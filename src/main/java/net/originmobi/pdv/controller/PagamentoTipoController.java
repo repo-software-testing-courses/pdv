@@ -48,7 +48,7 @@ public class PagamentoTipoController {
 	}
 	
 	@RequestMapping("/qtdparcelas/{codigo}")
-	public @ResponseBody String qtdParcelas(@PathVariable("codigo") Long codigo) {
+	public @ResponseBody String qtdParcelas(@PathVariable Long codigo) {
 		return pagamentotipo.qtdParcelas(codigo);
 	}
 

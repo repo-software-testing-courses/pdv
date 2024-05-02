@@ -9,13 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -59,7 +53,7 @@ public class AjusteController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public @ResponseBody String cadastra(UriComponentsBuilder builder) {
 		UriComponents uri = builder.path("/ajustes/").build();
 
@@ -79,7 +73,7 @@ public class AjusteController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/addproduto", method = RequestMethod.POST)
+	@PostMapping("/addproduto")
 	public @ResponseBody String addProduto(@RequestParam Map<String, String> request) {
 		Long codajuste = Long.decode(request.get("codajuste"));
 		Long codprod = Long.decode(request.get("codprod"));
@@ -88,7 +82,7 @@ public class AjusteController {
 		return ajusteProdutos.addProduto(codajuste, codprod, qtd_alterar);
 	}
 	
-	@RequestMapping(value = "/processar", method = RequestMethod.POST)
+	@PostMapping("/processar")
 	public @ResponseBody String processar(@RequestParam Map<String, String> request) {
 		Long codajuste = Long.decode(request.get("codajuste"));
 		String obs = request.get("obs");
@@ -96,7 +90,7 @@ public class AjusteController {
 		return ajustes.processar(codajuste, obs);
 	}
 	
-	@RequestMapping(value = "/cancelar/{codigo}", method = RequestMethod.DELETE)
+	@DeleteMapping("/cancelar/{codigo}")
 	public @ResponseBody String remover(@PathVariable("codigo") Ajuste ajuste, UriComponentsBuilder builder) {
 		UriComponents component = builder.path("/ajustes").build();
 		
@@ -108,7 +102,7 @@ public class AjusteController {
 		return component.toString();
 	}
 	
-	@RequestMapping(value = "/remove/item", method = RequestMethod.DELETE)
+	@DeleteMapping("/remove/item")
 	public @ResponseBody String removeItem(@RequestParam Map<String, String> request) {
 		Long codajuste = Long.decode(request.get("codajuste"));
 		Long coditem = Long.decode(request.get("coditem"));

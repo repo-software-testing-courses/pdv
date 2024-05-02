@@ -7,13 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -69,14 +63,14 @@ public class MaquinaCartaoController {
 		return mv;
 	}
 
-	@RequestMapping(value = "{codigo}", method = RequestMethod.DELETE)
-	public @ResponseBody String editar(@PathVariable("codigo") Long codigo) {
+	@DeleteMapping("{codigo}")
+	public @ResponseBody String editar(@PathVariable Long codigo) {
 		maquinas.remove(codigo);
 
 		return "Máquina removida com sucesso";
 	}
 	
-	@RequestMapping(value = "listaJson", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "listaJson", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<MaquinaCartao> listaMaquinasJson() {
 		return maquinas.lista();
 	}

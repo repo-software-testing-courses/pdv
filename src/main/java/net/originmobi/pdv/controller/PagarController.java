@@ -11,13 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.originmobi.pdv.filter.PagarParcelaFilter;
@@ -59,7 +53,7 @@ public class PagarController {
 	}
 	
 	@GetMapping
-	public ModelAndView list(@ModelAttribute("filter") PagarParcelaFilter filter, Pageable pageable, Model model) {
+	public ModelAndView list(@ModelAttribute PagarParcelaFilter filter, Pageable pageable, Model model) {
 		ModelAndView mv = new ModelAndView(PAGAR_FORM);
 		
 		Page<PagarParcela> paginas = pagarParcelas.lista(filter, pageable);
@@ -75,7 +69,7 @@ public class PagarController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public @ResponseBody String cadastroDespesa(@RequestParam Map<String, String> request) {
 		Long codFornecedor = Long.decode(request.get("fornecedor"));
 		Long tipo = Long.decode(request.get("tipo"));
@@ -89,7 +83,7 @@ public class PagarController {
 		return pagarServ.cadastrar(codFornecedor, valor, obs, vencimento, pagarTipo.get());
 	}
 
-	@RequestMapping(value = "/quitar", method = RequestMethod.POST)
+	@PostMapping("/quitar")
 	public @ResponseBody String quitar(@RequestParam Map<String, String> request) {
 		Long codparcela = Long.decode(request.get("parcela"));
 		Long codCaixa = Long.decode(request.get("caixa"));

@@ -5,12 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.originmobi.pdv.enumerado.cartao.CartaoSituacao;
@@ -35,12 +30,12 @@ public class CartaoLancamentoController {
 		return mv;
 	}
 
-	@RequestMapping(value = "{codigo}", method = RequestMethod.PUT)
+	@PutMapping("{codigo}")
 	public @ResponseBody String processar(@PathVariable("codigo") CartaoLancamento cartaoLancamento) {
 		return cartaoLancamentos.processar(cartaoLancamento);
 	}
 
-	@RequestMapping(value = "/antecipar/{codigo}", method = RequestMethod.PUT)
+	@PutMapping("/antecipar/{codigo}")
 	public @ResponseBody String antecipar(@PathVariable("codigo") CartaoLancamento cartaoLancamento) {
 		return cartaoLancamentos.antecipar(cartaoLancamento);
 	}
