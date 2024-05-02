@@ -1,7 +1,6 @@
 package net.originmobi.pdv.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class VendaProdutoService {
 	}
 
 	public List<Produto> listaVendaProduto(Venda venda) {
-		return vendaProdutos.findByVendaIn(venda);
+		return vendaProdutos.findByVenda(venda);
 	}
 
 	public List<VendaProduto> listaVendaProdutos(Long codigoVen) {
@@ -34,7 +33,7 @@ public class VendaProdutoService {
 	}
 
 	public VendaProduto busca(Long codigo) {
-		return vendaProdutos.findByCodigoIn(codigo);
+		return vendaProdutos.findByCodigo(codigo);
 	}
 
 	public void remove(VendaProduto vendaProduto) {

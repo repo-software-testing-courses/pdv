@@ -1,14 +1,14 @@
 package net.originmobi.pdv.utilitarios;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConexaoJDBCTest {
 
@@ -16,14 +16,14 @@ public class ConexaoJDBCTest {
     private DataSource dataSource;
     private Connection connection;
 
-    @Before
+    @BeforeEach
     public void IniciarConexão() throws Exception {
         conexaoJDBC = new ConexaoJDBC();
         dataSource = conexaoJDBC.abre();
         connection = dataSource.getConnection();
     }
 
-    @After
+    @AfterEach
     public void FecharConexão() throws Exception {
         conexaoJDBC.fecha();
     }

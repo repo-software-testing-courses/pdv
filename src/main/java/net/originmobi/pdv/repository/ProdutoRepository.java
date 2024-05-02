@@ -17,7 +17,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	public Page<Produto> findByDescricaoContaining(String descricao, Pageable pageable);
 
-	public Produto findByCodigoIn(Long codigo);
+	public Produto findByCodigo(Long codigo);
 
 	@Transactional
 	@Modifying
