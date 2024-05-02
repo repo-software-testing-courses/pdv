@@ -6,13 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -66,7 +60,7 @@ public class ReceberController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/parcelaReceber", method = RequestMethod.POST)
+	@PostMapping("/parcelaReceber")
 	public @ResponseBody String receber(@RequestParam Map<String, String> request) {
 		Long parcela = Long.decode(request.get("receber"));
 		String vltotalPago = request.get("vltotalPago").replace(",", ".");
@@ -84,7 +78,7 @@ public class ReceberController {
 		return mensagem;
 	}
 
-	@RequestMapping(value = "/parcelas", method = RequestMethod.GET)
+	@GetMapping("/parcelas")
 	public @ResponseBody String recebimento(@RequestParam Map<String, String> request, UriComponentsBuilder b) {
 		Long codpes = Long.decode(request.get("codpessoa"));
 		String[] arrayParcelas = request.get("parcelas").replace(", ", " ").split(" ");

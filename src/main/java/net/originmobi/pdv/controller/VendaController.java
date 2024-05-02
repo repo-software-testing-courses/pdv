@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,8 +69,8 @@ public class VendaController {
 	}
 
 	@GetMapping("/status/{status}")
-	public ModelAndView listaPedidos(@ModelAttribute("filter") VendaFilter filter,
-			@PathVariable("status") String status, Pageable pageable, Model model) {
+	public ModelAndView listaPedidos(@ModelAttribute VendaFilter filter,
+			@PathVariable String status, Pageable pageable, Model model) {
 		ModelAndView mv = new ModelAndView(VENDA_LIST);
 		Page<Venda> vendasPaginadas = vendas.busca(filter, status, pageable);
 		mv.addObject("vendas", vendasPaginadas);
@@ -115,7 +114,7 @@ public class VendaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/addproduto", method = RequestMethod.POST)
+	@PostMapping("/addproduto")
 	public @ResponseBody String addProdutoVenda(@RequestParam Map<String, String> request) {
 		Long codVen = Long.decode(request.get("codigoVen"));
 		Long codPro = Long.decode(request.get("codigoPro"));
@@ -132,7 +131,7 @@ public class VendaController {
 		return mensagem;
 	}
 
-	@RequestMapping(value = "/removeproduto", method = RequestMethod.POST)
+	@PostMapping("/removeproduto")
 	public @ResponseBody String removeProdutoVenda(@RequestParam Map<String, String> request) {
 		Long posicaoProd = Long.decode(request.get("posicaoPro"));
 		Long venda = Long.decode(request.get("codigoVen"));
@@ -147,7 +146,7 @@ public class VendaController {
 		return mensagem;
 	}
 
-	@RequestMapping(value = "/fechar", method = RequestMethod.POST)
+	@PostMapping("/fechar")
 	public @ResponseBody String fechar(@RequestParam Map<String, String> request) {
 		Long venda = Long.decode(request.get("venda"));
 		Long pagamentotipo = Long.decode(request.get("pagamentotipo"));
@@ -165,7 +164,7 @@ public class VendaController {
 		return vendas.fechaVenda(venda, pagamentotipo, vlprodutos, vldesconto, vlacrescimo, vlParcelas, titulos);
 	}
 
-	@RequestMapping(value = "/titulos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/titulos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Titulo> titulos() {
 		return titulos.lista();
 	}

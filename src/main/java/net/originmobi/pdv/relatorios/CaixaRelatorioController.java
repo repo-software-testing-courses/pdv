@@ -18,7 +18,7 @@ public class CaixaRelatorioController {
 	private GerarRelatorio relatorio;
 	
 	@GetMapping("/caixa/{codigo}")
-	public @ResponseBody String caixa(@PathVariable("codigo") Integer codigo, HttpServletResponse response) {
+	public @ResponseBody String caixa(@PathVariable Integer codigo, HttpServletResponse response) {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("codcaixa", codigo);
 

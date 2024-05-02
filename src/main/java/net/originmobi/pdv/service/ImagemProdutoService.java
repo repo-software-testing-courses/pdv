@@ -53,15 +53,15 @@ public class ImagemProdutoService {
 		String imagemNovaDescricao = file.getOriginalFilename().replaceAll(file.getOriginalFilename(),
 				"imagem" + "-" + vlAleatorio.nextInt() + ".jpg");
 
-		FileOutputStream output = new FileOutputStream(DIRETORIO.toString() + "/" + imagemNovaDescricao);
-		
-
-		try {
-			output.write(file.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "erro ao salvar aquivo no diretorio";
+		try (FileOutputStream output = new FileOutputStream(DIRETORIO.toString() + "/" + imagemNovaDescricao)) {
+			try {
+				output.write(file.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "erro ao salvar aquivo no diretorio";
+			}
 		}
+		
 
 		removeImagem(codigoProduto);
 

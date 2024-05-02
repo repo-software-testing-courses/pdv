@@ -56,7 +56,7 @@ public class FornecedorController {
 	}
 
 	@GetMapping
-	public ModelAndView busca(@ModelAttribute("filter") FornecedorFilter filter) {
+	public ModelAndView busca(@ModelAttribute FornecedorFilter filter) {
 		ModelAndView mv = new ModelAndView(FORNECEDOR_LIST);
 		List<Fornecedor> todosFornecedores = fornecedores.busca(filter);
 		mv.addObject("todosFornecedores", todosFornecedores);
