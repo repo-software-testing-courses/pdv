@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.originmobi.pdv.model.Recebimento;
 import net.originmobi.pdv.model.Titulo;
 import net.originmobi.pdv.service.RecebimentoService;
+import net.originmobi.pdv.service.TituloService;
 
 @Controller
 @RequestMapping("/recebimento")

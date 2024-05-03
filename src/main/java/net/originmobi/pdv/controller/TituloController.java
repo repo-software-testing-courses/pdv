@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.originmobi.pdv.model.Titulo;
 import net.originmobi.pdv.model.TituloTipo;
 import net.originmobi.pdv.model.cartao.MaquinaCartao;
+import net.originmobi.pdv.service.TituloService;
 import net.originmobi.pdv.service.TituloTipoService;
 import net.originmobi.pdv.service.cartao.MaquinaCartaoService;
 

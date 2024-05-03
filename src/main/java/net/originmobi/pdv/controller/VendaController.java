@@ -32,6 +32,7 @@ import net.originmobi.pdv.model.Venda;
 import net.originmobi.pdv.service.PagamentoTipoService;
 import net.originmobi.pdv.service.PessoaService;
 import net.originmobi.pdv.service.ProdutoService;
+import net.originmobi.pdv.service.TituloService;
 import net.originmobi.pdv.service.VendaProdutoService;
 import net.originmobi.pdv.service.VendaService;
 
