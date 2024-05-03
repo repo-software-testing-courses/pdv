@@ -19,7 +19,7 @@ public class ConversorXmlNfe implements Converter {
 	private String chaveNfeRetorno = "";
 
 	@Override
-	public boolean canConvert(Class type) {
+	public boolean canConvert(@SuppressWarnings("rawtypes") Class type) {
 		return type.equals(NotaFiscal.class);
 	}
 

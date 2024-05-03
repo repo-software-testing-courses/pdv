@@ -7,13 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -59,7 +53,7 @@ public class NotaFiscalController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public @ResponseBody String criaNota(@RequestParam Map<String, String> request, UriComponentsBuilder b) {
 		UriComponents uri = b.path("/notafiscal/").build();
 		HttpHeaders headers = new HttpHeaders();
@@ -93,7 +87,7 @@ public class NotaFiscalController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "{codigo}", method = RequestMethod.POST)
+	@PostMapping("{codigo}")
 	public @ResponseBody String emitir(@PathVariable("codigo") NotaFiscal notaFiscal) {
 		
 		notasFiscais.emitir(notaFiscal);

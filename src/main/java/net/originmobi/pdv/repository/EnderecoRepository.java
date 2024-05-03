@@ -14,8 +14,10 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "update endereco set cidade_codigo = :cidade, rua = :rua, bairro = :bairro, numero = :numero, cep = :cep, "
-			+ "referencia = :referencia where codigo = :codigo", nativeQuery = true)
+	@Query(value = """
+            update endereco set cidade_codigo = :cidade, rua = :rua, bairro = :bairro, numero = :numero, cep = :cep, \
+            referencia = :referencia where codigo = :codigo\
+            """, nativeQuery = true)
 	public void update(@Param("codigo") Long codigo, @Param("cidade") Long codcidade, @Param("rua") String rua, @Param("bairro") String bairro,
 			@Param("numero") String numero, @Param("cep") String cep, @Param("referencia") String referencia);
 
