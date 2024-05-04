@@ -1,0 +1,54 @@
+
+€	java:S112G"FDefine and throw a dedicated exception instead of using a generic one.(ûúô]J$44bd5d6a-6bda-419f-918a-684f5673c12a
+†	java:S112J"FDefine and throw a dedicated exception instead of using a generic one.(øÊ¥ÄùÿÿÿÿJ$14b399ef-766f-4219-9e04-d7541955cf17
+†	java:S112S"FDefine and throw a dedicated exception instead of using a generic one.(Ö“ÍüÿÿÿÿJ$f12f798c-0f4a-4e51-88a2-9cd801d930ec
+†	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(Óù„¥ùÿÿÿÿJ$59ec5c54-5b62-4cdc-9515-f91293f51916
+†	java:S112b"FDefine and throw a dedicated exception instead of using a generic one.(Ö“ÍüÿÿÿÿJ$2c8528bf-f526-473f-ab66-79ba4d02b4c2
+†	java:S112n"FDefine and throw a dedicated exception instead of using a generic one.(“—ãûøÿÿÿÿJ$e6853634-1fd3-4f38-91ba-773ddda9f11b
+	java:S112q"FDefine and throw a dedicated exception instead of using a generic one.(íèÔ¶J$7c8c27cf-2140-489a-a692-69b4b9a690cd
+	java:S112{"FDefine and throw a dedicated exception instead of using a generic one.(Ã°ãüJ$313186e0-1211-4380-b5ff-b647f1bca2e3
+‚	java:S112€"FDefine and throw a dedicated exception instead of using a generic one.(ÁâJ$3121f3ef-5c0a-4a5c-92ca-962558d5a435
+‡	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(Àå‰äüÿÿÿÿJ$b12e4784-63fc-45dd-b4b8-2ed626f4963d
+‚	java:S112š"FDefine and throw a dedicated exception instead of using a generic one.(«­ë”J$e69ff0b2-c594-40e7-a81a-f5df7aa3ce9e
+‚	java:S112·"FDefine and throw a dedicated exception instead of using a generic one.(«­ë”J$86733402-e9d8-46af-afd6-0ed8fe4ae85e
+‚	java:S112Æ"FDefine and throw a dedicated exception instead of using a generic one.(«­ë”J$2f53f5e8-e2f7-4af6-b76b-409bbf0d83cb
+‡	java:S112Ğ"FDefine and throw a dedicated exception instead of using a generic one.(·ØúÿÿÿÿJ$a46be743-b0d4-4b1c-acad-217c5c99c773
+‚	java:S112Ö"FDefine and throw a dedicated exception instead of using a generic one.(ÅäİÚJ$44ad2d04-8de9-4997-a917-7f4983707651
+¸
+java:S1192š"{Define a constant instead of duplicating this literal "Ocorreu um erro ao realizar o recebimento, chame o suporte" 3 times.(«­ë”J$b368b631-6354-4f7d-bb56-84579612bfca
+^
+java:S4973I"<Strings and Boxed types should be compared using "equals()".(ä¢ö ÿÿÿÿÿ8»£Íí1
+R
+java:S3655t"5Call "titulo.isPresent()" before accessing the value.(«õÍÉ8¥Íí1
+Z
+java:S3655¤"7Call "Optional#isPresent()" before accessing the value.(†úÇâûÿÿÿÿ8¥Íí1
+W
+java:S3655t":Call "recebimento.isPresent()" before accessing the value.(«õÍÉ8¥Íí1
+R
+java:S3655­"4Call "caixa.isPresent()" before accessing the value.(Ú÷Ë…8¥Íí1
+Y
+java:S3655x"7Call "Optional#isPresent()" before accessing the value.(º¼ìşÿÿÿÿ8¥Íí1
+~
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞJ$eaee7c15-9dd4-4d95-b686-b7fa9d5d2f51
+~
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞJ$00c4e39c-b57c-41ba-acad-3fb4ef6dde1a
+~
+java:S6813("BRemove this field injection and use constructor injection instead.(êæÄŞJ$121e6699-95f9-426a-bcf6-73943f798133
+~
+java:S6813+"BRemove this field injection and use constructor injection instead.(êæÄŞJ$ffc80c07-c631-4ef2-a852-c541a5618271
+~
+java:S6813."BRemove this field injection and use constructor injection instead.(êæÄŞJ$3499aa90-9b08-495e-b049-185a0ba10d5e
+~
+java:S68131"BRemove this field injection and use constructor injection instead.(êæÄŞJ$bfc0498f-fb04-4d1c-b823-4a0603973819
+~
+java:S68134"BRemove this field injection and use constructor injection instead.(êæÄŞJ$e40f6dc6-69b7-4d9c-a646-4cbdab360712
+~
+java:S68137"BRemove this field injection and use constructor injection instead.(êæÄŞJ$12473a97-5c72-4ca9-8b20-05869cafd0c3
+~
+java:S6813:"BRemove this field injection and use constructor injection instead.(êæÄŞJ$31346841-b548-4937-b520-024a6b30346b
+
+java:S3776i"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(„ÙÀ—J$324a92c7-0fbe-4a45-ae10-d07b5a7fd349
+j
+java:S5361x"HReplace this call to "replaceAll()" by a call to the "replace()" method.(º¼ìşÿÿÿÿ8¥Íí1
+x	java:S125²"<This block of commented-out lines of code should be removed.(£Êğ²J$a60778ef-d801-42be-b263-694cf24c209e
+l	java:S106Õ"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿJ$07bdbb0f-d4c7-44d5-b9de-f6879ce8fb9b

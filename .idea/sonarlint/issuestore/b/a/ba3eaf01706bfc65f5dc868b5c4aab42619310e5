@@ -1,0 +1,28 @@
+
+Œ
+java:S1192D"qDefine a constant instead of duplicating this literal "Erro ao salvar dados da empresa, chame o suporte" 6 times.(Å…×Öøÿÿÿÿ
+f	java:S117;"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í£íŸ
+
+java:S14885"fImmediately return this expression instead of assigning it to the temporary variable "empresaOptiona".(×•ÇÅúÿÿÿÿ
+T
+java:S3655p"9Call "tributario.isPresent()" before accessing the value.(ºÔöÒøÿÿÿÿ
+P
+java:S3655f"5Call "cidade.isPresent()" before accessing the value.(ÿ¦ºÎıÿÿÿÿ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ
+R	java:S107;"=Method has 16 parameters, which is greater than 7 authorized.(Í£íŸ
+E	java:S106+"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106C"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106J"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106Q"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106]"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106k"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
+E	java:S106s"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ
