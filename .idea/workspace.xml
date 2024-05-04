@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d2cd5d3-4b2a-412d-af60-a7cf5e6c174f" name="Changes" comment="Implementação inicial - rodando">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/dtos/ProdutoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/exceptions/InsufficientStockException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/ProdutoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

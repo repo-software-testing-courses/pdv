@@ -56,3 +56,5 @@ l
 Ksrc/main/java/net/originmobi/pdv/exceptions/InsufficientStockException.java,e\9\e967729e2e859916ae8c6fcbe32852975f26a71f
 e
 5src/main/java/net/originmobi/pdv/dtos/ProdutoDTO.java,2\d\2df63669a8bd315cd689f1c1e34c6347da65d18e
+‚
+Rsrc/main/java/net/originmobi/pdv/exceptions/InsufficientStockControlException.java,e\d\edb58aeb0811a53d26445d2b773e3ee47ba033cd
