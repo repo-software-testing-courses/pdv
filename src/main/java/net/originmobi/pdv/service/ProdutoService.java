@@ -3,10 +3,14 @@ package net.originmobi.pdv.service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import net.originmobi.pdv.dtos.ProdutoDTO;
 import net.originmobi.pdv.exceptions.InsufficientStockException;
+import net.originmobi.pdv.exceptions.ProductInsertionException;
+import net.originmobi.pdv.exceptions.ProductUpdateException;
+import net.originmobi.pdv.exceptions.ProdutoNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -44,11 +48,15 @@ public class ProdutoService {
 	}
 
 	public Produto busca(Long codigoProduto) {
-		return produtos.findByCodigoIn(codigoProduto);
+		try {
+			return produtos.findById(codigoProduto).get();
+		} catch (NoSuchElementException e) {
+			throw new ProdutoNotFoundException("Produto com código " + codigoProduto + " não foi encontrado.");
+		}
 	}
 
-	public Optional<Produto> buscaProduto(Long codigo) {
-		return produtos.findById(codigo);
+	public Produto buscaProduto(Long codigo) {
+		return produtos.findById(codigo).orElseThrow(() -> new ProdutoNotFoundException("Produto com código " + codigo + " não foi encontrado."));
 	}
 
 	public Page<Produto> filter(ProdutoFilter filter, Pageable pageable) {
@@ -89,7 +97,7 @@ public class ProdutoService {
 				produtos.insere(codforne, codcategoria, codgrupo, balanca, descricao, valorCusto, valorVenda,
 						dataValidade, controleEstoque, situacao, unitario, subtribu.ordinal(), Date.valueOf(dataAtual),
 						ncm, cest, tributacao, modbc, vendavel);
-			} catch (Exception e) {
+			} catch (ProductInsertionException e) {
 				logger.info(e.getMessage());
 				return "Erro a cadastrar produto, chame o suporte";
 			}
@@ -101,14 +109,14 @@ public class ProdutoService {
 						modbc, vendavel);
 
 				return "Produto atualizado com sucesso";
-			} catch (Exception e) {
+			} catch (ProductUpdateException e) {
 				logger.info(e.getMessage());
 				return "Erro a atualizar produto, chame o suporte";
 			}
 
 		}
 
-		return "Produdo cadastrado com sucesso";
+		return "Produto cadastrado com sucesso";
 	}
 
 	@SuppressWarnings("static-access")

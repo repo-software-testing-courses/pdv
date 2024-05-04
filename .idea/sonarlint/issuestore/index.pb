@@ -58,3 +58,11 @@ e
 5src/main/java/net/originmobi/pdv/dtos/ProdutoDTO.java,2\d\2df63669a8bd315cd689f1c1e34c6347da65d18e
 ‚
 Rsrc/main/java/net/originmobi/pdv/exceptions/InsufficientStockControlException.java,e\d\edb58aeb0811a53d26445d2b773e3ee47ba033cd
+r
+Bsrc/main/java/net/originmobi/pdv/repository/ProdutoRepository.java,7\9\7908d1ab6f9f8853cf936efceb04fdea667e5ebe
+y
+Isrc/main/java/net/originmobi/pdv/exceptions/ProdutoNotFoundException.java,1\f\1fc08422bfae0bbfcb49f331cc7a7a84237e3d58
+z
+Jsrc/main/java/net/originmobi/pdv/exceptions/ProductInsertionException.java,f\8\f86b00240b4d1ab7efb1fb7dd50b650bf6e90c02
+w
+Gsrc/main/java/net/originmobi/pdv/exceptions/ProductUpdateException.java,b\f\bf0022423be535d5fbc47e899b6e4a9a2c51caf4
