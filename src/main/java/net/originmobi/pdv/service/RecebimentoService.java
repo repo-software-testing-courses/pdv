@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ibm.icu.text.DecimalFormat;
 
-import net.originmobi.pdv.controller.TituloService;
 import net.originmobi.pdv.enumerado.TituloTipo;
 import net.originmobi.pdv.enumerado.caixa.EstiloLancamento;
 import net.originmobi.pdv.enumerado.caixa.TipoLancamento;
@@ -85,7 +84,7 @@ public class RecebimentoService {
 
 		Optional<Pessoa> pessoa = pessoas.buscaPessoa(codpes);
 
-		if (!pessoa.isPresent())
+		if (pessoa.isEmpty())
 			throw new RuntimeException("Cliente não encontrado");
 
 		Recebimento recebimento = new Recebimento(vlTotal, dataAtual.dataAtualTimeStamp(), pessoa.get(), lista);

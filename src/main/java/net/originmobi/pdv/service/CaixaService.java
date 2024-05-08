@@ -125,7 +125,7 @@ public class CaixaService {
 			if (caixaAtual.map(Caixa::getData_fechamento).isPresent())
 				throw new RuntimeException("Caixa já esta fechado");
 
-			Double valorTotal = !caixaAtual.map(Caixa::getValor_total).isPresent() ? 0.0
+			Double valorTotal = caixaAtual.map(Caixa::getValor_total).isEmpty() ? 0.0
 					: caixaAtual.map(Caixa::getValor_total).get();
 
 			Timestamp dataHoraAtual = new Timestamp(System.currentTimeMillis());

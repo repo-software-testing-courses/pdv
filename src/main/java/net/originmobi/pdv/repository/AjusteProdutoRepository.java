@@ -16,8 +16,10 @@ public interface AjusteProdutoRepository extends JpaRepository<AjusteProduto, Lo
 
 	@Transactional
 	@Modifying
-	@Query(value = "insert into ajuste_produtos (ajuste_codigo, produto_codigo, estoque_atual, qtd_alteracao, qtd_nova) "
-			+ "values (:codajuste, :codprod, :estoque_atual, :qtd_alteracao, :qtd_nova)", nativeQuery = true)
+	@Query(value = """
+            insert into ajuste_produtos (ajuste_codigo, produto_codigo, estoque_atual, qtd_alteracao, qtd_nova) \
+            values (:codajuste, :codprod, :estoque_atual, :qtd_alteracao, :qtd_nova)\
+            """, nativeQuery = true)
 	void insereProduto(@Param("codajuste") Long codajuste, @Param("codprod") Long codprod,
 			@Param("estoque_atual") int estoque_aqual, @Param("qtd_alteracao") int qtd_alteracao,
 			@Param("qtd_nova") int qtd_nova);

@@ -16,9 +16,11 @@ public interface TributacaoRegraRepository extends JpaRepository<TributacaoRegra
 
 	@Transactional
 	@Modifying
-	@Query(value = "insert into tributacao_regra (tributacao_codigo, tipo, uf, cfop_codigo, cst_csosn_codigo, cst_pis, cst_cofins, pis, cofins, "
-			+ "aliq_ipi, aliq_icms, cst_ipi_codigo, data_cadastro) values (:codtribu, :tipo, :uf, :cfop, :cst_csosn, :cstpis, :cst_cofins, :pis, :cofins, :aliq_ipi, "
-			+ ":aliq_icms, :cst_ipi, :data_cadastro)", nativeQuery = true)
+	@Query(value = """
+            insert into tributacao_regra (tributacao_codigo, tipo, uf, cfop_codigo, cst_csosn_codigo, cst_pis, cst_cofins, pis, cofins, \
+            aliq_ipi, aliq_icms, cst_ipi_codigo, data_cadastro) values (:codtribu, :tipo, :uf, :cfop, :cst_csosn, :cstpis, :cst_cofins, :pis, :cofins, :aliq_ipi, \
+            :aliq_icms, :cst_ipi, :data_cadastro)\
+            """, nativeQuery = true)
 	void cadastrar(@Param("codtribu") Long codtribu, @Param("tipo") String tipo, @Param("uf") String uf,
 			@Param("cfop") String cfop, @Param("cst_csosn") String cst_csosn, @Param("cstpis") String cstpis,
 			@Param("cst_cofins") String cstcofins, @Param("pis") String pis, @Param("cofins") String cofins,
@@ -29,9 +31,11 @@ public interface TributacaoRegraRepository extends JpaRepository<TributacaoRegra
 
 	@Transactional
 	@Modifying
-	@Query(value = "update tributacao_regra set tributacao_codigo = :tributacao_codigo, tipo = :tipo, uf = :uf, cfop_codigo = :cfop, "
-			+ "cst_csosn_codigo = :cstcsosn, cst_pis = :cstpis, "
-			+ "cst_cofins = :cstcofins, pis = :pis, cofins = :cofins, aliq_ipi = :aliq_ipi, aliq_icms = :aliq_icms, cst_ipi_codigo = :cst_ipi where codigo = :codigo", nativeQuery = true)
+	@Query(value = """
+            update tributacao_regra set tributacao_codigo = :tributacao_codigo, tipo = :tipo, uf = :uf, cfop_codigo = :cfop, \
+            cst_csosn_codigo = :cstcsosn, cst_pis = :cstpis, \
+            cst_cofins = :cstcofins, pis = :pis, cofins = :cofins, aliq_ipi = :aliq_ipi, aliq_icms = :aliq_icms, cst_ipi_codigo = :cst_ipi where codigo = :codigo\
+            """, nativeQuery = true)
 	void update(@Param("codigo") Long codregra, @Param("tributacao_codigo") Long codtribu, @Param("tipo") String tipo,
 			@Param("uf") String uf, @Param("cfop") String cfop, @Param("cstcsosn") String cst_csosn,
 			@Param("cstpis") String cstpis, @Param("cstcofins") String cstcofins, @Param("pis") String pis,

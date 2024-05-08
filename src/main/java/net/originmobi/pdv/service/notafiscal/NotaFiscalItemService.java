@@ -135,10 +135,10 @@ public class NotaFiscalItemService {
 	}
 
 	private void verificaRegraDeTributacao(NotaFiscalTipo tipo, Optional<Produto> produto) {
-		if (!produto.isPresent())
+		if (produto.isEmpty())
 			throw new RuntimeException("Nenhum produto encontrado, favor verifique");
 
-		if (!produto.map(Produto::getTributacao).isPresent())
+		if (produto.map(Produto::getTributacao).isEmpty())
 			throw new RuntimeException("Produto sem tributação, favor verifique");
 
 		if (produto.map(Produto::getNcm).get().isEmpty())

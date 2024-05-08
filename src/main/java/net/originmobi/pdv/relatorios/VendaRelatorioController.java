@@ -3,7 +3,7 @@ package net.originmobi.pdv.relatorios;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class VendaRelatorioController {
 	GerarRelatorio relatorio;
 
 	@GetMapping("/controle/{codigo}")
-	public void controle(@PathVariable("codigo") Integer codigo, HttpServletResponse response) {
+	public void controle(@PathVariable Integer codigo, HttpServletResponse response) {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("codvenda", codigo);
 
@@ -27,7 +27,7 @@ public class VendaRelatorioController {
 	}
 	
 	@GetMapping("/comanda/{codigo}")
-	public @ResponseBody String comanda(@PathVariable("codigo") Integer codigo, HttpServletResponse response) {
+	public @ResponseBody String comanda(@PathVariable Integer codigo, HttpServletResponse response) {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("codvenda", codigo);
 		

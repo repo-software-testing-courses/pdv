@@ -2,7 +2,7 @@ package net.originmobi.pdv.repository;
 
 import java.sql.Timestamp;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import jakarta.transaction.Transactional;
 import net.originmobi.pdv.enumerado.VendaSituacao;
 import net.originmobi.pdv.model.PagamentoTipo;
 import net.originmobi.pdv.model.Pessoa;
@@ -18,7 +19,7 @@ import net.originmobi.pdv.model.Venda;
 
 public interface VendaRepository extends JpaRepository<Venda, Long> {
 
-	public Page<Venda> findByCodigoIn(Long codigo, Pageable pageable);
+	public Page<Venda> findByCodigo(Long codigo, Pageable pageable);
 
 	@Transactional
 	@Modifying
@@ -43,8 +44,10 @@ public interface VendaRepository extends JpaRepository<Venda, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("update Venda set situacao = :situacao, valor_total = :vlTotal, valor_desconto = :vlDesconto, valor_acrescimo = :vlAcrescimo, data_finalizado = :dataFinalizado, "
-			+ "pagamentotipo = :formaPagamento where codigo = :codigo and data_finalizado is null")
+	@Query("""
+            update Venda set situacao = :situacao, valor_total = :vlTotal, valor_desconto = :vlDesconto, valor_acrescimo = :vlAcrescimo, data_finalizado = :dataFinalizado, \
+            pagamentotipo = :formaPagamento where codigo = :codigo and data_finalizado is null\
+            """)
 	public void fechaVenda(@Param("codigo") Long codVenda, @Param("situacao") VendaSituacao situacao,
 			@Param("vlTotal") Double vltotal, @Param("vlDesconto") Double vldesconto,
 			@Param("vlAcrescimo") Double vlacrescimo, @Param("dataFinalizado") Timestamp dataFinalizado,

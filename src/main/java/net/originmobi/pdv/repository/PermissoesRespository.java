@@ -10,9 +10,11 @@ import net.originmobi.pdv.model.Permissoes;
 
 public interface PermissoesRespository extends JpaRepository<Permissoes, Long> {
 
-	public List<Permissoes> findByGrupoUsuarioIn(GrupoUsuario grupoUsuario);
+	public List<Permissoes> findByGrupoUsuario(GrupoUsuario grupoUsuario);
 
-	@Query(value = "select * from permissoes p, permissoes_grupo_usuario pgu where pgu.permissoes_codigo = p.codigo "
-			+ "and pgu.grupo_usuario_codigo = ?1 order by pgu.permissoes_codigo", nativeQuery = true)
+	@Query(value = """
+            select * from permissoes p, permissoes_grupo_usuario pgu where pgu.permissoes_codigo = p.codigo \
+            and pgu.grupo_usuario_codigo = ?1 order by pgu.permissoes_codigo\
+            """, nativeQuery = true)
 	List<Permissoes> listaPermissoesDoGrupo(Long codigo);
 }

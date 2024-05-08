@@ -37,7 +37,7 @@ public class ProdutoService {
 	}
 
 	public Produto busca(Long codigoProduto) {
-		return produtos.findByCodigoIn(codigoProduto);
+		return produtos.findByCodigo(codigoProduto);
 	}
 
 	public Optional<Produto> buscaProduto(Long codigo) {
@@ -88,7 +88,7 @@ public class ProdutoService {
 			Long codprod = Long.decode(resultado.get(i)[0].toString());
 			int qtd = Integer.parseInt(resultado.get(i)[1].toString());
 
-			Produto produto = produtos.findByCodigoIn(codprod);
+			Produto produto = produtos.findByCodigo(codprod);
 
 			if (produto.getControla_estoque().equals(ProdutoControleEstoque.SIM)) {
 
@@ -111,7 +111,7 @@ public class ProdutoService {
 	}
 	
 	public void ajusteEstoque(Long codprod, int qtd, EntradaSaida tipo, String origem_operacao, Date data_movimentacao) {
-		Produto produto = produtos.findByCodigoIn(codprod);
+		Produto produto = produtos.findByCodigo(codprod);
 		
 		if (produto.getControla_estoque().equals(ProdutoControleEstoque.NAO))
 			throw new RuntimeException("O produto de código " + codprod + " não controla estoque, verifique");

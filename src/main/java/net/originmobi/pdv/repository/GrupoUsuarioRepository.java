@@ -13,9 +13,9 @@ import net.originmobi.pdv.model.Usuario;
 
 public interface GrupoUsuarioRepository extends JpaRepository<GrupoUsuario, Long> {
 
-	public List<GrupoUsuario> findByUsuarioIn(Usuario usuario);
+	public List<GrupoUsuario> findByUsuario(Usuario usuario);
 
-	public GrupoUsuario findByCodigoIn(Long codigo);
+	public GrupoUsuario findByCodigo(Long codigo);
 
 	@Transactional
 	@Modifying
@@ -27,18 +27,24 @@ public interface GrupoUsuarioRepository extends JpaRepository<GrupoUsuario, Long
 
 	@Transactional
 	@Modifying
-	@Query(value = "insert into permissoes_grupo_usuario (grupo_usuario_codigo, permissoes_codigo) "
-			+ "values (:codgrupo, :codpermissao)", nativeQuery = true)
+	@Query(value = """
+            insert into permissoes_grupo_usuario (grupo_usuario_codigo, permissoes_codigo) \
+            values (:codgrupo, :codpermissao)\
+            """, nativeQuery = true)
 	public void addPermissao(@Param("codgrupo") Long codgrupo, @Param("codpermissao") Long codpermissao);
 
-	@Query(value = "select count(*) from permissoes_grupo_usuario pgu where pgu.grupo_usuario_codigo = :codgrupo "
-			+ "and pgu.permissoes_codigo = :codpermissao", nativeQuery = true)
+	@Query(value = """
+            select count(*) from permissoes_grupo_usuario pgu where pgu.grupo_usuario_codigo = :codgrupo \
+            and pgu.permissoes_codigo = :codpermissao\
+            """, nativeQuery = true)
 	public int grupoTemPermissao(@Param("codgrupo") Long codgrupo, @Param("codpermissao") Long codpermissao);
 
 	@Transactional
 	@Modifying
-	@Query(value = "delete from permissoes_grupo_usuario where permissoes_codigo = :codigo "
-			+ "and grupo_usuario_codigo = :codgrupo", nativeQuery = true)
+	@Query(value = """
+            delete from permissoes_grupo_usuario where permissoes_codigo = :codigo \
+            and grupo_usuario_codigo = :codgrupo\
+            """, nativeQuery = true)
 	public void removePermissao(@Param("codigo") Long codigo, @Param("codgrupo") Long codgrupo);
 
 }

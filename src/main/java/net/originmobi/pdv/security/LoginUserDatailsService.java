@@ -43,14 +43,14 @@ public class LoginUserDatailsService implements UserDetailsService {
 	}
 
 	public Collection<? extends GrantedAuthority> authorities(Usuario usuario) {
-		return authorities(grupos.findByUsuarioIn(usuario));
+		return authorities(grupos.findByUsuario(usuario));
 	}
 
 	public Collection<? extends GrantedAuthority> authorities(List<GrupoUsuario> grupos) {
 		Collection<GrantedAuthority> auths = new ArrayList<>();
 
 		for (GrupoUsuario grupo : grupos) {
-			List<Permissoes> lista = permissoes.findByGrupoUsuarioIn(grupo);
+			List<Permissoes> lista = permissoes.findByGrupoUsuario(grupo);
 
 			for (Permissoes permissao : lista) {
 				auths.add(new SimpleGrantedAuthority("ROLE_" + permissao.getNome()));

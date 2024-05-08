@@ -21,7 +21,7 @@ public class ImagemProdutoController {
 	private ImagemProdutoService imagens;
 
 	@PostMapping("/upload")
-	public @ResponseBody String upload(@RequestParam("files") MultipartFile file, @RequestParam("codigo") Long codigo,
+	public @ResponseBody String upload(@RequestParam("files") MultipartFile file, @RequestParam Long codigo,
 			RedirectAttributes attributes) throws IOException {
 
 		if (file.isEmpty())

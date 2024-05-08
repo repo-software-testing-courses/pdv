@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.originmobi.pdv.controller.TituloService;
 import net.originmobi.pdv.enumerado.EntradaSaida;
 import net.originmobi.pdv.enumerado.TituloTipo;
 import net.originmobi.pdv.enumerado.VendaSituacao;
@@ -106,7 +105,7 @@ public class VendaService {
 		VendaSituacao situacaoVenda = situacao.equals("ABERTA") ? VendaSituacao.ABERTA : VendaSituacao.FECHADA;
 
 		if (filter.getCodigo() != null)
-			return vendas.findByCodigoIn(filter.getCodigo(), pageable);
+			return vendas.findByCodigo(filter.getCodigo(), pageable);
 		else
 			return vendas.findBySituacaoEquals(situacaoVenda, pageable);
 	}

@@ -5,12 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 import net.originmobi.pdv.model.TributacaoRegra;
 import net.originmobi.pdv.service.TributacaoRegraService;
 
@@ -21,7 +16,7 @@ public class TributacaoRegraController {
 	@Autowired
 	private TributacaoRegraService regras;
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public @ResponseBody String salvar(@RequestParam Map<String, String> request) {
 		Long codtribu = Long.decode(request.get("codigo"));
 		String tipo = request.get("tipo");
@@ -42,13 +37,13 @@ public class TributacaoRegraController {
 				aliq_icms, cst_ipi);
 	}
 
-	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
-	public @ResponseBody String excluir(@PathVariable("codigo") Long codigo) {
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody String excluir(@PathVariable Long codigo) {
 		return regras.remover(codigo);
 	}
 
-	@RequestMapping(value = "/{codigo}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody TributacaoRegra editar(@PathVariable("codigo") Long codigo) {
+	@PutMapping(value = "/{codigo}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody TributacaoRegra editar(@PathVariable Long codigo) {
 		TributacaoRegra regra = regras.busca(codigo);
 		return regra;
 	}
