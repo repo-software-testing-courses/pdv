@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import net.originmobi.pdv.model.Parcela;
 import net.originmobi.pdv.model.Pessoa;
 import net.originmobi.pdv.model.Receber;
+import net.originmobi.pdv.model.Recebimento;
 import net.originmobi.pdv.repository.RecebimentoRepository;
 
 
@@ -23,16 +26,25 @@ import net.originmobi.pdv.repository.RecebimentoRepository;
 public class RecebimentoServiceTest {
 
     @Mock
-    private RecebimentoRepository recebimentos;
+    private Optional<Pessoa> pessoaOptionalMock;
+    @Mock
+    private Pessoa pessoaMock;
+    @Mock
+    private Recebimento recebimentoMock;
+    @Mock
+    private RecebimentoRepository recebimentosMock;
 
     @Mock
-    private PessoaService pessoas;
+    private PessoaService pessoasMock;
 
     @Mock
-    private ParcelaService parcelas;
+    private ParcelaService parcelasMock;
 
     @Mock
-    private TituloService titulos;
+    private Parcela parcelaMock;
+
+    @Mock
+    private TituloService titulosMock;
 
     @InjectMocks
     private RecebimentoService recebimentoService;
@@ -48,8 +60,8 @@ public void testAbrirRecebimento_jaquitado() {
     
     Long codpes1 = 1L;
     String[] arrayParcelas1 = {"2","3"};
-    Parcela parcelaMock = mock(Parcela.class);
-    when(parcelas.busca(anyLong())).thenReturn(parcelaMock);
+    parcelaMock = mock(Parcela.class);
+    when(parcelasMock.busca(anyLong())).thenReturn(parcelaMock);
     when(parcelaMock.getQuitado()).thenReturn(1);
     when(parcelaMock.getCodigo()).thenReturn(1L);
 
@@ -69,8 +81,8 @@ public void testAbrirRecebimento_naoPertenceAoUsuario() {
     String[] arrayParcelas = {"1", "2"};
     Parcela parcelaMock = mock(Parcela.class);
     Receber receberMock = mock(Receber.class);
-    Pessoa pessoaMock = mock(Pessoa.class);
-    when(parcelas.busca(anyLong())).thenReturn(parcelaMock);
+    pessoaMock = mock(Pessoa.class);
+    when(parcelasMock.busca(anyLong())).thenReturn(parcelaMock);
     when(parcelaMock.getQuitado()).thenReturn(0);
     when(parcelaMock.getCodigo()).thenReturn(parcelaCodigo);
     when(parcelaMock.getReceber()).thenReturn(receberMock);
@@ -92,21 +104,46 @@ public void testAbrirRecebimento_ClienteNãoEncontrado() {
     Parcela parcelaMock = mock(Parcela.class);
     Receber receberMock = mock(Receber.class);
     Pessoa pessoaMock = mock(Pessoa.class);
-    pessoas = mock(PessoaService.class);
-    when(parcelas.busca(anyLong())).thenReturn(parcelaMock);
+    pessoasMock = mock(PessoaService.class);
+    when(parcelasMock.busca(anyLong())).thenReturn(parcelaMock);
     when(parcelaMock.getQuitado()).thenReturn(0);
     when(parcelaMock.getCodigo()).thenReturn(parcelaCodigo);
     when(parcelaMock.getReceber()).thenReturn(receberMock);
     when(receberMock.getPessoa()).thenReturn(pessoaMock);
     when(pessoaMock.getCodigo()).thenReturn(codpes);
     when(parcelaMock.getValor_restante()).thenReturn(10D);
-    when(pessoas.buscaPessoa(anyLong())).thenReturn(null);
+    when(pessoasMock.buscaPessoa(anyLong())).thenReturn(null);
     RuntimeException exception = assertThrows(RuntimeException.class, () -> {
         recebimentoService.abrirRecebimento(codpes, arrayParcelas);
     });
     assertEquals("Cliente não encontrado", exception.getMessage());
+}
+    // Add more test cases as needed for other methods in RecebimentoService
 
 
+@Test
+public void testAbrirRecebimento_() {
+    Long codpes = 1L;
+    Long parcelaCodigo=3L;
+    String[] arrayParcelas = {"1", "2"};
+    Parcela parcelaMock = mock(Parcela.class);
+    Receber receberMock = mock(Receber.class);
+    pessoaMock = mock(Pessoa.class);
+    pessoaMock.setCodigo(1L);
+    pessoasMock = mock(PessoaService.class);
+    recebimentosMock = mock(RecebimentoRepository.class);
+    recebimentoMock = mock(Recebimento.class);
+    when(recebimentoMock.getCodigo()).thenReturn(1L);
+    when(parcelasMock.busca(anyLong())).thenReturn(parcelaMock);
+    when(parcelaMock.getQuitado()).thenReturn(0);
+    when(parcelaMock.getCodigo()).thenReturn(parcelaCodigo);
+    when(parcelaMock.getReceber()).thenReturn(receberMock);
+    when(receberMock.getPessoa()).thenReturn(pessoaMock);
+    when(pessoaMock.getCodigo()).thenReturn(codpes);
+    when(parcelaMock.getValor_restante()).thenReturn(1D);
+    when(pessoasMock.buscaPessoa(anyLong())).thenReturn(Optional.of(pessoaMock));
+    when(recebimentosMock.save(recebimentoMock)).thenReturn(recebimentoMock);
+    assertEquals(codpes.toString(), recebimentoService.abrirRecebimento(codpes, arrayParcelas));
 }
     // Add more test cases as needed for other methods in RecebimentoService
 
