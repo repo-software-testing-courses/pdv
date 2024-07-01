@@ -169,5 +169,29 @@ public class ProdutoDTO {
     private Long modbc;
     private String vendavel;
 
-    // Add getters and setters for all fields
+    public ProdutoDTO(){
+    }
+
+    public ProdutoDTO(Long codigoprod, Long codforne, Long categoria, Long grupo, int usaBalanca, String descricao, Double valorCusto,
+                      Double valorVenda, Date dataValidade, String controleEstoque, String situacao, String unitario, ProdutoSubstTributaria substituicao,
+                      String ncm, String cest, Long tributacao, Long modbc, String vendavel) {
+        this.codprod = codigoprod;
+        this.codforne = codforne;
+        this.codcategoria = categoria;
+        this.codgrupo = grupo;
+        this.balanca = usaBalanca;
+        this.descricao = descricao;
+        this.valorCusto = valorCusto;
+        this.valorVenda = valorVenda;
+        this.dataValidade = dataValidade;
+        this.controleEstoque = controleEstoque;
+        this.situacao = situacao;
+        this.unitario = unitario;
+        this.subtribu = substituicao;
+        this.ncm = ncm;
+        this.cest = cest;
+        this.tributacao = tributacao;
+        this.modbc = modbc;
+        this.vendavel = vendavel;
+    }
 }

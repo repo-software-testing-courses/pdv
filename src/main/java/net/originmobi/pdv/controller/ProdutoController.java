@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import net.originmobi.pdv.dtos.ProdutoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -145,9 +146,11 @@ public class ProdutoController {
 
 		String mensagem = "";
 		System.out.println(controleEstoque);
-		mensagem = produtos.merger(codigoprod, codforne, categoria, grupo, usaBalanca, descricao, valorCusto,
+		ProdutoDTO product = new ProdutoDTO(codigoprod, codforne, categoria, grupo, usaBalanca, descricao, valorCusto,
 				valorVenda, dataValidade, controleEstoque, situacao.toString(), unitario, substituicao, ncm, cest, tributacao,
 				modbc, vendavel);
+
+		mensagem = produtos.insertOrUpdate(product);
 
 		attributes.addFlashAttribute("mensagem", mensagem);
 		

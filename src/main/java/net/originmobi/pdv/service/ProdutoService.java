@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import net.originmobi.pdv.dtos.ProdutoDTO;
 import net.originmobi.pdv.exceptions.InsufficientStockException;
@@ -69,7 +68,7 @@ public class ProdutoService {
 	 * @param produtoDTO
 	 * @return
 	 */
-	public String merger(ProdutoDTO produtoDTO) {
+	public String insertOrUpdate(ProdutoDTO produtoDTO) {
 
 		// Vars
 		Long codprod = produtoDTO.getCodprod();
@@ -94,6 +93,9 @@ public class ProdutoService {
 		// Verifica se o produto já existe
 		if (codprod == 0) {
 			try {
+				if(codcategoria == -1){
+					throw new ProductInsertionException("Categoria não informada");
+				}
 				produtos.insere(codforne, codcategoria, codgrupo, balanca, descricao, valorCusto, valorVenda,
 						dataValidade, controleEstoque, situacao, unitario, subtribu.ordinal(), Date.valueOf(dataAtual),
 						ncm, cest, tributacao, modbc, vendavel);
@@ -104,6 +106,9 @@ public class ProdutoService {
 		} else {
 
 			try {
+				if(codcategoria == -1){
+					throw new ProductUpdateException("Categoria não informada");
+				}
 				produtos.atualiza(codprod, codforne, codcategoria, codgrupo, balanca, descricao, valorCusto, valorVenda,
 						dataValidade, controleEstoque, situacao, unitario, subtribu.ordinal(), ncm, cest, tributacao,
 						modbc, vendavel);
@@ -128,10 +133,7 @@ public class ProdutoService {
 			int qtd = Integer.parseInt(resultado.get(i)[1].toString());
 
 			Produto produto = produtos.findByCodigoIn(codprod);
-
 			if (produto.getControla_estoque().equals(ProdutoControleEstoque.SIM)) {
-
-				// estoque atual do produto
 				int qtEstoque = produtos.saldoEstoque(codprod);
 				String origemOp = "Venda " + codvenda.toString();
 
@@ -146,12 +148,10 @@ public class ProdutoService {
 				logger.info("Produto não controla estoque");
 			}
 		}
-
 	}
 
 	public void ajusteEstoque(Long codprod, int qtd, EntradaSaida tipo, String origemOp, Date dataMovimentacao) {
 		Produto produto = produtos.findByCodigoIn(codprod);
-
 		if (produto.getControla_estoque().equals(ProdutoControleEstoque.NAO))
 			throw new InsufficientStockException("O produto de código " + codprod + " não controla estoque, verifique");
 
