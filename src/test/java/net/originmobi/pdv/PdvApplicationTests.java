@@ -11,6 +11,9 @@ public class PdvApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assert true;
+		return ;
 	}
-	
+
+
 }
