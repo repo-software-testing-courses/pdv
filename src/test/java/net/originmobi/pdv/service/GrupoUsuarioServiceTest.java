@@ -45,7 +45,7 @@ public class GrupoUsuarioServiceTest {
         grupoUsuario.setDescricao("Descrição do Grupo Teste");
     }
 
-    // Teste para o método buscaGrupos(Usuario usuario)
+    // Teste para o método buscaGrupos(Usuario usuario) -ok
     @Test
     public void testBuscaGrupos() {
         // Dados simulados
@@ -73,7 +73,7 @@ public class GrupoUsuarioServiceTest {
         assertEquals("Grupo 2", gruposRetornados.get(1).getNome());
     }
 
-    // Teste para o método lista()
+    // Teste para o método lista() -ok
     @Test
     public void testLista() {
         // Dados simulados
@@ -98,7 +98,7 @@ public class GrupoUsuarioServiceTest {
         verify(grupousuarios, times(1)).findAll();
     }
 
-    // Teste para o método buscaGrupo(Long codigoGru)
+    // Teste para o método buscaGrupo(Long codigoGru) -ok
     @Test
     public void testBuscaGrupo() {
         Long codigoGru = 1L;
@@ -115,7 +115,7 @@ public class GrupoUsuarioServiceTest {
         verify(grupousuarios, times(1)).findByCodigoIn(codigoGru);
     }
 
-    // Teste para o método merge(GrupoUsuario grupoUsuario, RedirectAttributes attributes)
+    // Teste para o método merge(GrupoUsuario grupoUsuario, RedirectAttributes attributes) -ok
     @Test
     public void testMergeNovoGrupo() {
         // Dados de entrada
@@ -134,6 +134,8 @@ public class GrupoUsuarioServiceTest {
         verify(redirectAttributes, times(1)).addFlashAttribute("mensagem", "Grupo adicionado com sucesso");
     }
 
+
+    // Teste que atualiza a descrição do grupo
     @Test
     public void testMergeAtualizaGrupo() {
         // Dados de entrada
@@ -156,6 +158,7 @@ public class GrupoUsuarioServiceTest {
         verify(redirectAttributes, times(1)).addFlashAttribute("mensagem", "Grupo atualizado com sucesso");
     }
 
+    // remove grupo sem usuário -ok
     // Teste para o método remove(Long codigo, RedirectAttributes attributes)
     @Test
     public void testRemoveGrupoSemUsuariosVinculados() {
@@ -173,6 +176,7 @@ public class GrupoUsuarioServiceTest {
         assertEquals("redirect:/grupousuario", resultado);
     }
 
+    // apagar grupo com usuários associados
     @Test
     public void testRemoveGrupoComUsuariosVinculados() {
         Long codigoGrupo = 1L;
@@ -190,7 +194,7 @@ public class GrupoUsuarioServiceTest {
         assertEquals("redirect:/grupousuario/" + codigoGrupo, resultado);
     }
 
-    // Teste para o método addPermissao(Long codgrupo, Long codpermissao)
+    // Teste para o método addPermissao(Long codgrupo, Long codpermissao) -ok
     @Test
     public void testAddPermissaoComSucesso() {
         Long codgrupo = 1L;
@@ -208,6 +212,7 @@ public class GrupoUsuarioServiceTest {
         assertEquals("Permissao adicionada com sucesso", resultado);
     }
 
+    // adicionar permissão que ja existe
     @Test(expected = RuntimeException.class)
     public void testAddPermissaoJaExiste() {
         Long codgrupo = 1L;
