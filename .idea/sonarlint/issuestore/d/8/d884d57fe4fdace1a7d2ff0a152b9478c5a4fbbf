@@ -1,0 +1,20 @@
+
+m
+java:S22595"RA "NullPointerException" could be thrown; "getOriginalFilename()" can return null.(Íñ÷×üÿÿÿÿ
+i
+java:S20958"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(š°±¼ıÿÿÿÿ
+i	java:S116!"TRename this field "DIRETORIO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áøÀÚ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+r
+java:S1450"WRemove the "contexto" field and declare it as a local variable in the relevant methods.(±õ÷Óúÿÿÿÿ
+w
+java:S1450"\Remove the "imagemProduto" field and declare it as a local variable in the relevant methods.(ØóÕüÿÿÿÿ
+m
+java:S1450#"RRemove the "uri" field and declare it as a local variable in the relevant methods.(ó»şúÿÿÿÿ
+9
+java:S2119'"Save and re-use this "Random".( –Æãüÿÿÿÿ
+a
+java:S18582"K"contexto" is already a string, there's no need to call "toString()" on it.(×¾Ú²

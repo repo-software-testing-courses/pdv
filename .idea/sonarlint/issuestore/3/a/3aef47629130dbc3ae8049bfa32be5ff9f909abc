@@ -1,0 +1,33 @@
+
+’	java:S117ë"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹æÎÒúÿÿÿÿJ$94917659-e85c-4838-9d9f-a9157acff6b2
+–
+java:S1104"UMake nfService a static final constant or non-public and provide accessors if needed.(ƒôþ¾üÿÿÿÿJ$e821ba9c-136e-4e58-8c06-95d060a0913d
+s
+java:S1153À"1Directly append the argument of String.valueOf().(ñ®ÆÇûÿÿÿÿJ$a6ba870b-11ad-4a6f-ad62-4646a5fb9fa9
+e
+java:S2140%")Use "java.util.Random.nextInt()" instead.(Î¾¾šJ$eb52d792-c960-40fc-aa61-00d7b8ecb718
+}	java:S125¬"<This block of commented-out lines of code should be removed.(¥­ºƒüÿÿÿÿJ$8ca320b1-8963-45a8-b0cc-4e6bd089042d
+k
+java:S5361ë"HReplace this call to "replaceAll()" by a call to the "replace()" method.(‹æÎÒúÿÿÿÿ8ê¢Íí1
+k
+java:S5361õ"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ƒÕéáøÿÿÿÿ8ë¢Íí1
+k
+java:S5361…"HReplace this call to "replaceAll()" by a call to the "replace()" method.(Æƒüãüÿÿÿÿ8ì¢Íí1
+f
+java:S5361‰"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ÚöÖ¼8í¢Íí1
+k
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ÛË†òÿÿÿÿÿ8í¢Íí1
+f
+java:S5361‘"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ö¡æè8î¢Íí1
+k
+java:S5361•"HReplace this call to "replaceAll()" by a call to the "replace()" method.(Þé½Üýÿÿÿÿ8ï¢Íí1
+k
+java:S5361™"HReplace this call to "replaceAll()" by a call to the "replace()" method.(¼È³Œÿÿÿÿÿ8ï¢Íí1
+k
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(÷Çøÿÿÿÿ8ð¢Íí1
+f
+java:S5361¡"HReplace this call to "replaceAll()" by a call to the "replace()" method.(þÌŸà8ð¢Íí1
+k
+java:S5361¥"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ëÇýæþÿÿÿÿ8ñ¢Íí1
+k
+java:S5361©"HReplace this call to "replaceAll()" by a call to the "replace()" method.(Å³®¬ûÿÿÿÿ8ñ¢Íí1

@@ -2,7 +2,6 @@ package net.originmobi.pdv.xml.nfe;
 
 import java.text.DecimalFormat;
 
-import org.apache.commons.lang.StringUtils;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -12,6 +11,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import net.originmobi.pdv.model.NotaFiscal;
 import net.originmobi.pdv.service.notafiscal.NotaFiscalService;
+import org.apache.commons.lang3.StringUtils;
 
 public class ConversorXmlNfe implements Converter {
 

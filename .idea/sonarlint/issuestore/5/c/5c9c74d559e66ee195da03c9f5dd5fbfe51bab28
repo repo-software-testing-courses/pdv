@@ -1,0 +1,38 @@
+
+`	java:S112C"FDefine and throw a dedicated exception instead of using a generic one.(ëßÂŽüÿÿÿÿ
+`	java:S112J"FDefine and throw a dedicated exception instead of using a generic one.(ëßÂŽüÿÿÿÿ
+`	java:S112X"FDefine and throw a dedicated exception instead of using a generic one.(èÕØÆøÿÿÿÿ
+[	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(¿¼ŠÎ
+`	java:S112y"FDefine and throw a dedicated exception instead of using a generic one.(é‰Ã¥üÿÿÿÿ
+\	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(¿¼ŠÎ
+f	java:S117:"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁðÍî
+M
+java:S3655["7Call "Optional#isPresent()" before accessing the value.(äÙšß
+L
+java:S3655e"6Call "parcela.isPresent()" before accessing the value.(‘‘®ÿ
+J
+java:S3655}"4Call "caixa.isPresent()" before accessing the value.(ñÛ§ü
+R
+java:S3655\"7Call "Optional#isPresent()" before accessing the value.(ÂÜúÌýÿÿÿÿ
+R
+java:S3655]"7Call "Optional#isPresent()" before accessing the value.(¼¤ÒÜþÿÿÿÿ
+[
+java:S3655;"@Call "OptionaFornecedor.isPresent()" before accessing the value.(ìÙã®þÿÿÿÿ
+R
+java:S3655x"7Call "Optional#isPresent()" before accessing the value.(®šï ûÿÿÿÿ
+R
+java:S3655Z"7Call "Optional#isPresent()" before accessing the value.(æœáÓøÿÿÿÿ
+M
+java:S3655W"7Call "Optional#isPresent()" before accessing the value.(ïÇŠÃ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813,"BRemove this field injection and use constructor injection instead.(êæÄÞ

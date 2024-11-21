@@ -1,0 +1,33 @@
+
+	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(‘¤œáJ$c0a59a45-6602-4b9b-ae53-71e8b9b9857f
+†	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(·²¼ÉşÿÿÿÿJ$3f0f20e4-a6a5-43e7-b964-899cc37ef168
+	java:S112S"FDefine and throw a dedicated exception instead of using a generic one.(óğ¥J$5c4ade4d-1ae6-4c34-b750-7f4c742890d8
+†	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(æÅŒúùÿÿÿÿJ$e71bfd39-b6c2-4024-bc42-04923420e1ab
+	java:S112~"FDefine and throw a dedicated exception instead of using a generic one.(œºñıJ$0c46ecca-0735-4f07-9a10-8c2e95eae017
+‡	java:S112Š"FDefine and throw a dedicated exception instead of using a generic one.(Ï—†¯ùÿÿÿÿJ$418f8d6e-047d-468b-8e0d-be004a29458c
+q
+java:S1066"/Merge this if statement with the enclosing one.(£Ò“©ıÿÿÿÿJ$a8c42d65-a438-4cae-8178-e37bb15233d8
+q
+java:S1066Ä"/Merge this if statement with the enclosing one.(£Ò“©ıÿÿÿÿJ$45785d0b-239b-48e2-b435-f65db1af4181
+§
+java:S1488¶"eImmediately return this expression instead of assigning it to the temporary variable "caixaOptional".(´ºœÔûÿÿÿÿJ$21f9df5a-81d8-4998-9426-ad894c998e1b
+v
+java:S3655„"9Call "caixaAtual.isPresent()" before accessing the value.(•€İJ$83f372c7-9e8c-4724-a2c1-561da5094fd1
+t
+java:S3655"7Call "Optional#isPresent()" before accessing the value.(’©§¢J$eb6654df-f9aa-4e46-a47a-75db007ff1ed
+~
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞJ$e1f30acf-bfbb-48c6-b75f-625548c1cfac
+~
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞJ$9badde96-00a6-435d-bcd0-b3ee947248bf
+~
+java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄŞJ$b5d3658b-e4ca-403b-b2d7-3ab162d8782a
+—
+java:S1450"VRemove the "usuario" field and declare it as a local variable in the relevant methods.(ÂÌ±ÑûÿÿÿÿJ$fa1c6192-561b-43e3-936a-1bdd2cf266bd
+“
+java:S3776*"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ĞúÍàüÿÿÿÿJ$95703148-b4b7-49eb-86c3-4e4d6e3cb9c0
+f	java:S106I"+Replace this use of System.out by a logger.(±‹–¡J$5ebf29b3-51a7-4bc3-a44c-7371eda750e2
+f	java:S106J"+Replace this use of System.out by a logger.(Â¿²J$47693e3e-406b-4099-88a7-f60bec4abb7d
+…
+java:S3358Z"DExtract this nested ternary operation into an independent statement.(ı¨Ô‰üÿÿÿÿJ$b781c967-0ba1-42fe-af86-40cdb5fc60b5
+|
+java:S1117q";Rename "usuario" which hides the field declared at line 30.(¦ŠİıÿÿÿÿJ$d8331e32-fc0d-4bb1-ab3b-02f6cb2bfcb5

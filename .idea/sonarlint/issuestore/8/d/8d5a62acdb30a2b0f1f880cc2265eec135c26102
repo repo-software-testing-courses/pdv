@@ -1,0 +1,9 @@
+
+`	java:S112G"FDefine and throw a dedicated exception instead of using a generic one.(¿­¤Ãÿÿÿÿÿ
+[	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(õèì­
+`	java:S112W"FDefine and throw a dedicated exception instead of using a generic one.(Œ—ûÄûÿÿÿÿ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+E	java:S106&"+Replace this use of System.out by a logger.(¨¶ÑÍþÿÿÿÿ
+E	java:S106<"+Replace this use of System.out by a logger.(¨¶ÑÍþÿÿÿÿ
+E	java:S106L"+Replace this use of System.out by a logger.(¨¶ÑÍþÿÿÿÿ

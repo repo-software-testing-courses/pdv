@@ -1,0 +1,15 @@
+
+[	java:S112B"FDefine and throw a dedicated exception instead of using a generic one.(ÖÚ»å
+`	java:S112z"FDefine and throw a dedicated exception instead of using a generic one.(©‰Êœÿÿÿÿÿ
+f	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ý«è
+K
+java:S3655L"5Call "cidade.isPresent()" before accessing the value.(™ÊëŸ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄÞ
+R	java:S107<"=Method has 17 parameters, which is greater than 7 authorized.(ý«è

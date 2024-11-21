@@ -41,7 +41,7 @@ public class NotaFiscalItemService {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public String insere(Long prod, Long codnota, int qtd, NotaFiscalTipo tipo) {
-		Optional<Produto> produto = produtos.buscaProduto(prod);
+		Optional<Produto> produto = Optional.ofNullable(produtos.buscaProduto(prod));
 		Optional<NotaFiscal> notaFiscal = notas.busca(codnota);
 
 		verificaRegraDeTributacao(tipo, produto);

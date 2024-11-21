@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9d2cd5d3-4b2a-412d-af60-a7cf5e6c174f" name="Changes" comment="Implementação inicial - rodando">
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/originmobi/pdv/service/ProdutoServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/6/261caa45a57f0045122b81a3096164b770083796" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/6/261caa45a57f0045122b81a3096164b770083796" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2df63669a8bd315cd689f1c1e34c6347da65d18e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2df63669a8bd315cd689f1c1e34c6347da65d18e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/controller/ProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/controller/ProdutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/dtos/ProdutoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/dtos/ProdutoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/repository/ProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/repository/ProdutoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/ProdutoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/notafiscal/NotaFiscalItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/notafiscal/NotaFiscalItemService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="1" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2f0mHii6ytZmhTzd5oHjYzl6Vsh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Projects/qualidade-testes-2024/trabalho-qa/qts-pdv/pom.xml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="net.originmobi.pdv.service" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.ProdutoServiceTest">
+    <configuration name="ProdutoServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pdv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.originmobi.pdv.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.originmobi.pdv.service" />
+      <option name="MAIN_CLASS_NAME" value="net.originmobi.pdv.service.ProdutoServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProdutoServiceTest.shouldReturnProductWhenProductExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pdv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.originmobi.pdv.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.originmobi.pdv.service" />
+      <option name="MAIN_CLASS_NAME" value="net.originmobi.pdv.service.ProdutoServiceTest" />
+      <option name="METHOD_NAME" value="shouldReturnProductWhenProductExists" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProdutoServiceTest.shouldThrowExceptionWhenAdjustingStockOfNonControllingProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pdv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.originmobi.pdv.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.originmobi.pdv.service" />
+      <option name="MAIN_CLASS_NAME" value="net.originmobi.pdv.service.ProdutoServiceTest" />
+      <option name="METHOD_NAME" value="shouldThrowExceptionWhenAdjustingStockOfNonControllingProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProdutoServiceTest.shouldThrowExceptionWhenProductDoesNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pdv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.originmobi.pdv.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.originmobi.pdv.service" />
+      <option name="MAIN_CLASS_NAME" value="net.originmobi.pdv.service.ProdutoServiceTest" />
+      <option name="METHOD_NAME" value="shouldThrowExceptionWhenProductDoesNotExist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProdutoServiceTest.shouldThrowInsufficientStockExceptionOnAdjustment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pdv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.originmobi.pdv.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.originmobi.pdv.service" />
+      <option name="MAIN_CLASS_NAME" value="net.originmobi.pdv.service.ProdutoServiceTest" />
+      <option name="METHOD_NAME" value="shouldThrowInsufficientStockExceptionOnAdjustment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="qts-pdv" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="qts-pdv" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ProdutoServiceTest" />
+        <item itemvalue="JUnit.ProdutoServiceTest.shouldThrowExceptionWhenProductDoesNotExist" />
+        <item itemvalue="JUnit.ProdutoServiceTest.shouldReturnProductWhenProductExists" />
+        <item itemvalue="JUnit.ProdutoServiceTest.shouldThrowExceptionWhenAdjustingStockOfNonControllingProduct" />
+        <item itemvalue="JUnit.ProdutoServiceTest.shouldThrowInsufficientStockExceptionOnAdjustment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d2cd5d3-4b2a-412d-af60-a7cf5e6c174f" name="Changes" comment="" />
+      <created>1712946284450</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712946284450</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Implementação inicial - rodando">
+      <option name="closed" value="true" />
+      <created>1712948931403</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712948931403</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implementação inicial - rodando" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementação inicial - rodando" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/originmobi/pdv/service/ProdutoService.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/qts_pdv$ProdutoServiceTest_shouldInsertProductSuccessfully.ic" NAME="ProdutoServiceTest.shouldInsertProductSuccessfully Coverage Results" MODIFIED="1719833414538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>net.originmobi.pdv.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/qts_pdv$ProdutoServiceTest.ic" NAME="ProdutoServiceTest Coverage Results" MODIFIED="1719835712044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>net.originmobi.pdv.service.*</FILTER>
+    </SUITE>
+  </component>
+</project>
