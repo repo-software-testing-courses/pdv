@@ -102,13 +102,6 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- … -->
-
-   <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-web</artifactId>
-     <version>5.1.9.RELEASE</version>
-   </dependency>
  </dependencies>
 
 	<build>
@@ -121,7 +114,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version> <!-- Verifique a versão mais recente -->
+				<version>0.8.11</version> <!-- Verifique a versão mais recente -->
 				<executions>
 					<execution>
 						<goals>
