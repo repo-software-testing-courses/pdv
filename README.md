@@ -27,3 +27,9 @@ Para logar no sistema, use o usuário "gerente" e a senha "123".
 - Hibernate
 - FlyWay
 
+# Execução com Docker
+Para executar a aplicação utilizando o docker, utilize o seguinte comando na raiz do projeto:
+```sh
+docker compose up -d
+```
+
