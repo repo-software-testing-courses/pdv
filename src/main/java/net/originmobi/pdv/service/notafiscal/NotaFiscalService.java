@@ -47,18 +47,23 @@ public class NotaFiscalService {
 
 	private static final String CAMINHO_XML = "/src/main/resources/xmlNfe/";
 
+	//Busca todas as notas fiscais cadastradas no banco de dados.
 	public List<NotaFiscal> lista() {
 		return notasFiscais.findAll();
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	//cadastra nota fiscal, validando e preparando dados
 	public String cadastrar(Long coddesti, String natureza, NotaFiscalTipo tipo) {
+
+		//instancia 
 		Optional<Empresa> empresa = empresas.verificaEmpresaCadastrada();
 		Optional<Pessoa> pessoa = pessoas.buscaPessoa(coddesti);
 
+		//Verifica se existe empresa cadastrada
 		if (!empresa.isPresent())
 			throw new RuntimeException("Nenhuma empresa cadastrada, verifique");
-
+		//Verifica se existe o destinatário (pessoa).
 		if (!pessoa.isPresent())
 			throw new RuntimeException("Favor, selecione o destinatário");
 
@@ -107,6 +112,7 @@ public class NotaFiscalService {
 		return nota.getCodigo().toString();
 	}
 
+	//Implementa um algoritmo para gerar o Dígito Verificador (DV) de um código numerico
 	public Integer geraDV(String codigo) {
 		try {
 			int total = 0;
@@ -126,6 +132,8 @@ public class NotaFiscalService {
 		}
 	}
 
+	//Salva o XML da nota fiscal no diretório 
+	//O arquivo é nomeado com a chave da NF-e (chaveNfe.xml) -- Exemplo: 123456789.xml.
 	public void salvaXML(String xml, String chaveNfe) {
 		Path DIRETORIO;
 		String contexto = "";
@@ -148,10 +156,7 @@ public class NotaFiscalService {
 		}
 	}
 
-	/*
-	 * responsável por remover o xml quando o mesmo já existe na nota que foi
-	 * regerada
-	 */
+	//responsável por remover o xml quando o mesmo já existe na nota que foi regerada
 	public void removeXml(String chave_acesso) {
 		String contexto = "";
 
@@ -171,22 +176,25 @@ public class NotaFiscalService {
 		}
 	}
 
+	//Consulta uma nota fiscal pelo código/ID.
 	public Optional<NotaFiscal> busca(Long codnota) {
 		return notasFiscais.findById(codnota);
 	}
 
+	//Responsável por gerar o XML oficial da NF-e
 	public void emitir(NotaFiscal notaFiscal) {
 		GeraXmlNfe geraXmlNfe = new GeraXmlNfe();
 
 		// gera o xml e pega a chave de acesso do mesmo
 		String chaveNfe = geraXmlNfe.gerarXML(notaFiscal);
 
-		// seta a chave de acesso na nota fiscal para gravala no banco
+		// seta a chave de acesso na nota fiscal para grava-la no banco
 		notaFiscal.setChave_acesso(chaveNfe);
 
 		notasFiscais.save(notaFiscal);
 	}
 
+	//Retorna o total de notas fiscais emitidas (contagem do repositório).
 	public int totalNotaFiscalEmitidas() {
 		return notasFiscais.totalNotaFiscalEmitidas();
 	}
