@@ -134,7 +134,10 @@ public class VendaService {
 
 	public String removeProduto(Long posicaoProd, Long codVenda) {
 		try {
-			Venda venda = vendas.findByCodigoEquals(codVenda);
+            Venda venda = vendas.findByCodigoEquals(codVenda);
+            if (venda == null) {
+                return "Venda não encontrada";
+            }
 			if (venda.getSituacao().equals(VendaSituacao.ABERTA))
 				vendaProdutos.removeProduto(posicaoProd);
 			else

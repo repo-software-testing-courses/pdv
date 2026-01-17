@@ -6,16 +6,13 @@ services:
       - "5005:5005"
     volumes:
       - .:/app
+      - ~/.m2:/root/.m2
     depends_on:
       pdv-db:
         condition: service_healthy
-
-    command:
-      - bash
-      - -c
-      - >
-        mvn package -DskipTests &&
-        java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005 -jar target/pdv-0.0.1-SNAPSHOT.war
+    environment:
+      - MAVEN_OPTS=-Xmx512m
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
     
   pdv-db:
     image: mysql:8.0
@@ -24,7 +21,7 @@ services:
       MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: pdv
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]

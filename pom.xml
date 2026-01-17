@@ -25,7 +25,7 @@
 			<id>central</id>
 			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
-  	</repositories>
+	</repositories>
 
 
 	<properties>
@@ -55,25 +55,25 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -102,7 +102,57 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
- </dependencies>
+
+		<!-- Dependencias de Testagem -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.12.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>3.12.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>3.12.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.11.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.11.13</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -112,24 +162,55 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.11</version> <!-- Verifique a versão mais recente -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.jacoco</groupId> <!-- rodar com mvn clean verify -->
+				<artifactId>jacoco-maven-plugin</artifactId> <!-- abrir o arquivo em target/site/jacoco/index.html -->
+				<version>0.8.11</version>
 				<executions>
 					<execution>
+						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.pitest</groupId>  <!-- Rodar com mvn org.pitest:pitest-maven:mutationCoverage -->
+				<artifactId>pitest-maven</artifactId>
+				<version>1.9.11</version>
+				<configuration>
+					<targetClasses>
+						<param>net.originmobi.pdv.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>net.originmobi.pdv.*Test</param>
+					</targetTests>
+					<mutators>
+						<mutator>INVERT_NEGS</mutator>
+						<mutator>RETURN_VALS</mutator>
+						<mutator>NON_VOID_METHOD_CALLS</mutator>
+					</mutators>
+					<mutationThreshold>80</mutationThreshold>
+					<coverageThreshold>80</coverageThreshold>
+					<threads>4</threads>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

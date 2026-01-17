@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,9 +44,13 @@ public class NotaFiscalService {
 	@Autowired
 	private PessoaService pessoas;
 
-	private LocalDate dataAtual;
+	@Autowired
+	private GeraXmlNfe geraXmlNfe;
 
-	private static final String CAMINHO_XML = "/src/main/resources/xmlNfe/";
+	@Value("${nfe.xml.path:/tmp/nfe}")
+	private String CAMINHO_XML;
+
+	private LocalDate dataAtual;
 
 	public List<NotaFiscal> lista() {
 		return notasFiscais.findAll();
@@ -128,22 +133,29 @@ public class NotaFiscalService {
 
 	public void salvaXML(String xml, String chaveNfe) {
 		Path DIRETORIO;
-		String contexto = "";
 
 		try {
-			contexto = new File(".").getCanonicalPath();
-		} catch (Exception e) {
-			System.out.println("Erro ao pegar o contexto " + e);
-		}
+			if (Paths.get(CAMINHO_XML).isAbsolute()) {
+				DIRETORIO = Paths.get(CAMINHO_XML);
+			} else {
+				String contexto = new File(".").getCanonicalPath();
+				DIRETORIO = Paths.get(contexto, CAMINHO_XML);
+			}
 
-		DIRETORIO = Paths.get(contexto + CAMINHO_XML);
+			File dirFile = DIRETORIO.toFile();
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
 
-		try {
-			PrintWriter out = new PrintWriter(new FileWriter(DIRETORIO.toString() + "/" + chaveNfe + ".xml"));
+			PrintWriter out = new PrintWriter(
+					new FileWriter(DIRETORIO.resolve(chaveNfe + ".xml").toFile()));
+
 			out.write(xml);
 			out.close();
+
 			System.out.println("Arquivo gravado com sucesso em " + DIRETORIO.toString());
-		} catch (IOException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -153,19 +165,21 @@ public class NotaFiscalService {
 	 * regerada
 	 */
 	public void removeXml(String chave_acesso) {
-		String contexto = "";
-
 		try {
-			contexto = new File(".").getCanonicalPath();
-		} catch (Exception e) {
-			System.out.println("Erro ao pegar o contexto " + e);
-		}
+			Path diretorio;
 
-		try {
-			File file = new File(contexto + CAMINHO_XML + "/" + chave_acesso + ".xml");
-			System.out.println("XML para deletar " + file.toString());
-			if (file.exists())
-				file.delete();
+			if (Paths.get(CAMINHO_XML).isAbsolute()) {
+				diretorio = Paths.get(CAMINHO_XML);
+			} else {
+				String contexto = new File(".").getCanonicalPath();
+				diretorio = Paths.get(contexto, CAMINHO_XML);
+			}
+
+			Path arquivo = diretorio.resolve(chave_acesso + ".xml");
+			System.out.println("XML para deletar " + arquivo.toString());
+
+			java.nio.file.Files.deleteIfExists(arquivo);
+
 		} catch (Exception e) {
 			System.out.println("Erro ao deletar XML " + e);
 		}
@@ -176,7 +190,6 @@ public class NotaFiscalService {
 	}
 
 	public void emitir(NotaFiscal notaFiscal) {
-		GeraXmlNfe geraXmlNfe = new GeraXmlNfe();
 
 		// gera o xml e pega a chave de acesso do mesmo
 		String chaveNfe = geraXmlNfe.gerarXML(notaFiscal);

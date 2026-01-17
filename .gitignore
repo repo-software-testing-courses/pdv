@@ -1,16 +1,17 @@
-# Compiled class file
+
+# GitIgnore porradeiro
+
+
+# -----------------------
+# JAVA & MAVEN (Compilação)
+# -----------------------
+target/
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Arquivos de pacote (se você gerar, não devem ir pro git, exceto o wrapper se usado)
 *.jar
 *.war
 *.nar
@@ -19,5 +20,65 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Maven Wrapper (opcional: geralmente comitamos o script, mas não o .jar interno)
+# Descomente a linha abaixo se quiser ignorar o jar do wrapper
+# .mvn/wrapper/maven-wrapper.jar
+
+# -----------------------
+# IDEs (Editores de Código)
+# É crucial ignorar isso para não forçar sua configuração nos colegas
+# -----------------------
+# Eclipse
+.classpath
+.project
+.settings/
+.springBeans
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# -----------------------
+# SISTEMA OPERACIONAL
+# -----------------------
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# -----------------------
+# SEGURANÇA E AMBIENTE
+# -----------------------
+# Variáveis de ambiente locais (MUITO IMPORTANTE)
+.env
+.env.local
+
+# Logs de erro da JVM
 hs_err_pid*
+
+# -----------------------
+# DOCKER & DADOS LOCAIS
+# -----------------------
+# Se você criar um override para testes locais
+docker-compose.override.yml
+
+# Caso você mapeie volumes de banco de dados localmente no futuro
+# Exemplo: volumes
