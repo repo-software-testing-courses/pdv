@@ -6,6 +6,8 @@ services:
       - "5005:5005"
     volumes:
       - .:/app
+      - m2:/root/.m2
+      - target:/app/target
     depends_on:
       pdv-db:
         condition: service_healthy
@@ -32,3 +34,7 @@ services:
       timeout: 10s
       retries: 3
     
+
+volumes:
+  m2:
+  target:
