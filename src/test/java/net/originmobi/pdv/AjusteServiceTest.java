@@ -30,7 +30,7 @@ import net.originmobi.pdv.repository.AjusteRepository;
 public class AjusteServiceTest {
 
     @InjectMocks
-    private AjusteService meuaAjusteService;
+    private AjusteService ajusteService;
 
     @Mock
     private AjusteRepository ajusteRepository;
@@ -52,7 +52,6 @@ public class AjusteServiceTest {
         ajuste.setCodigo(1L);
     }
 
-   
     @Test
     @DisplayName("Deve listar ajustes aplicando filtro por código quando informado")
     void lista_ComFiltroCodigo_DeveRetornarPaginaFiltrada() {
@@ -60,7 +59,7 @@ public class AjusteServiceTest {
         filter.setCodigo(10L);
         when(ajusteRepository.lista(10L, pageable)).thenReturn(pageAjuste);
 
-        Page<Ajuste> resultado = meuaAjusteService.lista(pageable, filter);
+        Page<Ajuste> resultado = ajusteService.lista(pageable, filter);
 
         assertNotNull(resultado);
         verify(ajusteRepository, times(1)).lista(10L, pageable);
@@ -72,7 +71,7 @@ public class AjusteServiceTest {
         AjusteFilter filter = new AjusteFilter();
         when(ajusteRepository.lista(pageable)).thenReturn(pageAjuste);
 
-        Page<Ajuste> resultado = meuaAjusteService.lista(pageable, filter);
+        Page<Ajuste> resultado = ajusteService.lista(pageable, filter);
 
         assertNotNull(resultado);
         verify(ajusteRepository, times(1)).lista(pageable);
@@ -83,7 +82,7 @@ public class AjusteServiceTest {
     void busca_CodigoExistente_DeveRetornarAjuste() {
         when(ajusteRepository.findById(1L)).thenReturn(Optional.of(ajuste));
 
-        Optional<Ajuste> resultado = meuaAjusteService.busca(1L);
+        Optional<Ajuste> resultado = ajusteService.busca(1L);
 
         assertTrue(resultado.isPresent());
         assertEquals(1L, resultado.get().getCodigo());
@@ -94,7 +93,7 @@ public class AjusteServiceTest {
     void novo_DeveCriarENovoAjuste() {
         when(ajusteRepository.save(any(Ajuste.class))).thenReturn(ajuste);
 
-        Long codigoGerado = meuaAjusteService.novo();
+        Long codigoGerado = ajusteService.novo();
 
         assertEquals(1L, codigoGerado);
         verify(ajusteRepository, times(1)).save(any(Ajuste.class));
@@ -110,7 +109,7 @@ public class AjusteServiceTest {
         
         AjusteProduto ajusteProduto = new AjusteProduto();
         ajusteProduto.setProduto(produto);
-        ajusteProduto.setQtd_alteracao(5); // Valor positivo -> Gera ENTRADA
+        ajusteProduto.setQtd_alteracao(5);
         
         List<AjusteProduto> listaProdutos = new ArrayList<>();
         listaProdutos.add(ajusteProduto);
@@ -118,7 +117,7 @@ public class AjusteServiceTest {
 
         when(ajusteRepository.findById(1L)).thenReturn(Optional.of(ajuste));
 
-        String resultado = meuaAjusteService.processar(1L, "Ajuste de entrada");
+        String resultado = ajusteService.processar(1L, "Ajuste de entrada");
 
         assertEquals("Ajuste realizado com sucesso", resultado);
         assertEquals(AjusteStatus.PROCESSADO, ajuste.getStatus());
@@ -139,7 +138,7 @@ public class AjusteServiceTest {
         
         AjusteProduto ajusteProduto = new AjusteProduto();
         ajusteProduto.setProduto(produto);
-        ajusteProduto.setQtd_alteracao(-3); // Valor negativo -> Gera SAIDA
+        ajusteProduto.setQtd_alteracao(-3);
         
         List<AjusteProduto> listaProdutos = new ArrayList<>();
         listaProdutos.add(ajusteProduto);
@@ -147,7 +146,7 @@ public class AjusteServiceTest {
 
         when(ajusteRepository.findById(1L)).thenReturn(Optional.of(ajuste));
 
-        String resultado = meuaAjusteService.processar(1L, "Ajuste de saída");
+        String resultado = ajusteService.processar(1L, "Ajuste de saída");
 
         assertEquals("Ajuste realizado com sucesso", resultado);
         
@@ -163,14 +162,14 @@ public class AjusteServiceTest {
         when(ajusteRepository.findById(1L)).thenReturn(Optional.of(ajuste));
 
         RuntimeException erro = assertThrows(RuntimeException.class, () -> {
-            meuaAjusteService.processar(1L, "Processamento indevido");
+            ajusteService.processar(1L, "Processamento indevido");
         });
 
         assertEquals("Ajuste já processado", erro.getMessage());
     }
 
     @Test
-    @DisplayName("Deve capturar exceção do produtoService e solicitar suporte ao usuário")
+    @DisplayName("Deve capturar exceção do produtoService e solicitar suporte ao utilizador")
     void processar_ErroAoAjustarEstoque_DeveLancarExcecaoSuporte() {
         ajuste.setStatus(AjusteStatus.APROCESSAR);
         
@@ -191,7 +190,7 @@ public class AjusteServiceTest {
             .when(produtoService).ajusteEstoque(anyLong(), anyInt(), any(), anyString(), any());
 
         RuntimeException erro = assertThrows(RuntimeException.class, () -> {
-            meuaAjusteService.processar(1L, "Tentativa com falha");
+            ajusteService.processar(1L, "Tentativa com falha");
         });
 
         assertEquals("Erro ao tentar processar o ajuste, chame o suporte", erro.getMessage());
@@ -201,13 +200,13 @@ public class AjusteServiceTest {
     @DisplayName("Deve capturar exceção ao tentar salvar o ajuste processado no repositório")
     void processar_ErroAoSalvarAjuste_DeveLancarExcecaoSuporte() {
         ajuste.setStatus(AjusteStatus.APROCESSAR);
-        ajuste.setProdutos(new ArrayList<>()); // Lista vazia para testar a gravação direta
+        ajuste.setProdutos(new ArrayList<>()); 
 
         when(ajusteRepository.findById(1L)).thenReturn(Optional.of(ajuste));
         doThrow(new RuntimeException("Erro no save")).when(ajusteRepository).save(any(Ajuste.class));
 
         RuntimeException erro = assertThrows(RuntimeException.class, () -> {
-            meuaAjusteService.processar(1L, "Erro no save final");
+            ajusteService.processar(1L, "Erro no save final");
         });
 
         assertEquals("Erro ao tentar processar o ajuste, chame o suporte", erro.getMessage());
@@ -219,7 +218,7 @@ public class AjusteServiceTest {
         ajuste.setStatus(AjusteStatus.PROCESSADO);
 
         RuntimeException erro = assertThrows(RuntimeException.class, () -> {
-            meuaAjusteService.remover(ajuste);
+            ajusteService.remover(ajuste);
         });
 
         assertEquals("O ajuste já esta processado", erro.getMessage());
@@ -232,7 +231,7 @@ public class AjusteServiceTest {
         ajuste.setStatus(AjusteStatus.APROCESSAR);
 
         assertDoesNotThrow(() -> {
-            meuaAjusteService.remover(ajuste);
+            ajusteService.remover(ajuste);
         });
 
         verify(ajusteRepository, times(1)).deleteById(1L);
@@ -245,7 +244,7 @@ public class AjusteServiceTest {
         doThrow(new RuntimeException("Erro BD")).when(ajusteRepository).deleteById(1L);
 
         RuntimeException erro = assertThrows(RuntimeException.class, () -> {
-            meuaAjusteService.remover(ajuste);
+            ajusteService.remover(ajuste);
         });
 
         assertEquals("Erro ao tentar cancelar o ajuste", erro.getMessage());
