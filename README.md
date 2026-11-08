@@ -24,6 +24,7 @@ As responsabilidades de cada integrante e as classes sob teste estão em
 | --- | --- | --- |
 | **Plano de Teste** | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) | [Google Docs](https://docs.google.com/document/d/1b40d0Y7q8RmNOTqsJ-dV7mlSIBAJlqY2Q8F_PGl12M0/edit?usp=sharing) |
 | **Casos de Teste** | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) (exportação do TestLink) | [Google Docs](https://docs.google.com/document/d/1cpsUYGmLNs6N2mYzDVKepaeZyxAlKNn6bANoqa1tXVU/edit?usp=sharing) |
+| **Apresentação parcial (Entrega 1)** | [`docs/apresentacoes/`](docs/apresentacoes/) | [Google Slides](https://docs.google.com/presentation/d/1Vy5m1Brl0lf9eM_LRIxNzgr0ZdlR_FlJAifwIouKT-4/edit?usp=sharing) |
 
 ## Sumário
 
@@ -56,7 +57,7 @@ Google Docs, está em **[`docs/README.md`](docs/README.md)**.
 | **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
 | Testes gerados por IA — solução inicial (v0) | [`docs/ai/transcricoes/AI-002-v0-CaixaServiceTest.java`](docs/ai/transcricoes/AI-002-v0-CaixaServiceTest.java) |
 | Testes gerados por IA — descrição das alterações da revisão | [`docs/ai/transcricoes/AI-003-alteracoes-v0-para-final.md`](docs/ai/transcricoes/AI-003-alteracoes-v0-para-final.md) |
-| Slides das apresentações | [`docs/apresentacoes/`](docs/apresentacoes/) |
+| Slides das apresentações | [`docs/apresentacoes/`](docs/apresentacoes/) · [Apresentação parcial no Google Slides](https://docs.google.com/presentation/d/1Vy5m1Brl0lf9eM_LRIxNzgr0ZdlR_FlJAifwIouKT-4/edit?usp=sharing) |
 | Código dos testes automatizados | [`src/test/java/`](src/test/java/) |
 | Defeitos reportados | [Issues do repositório](https://github.com/elojas2/trabalho-pdv-2026.1/issues) |
 
