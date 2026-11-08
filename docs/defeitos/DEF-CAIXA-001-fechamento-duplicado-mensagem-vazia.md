@@ -74,4 +74,4 @@ não manter o botão habilitado.
 
 ## Rastreamento
 
-- [ ] Abrir Issue correspondente no GitHub e referenciar aqui.
+- [x] Abrir Issue correspondente no GitHub e referenciar aqui: [#15](https://github.com/elojas2/trabalho-pdv-2026.1/issues/15).

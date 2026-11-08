@@ -26,6 +26,7 @@ Issues; estas fichas documentam a análise e as evidências).
 | DEF-VENDA-001 | Venda | Fechamento sem título lança "Zero length string" | [ficha](defeitos/DEF-VENDA-001-zero-length-string.md) | [#11](https://github.com/elojas2/trabalho-pdv-2026.1/issues/11) |
 | DEF-VENDA-002 | Venda | Cartão débito/crédito não fecha a venda (NPE) | [ficha](defeitos/DEF-VENDA-002-cartao-nao-fecha.md) | [#12](https://github.com/elojas2/trabalho-pdv-2026.1/issues/12) |
 | DEF-VENDA-003 | Venda | Desconto e acréscimo aplicados trocados | [ficha](defeitos/DEF-VENDA-003-desconto-acrescimo-trocados.md) | [#13](https://github.com/elojas2/trabalho-pdv-2026.1/issues/13) |
+| DEF-CAIXA-001 | Caixa | Fechar caixa já fechado exibe alerta vazio | [ficha](defeitos/DEF-CAIXA-001-fechamento-duplicado-mensagem-vazia.md) | [#15](https://github.com/elojas2/trabalho-pdv-2026.1/issues/15) |
 | DEF-ESTOQUE-001 | Estoque | Entrada de estoque não aumenta o saldo (trigger) | [ficha](defeitos/DEF-ESTOQUE-001-entrada-nao-aumenta-saldo.md) | [#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14) |
 
 Defeitos expostos pelos testes unitários (sem ficha própria; documentados nos
