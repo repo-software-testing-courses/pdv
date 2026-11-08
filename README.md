@@ -18,9 +18,17 @@ teste e qualidade produzidos pelo grupo.
 As responsabilidades de cada integrante e as classes sob teste estão em
 [`docs/README.md`](docs/README.md).
 
+## Documentos principais
+
+| Documento | Versão no repositório | Versão editável |
+| --- | --- | --- |
+| **Plano de Teste** | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) | [Google Docs](https://docs.google.com/document/d/1b40d0Y7q8RmNOTqsJ-dV7mlSIBAJlqY2Q8F_PGl12M0/edit?usp=sharing) |
+| **Casos de Teste** | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) (exportação do TestLink) | [Google Docs](https://docs.google.com/document/d/1cpsUYGmLNs6N2mYzDVKepaeZyxAlKNn6bANoqa1tXVU/edit?usp=sharing) |
+
 ## Sumário
 
 - [Equipe](#equipe)
+- [Documentos principais](#documentos-principais)
 - [Artefatos do trabalho](#artefatos-do-trabalho)
 - [Recursos do sistema](#recursos-do-sistema)
 - [Tecnologias](#tecnologias)
@@ -41,6 +49,7 @@ Google Docs, está em **[`docs/README.md`](docs/README.md)**.
 | --- | --- |
 | Índice geral da documentação | [`docs/README.md`](docs/README.md) |
 | Plano de Teste | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) |
+| Casos de Teste (TestLink) | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) |
 | Relatórios (cobertura, mutação, inspeção) | [`docs/relatorios/`](docs/relatorios/) |
 | Relatório de testes manuais — VendaService | [`docs/relatorios/relatorio-testes-manuais-vendaservice.md`](docs/relatorios/relatorio-testes-manuais-vendaservice.md) |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
