@@ -208,3 +208,19 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | **Aceito:** a aplicação das anotações do Mockito para isolamento das dependências e a inclusão dos cenários de teste para cobrir a ramificação negativa do operador ternário (`qtd_alteracao > 0 ? ENTRADA : SAIDA`) e as exceções no repositório. **Alterado pela integrante:** mantida a nomenclatura original da variável injetada (`ajusteService`) para garantir a consistência com os artefatos da Entrega 1; ajustada a assinatura e os stubs dos cenários de paginação (`Pageable`/`Page`). |
 | **Validação** | Verificação direta da suíte em `src/test/java/net/originmobi/pdv/service/AjusteServiceTest.java`. A integrante conferiu o isolamento das dependências (garantindo que o banco de dados não é acionado) e validou que todos os desvios condicionais e tratamentos de exceção da classe `AjusteService` possuem asserções equivalentes com `assertThrows` e `verify`. |
 | **Transcrição** | Não preservada |
+
+---
+
+## AI-012 — Entrega 2: isolamento do BCrypt, valores-limite e arestas restantes em `CaixaServiceTest`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-08 |
+| **Responsável** | Eloyse Fernanda |
+| **Atividade** | Entrega 2 — "melhorar e aumentar os casos de testes unitários, isolando suas dependências" (classe `CaixaService`) |
+| **Ferramenta** | Claude (Claude Code — agente com acesso de leitura e escrita ao repositório local) |
+| **Prompt/instrução** | A integrante pediu para começar a Entrega 2 pela melhoria dos testes unitários isolando as dependências, restrito ao `CaixaService`. A IA analisou a suíte e o relatório JaCoCo e propôs 7 itens; a integrante aprovou. |
+| **Resultado** | Na branch `entrega2/caixaservice-testes-unitarios`: (1) `BCryptPasswordEncoder`, instanciado dentro de `fechaCaixa`, isolado com `mockConstruction` — o teste não executa mais o BCrypt real e verifica que a senha é comparada com o hash do usuário logado; (2) asserções de data reforçadas (`data_cadastro` = hoje; `data_fechamento` dentro do intervalo da execução) no lugar de `assertNotNull`; (3) novo caso "Abertura de banco" (aresta da linha 90 não coberta); (4) filtro de banco com data vazia (aresta da linha 196); (5) valores-limite da abertura: -0,01 e -1 rejeitados, 0 sem lançamento, 0,01 com lançamento; (6) teste de descrição padrão parametrizado (3 tipos × descrição vazia/preenchida), substituindo um teste que juntava 3 cenários; (7) COFRE/BANCO não consultam caixa aberto. Suíte: 29 → 41 casos. |
+| **Decisão** | **Aceito pela integrante:** os 7 itens propostos. **Adiado:** três defeitos identificados por leitura do código (`fechaCaixa` com caixa inexistente → `NoSuchElementException`; senha `null` → `NullPointerException`; `listaBancosAbertosTipoFilterBanco` ignora o tipo quando não há data) — ficam para avaliação e registro em issues. **Não coberto, por decisão:** a aresta falsa do `else if (BANCO)` em `cadastro` (linha 62) é inalcançável, pois `CaixaTipo` só tem CAIXA, COFRE e BANCO. «completar com alterações feitas pela integrante na revisão» |
+| **Validação** | Execução real em container Java 8 (`docker run ... maven:3.8.8-eclipse-temurin-8 mvn -Dtest=CaixaServiceTest test`): **Tests run: 41, Failures: 0, Errors: 0, Skipped: 0**. JaCoCo em `CaixaService`: arestas 41/44 (93,2%) → **43/44 (97,7%)**, instruções 407/407. |
+| **Transcrição** | solução inicial da IA: [`transcricoes/AI-012-v0-CaixaServiceTest.java`](transcricoes/AI-012-v0-CaixaServiceTest.java); versão final: `src/test/java/net/originmobi/pdv/CaixaServiceTest.java`. |

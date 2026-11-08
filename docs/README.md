@@ -60,6 +60,6 @@ versões.
 
 | Integrante | GitHub | Responsabilidades | Classes sob teste |
 | --- | --- | --- | --- |
-| Eloyse Fernanda | [@elojas2](https://github.com/elojas2) | _preencher_ | _preencher_ |
+| Eloyse Fernanda | [@elojas2](https://github.com/elojas2) | Testes unitários e manuais | CaixaService |
 | Natalia de Abreu Lamas | [@natalialamas73](https://github.com/natalialamas73) | Testes unitários e manuais | AjusteService |
 | Alexandre Porto | [@AlexPortoNascimento](https://github.com/AlexPortoNascimento) | Testes unitários e manuais | VendaService |
