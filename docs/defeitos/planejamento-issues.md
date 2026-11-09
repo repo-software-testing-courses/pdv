@@ -5,9 +5,9 @@ organiza em issues prontas para abrir no GitHub:
 
 1. **Testes unitários** (`src/test/java/net/originmobi/pdv/VendaServiceTest.java`)
    — casos que falham intencionalmente, com o defeito documentado em comentário.
-2. **Testes manuais** (`docs/relatorios/relatorio-testes-manuais-vendaservice.md`)
+2. **Testes manuais** (`docs/relatorios/testes-manuais-vendaservice.md`)
    — falhas observadas pela interface, com evidências em
-   `docs/relatorios/evidenciasVendaService/`.
+   `docs/evidencias/venda/`.
 
 > Rastreador oficial: **GitHub Issues**. Cada ficha em `docs/defeitos/` deve
 > receber o link da issue correspondente após a abertura.
@@ -197,7 +197,7 @@ Validar `titulos`/`vlParcelas` vazios antes de decodificar e lançar mensagem de
 negócio.
 
 **Evidência**
-`docs/relatorios/evidenciasVendaService/Evidencia 2.png`
+`docs/evidencias/venda/Evidencia 2.png`
 
 **Referências**
 - Ficha: `docs/defeitos/DEF-VENDA-001-zero-length-string.md`
@@ -233,7 +233,7 @@ Reabilitar/validar o campo Máquina para títulos de cartão; validar `getMaquin
 nulo com mensagem de negócio.
 
 **Evidência**
-`docs/relatorios/evidenciasVendaService/Evidencia 6.png` (débito),
+`docs/evidencias/venda/Evidencia 6.png` (débito),
 `Evidencia 4.png` (crédito).
 
 **Referências**
@@ -271,7 +271,7 @@ Alinhar a ordem dos parâmetros entre chamada e assinatura; adicionar teste
 unitário com desconto ≠ acréscimo.
 
 **Evidência**
-`docs/relatorios/evidenciasVendaService/Evidencia desc-acresc 1.png` e
+`docs/evidencias/venda/Evidencia desc-acresc 1.png` e
 `Evidencia desc-acresc 2.png`.
 
 **Referências**
@@ -312,7 +312,7 @@ Reescrever o trigger para somar em ENTRADA e subtrair em SAÍDA (ou centralizar 
 regra na aplicação).
 
 **Evidência**
-`docs/relatorios/evidenciasVendaService/Evidencia 10.png` (venda bloqueada por
+`docs/evidencias/venda/Evidencia 10.png` (venda bloqueada por
 estoque insuficiente, consequência do saldo não incrementado).
 
 **Referências**
