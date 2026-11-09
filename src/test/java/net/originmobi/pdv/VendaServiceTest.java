@@ -3,6 +3,7 @@ package net.originmobi.pdv;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -12,9 +13,11 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
@@ -22,10 +25,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import net.originmobi.pdv.controller.TituloService;
@@ -35,6 +40,7 @@ import net.originmobi.pdv.filter.VendaFilter;
 import net.originmobi.pdv.model.Caixa;
 import net.originmobi.pdv.model.CaixaLancamento;
 import net.originmobi.pdv.model.PagamentoTipo;
+import net.originmobi.pdv.model.Parcela;
 import net.originmobi.pdv.model.Pessoa;
 import net.originmobi.pdv.model.Titulo;
 import net.originmobi.pdv.model.TituloTipo;
@@ -831,5 +837,260 @@ class VendaServiceTest {
         assertEquals(7, resultado,
                 "O valor retornado deve ser o mesmo do repositorio");
         verify(vendas).qtdVendasEmAberto();
+    }
+
+    // ==================================================================
+    // Testes adicionais para elevar o escore de mutacao (PIT).
+    // Usam ArgumentCaptor para asserir VALORES calculados e valores de
+    // retorno, matando mutantes de Math, Increments, NullReturn,
+    // PrimitiveReturns, VoidMethodCall e NegateConditionals.
+    //
+    // IMPORTANTE: estas assercoes refletem o comportamento ATUAL do codigo
+    // (inclusive o defeito de troca desconto/acrescimo — DEF-VENDA-003),
+    // pois um teste de mutacao precisa PASSAR na suite original. A
+    // documentacao do defeito continua nos testes @Tag("defeito").
+    // ==================================================================
+
+    private Titulo tituloDin() {
+        TituloTipo tipo = new TituloTipo();
+        tipo.setSigla("DIN");
+        Titulo titulo = new Titulo();
+        titulo.setTipo(tipo);
+        return titulo;
+    }
+
+    // ---- busca: mata NullReturnVals (L109/L111) asserindo o Page retornado
+
+    @Test
+    @DisplayName("busca: filtro com codigo deve RETORNAR o Page de findByCodigoIn")
+    void busca_filtroComCodigo_deveRetornarPageDoRepositorio() {
+        VendaFilter filter = new VendaFilter();
+        filter.setCodigo(5L);
+        PageRequest pageable = PageRequest.of(0, 10);
+        @SuppressWarnings("unchecked")
+        Page<Venda> esperado = mock(Page.class);
+        when(vendas.findByCodigoIn(5L, pageable)).thenReturn(esperado);
+
+        Page<Venda> resultado = service.busca(filter, "ABERTA", pageable);
+
+        assertSame(esperado, resultado, "Deve retornar exatamente o Page do repositorio");
+    }
+
+    @Test
+    @DisplayName("busca: sem codigo deve RETORNAR o Page de findBySituacaoEquals")
+    void busca_semCodigo_deveRetornarPageDoRepositorio() {
+        VendaFilter filter = new VendaFilter();
+        PageRequest pageable = PageRequest.of(0, 10);
+        @SuppressWarnings("unchecked")
+        Page<Venda> esperado = mock(Page.class);
+        when(vendas.findBySituacaoEquals(VendaSituacao.FECHADA, pageable)).thenReturn(esperado);
+
+        Page<Venda> resultado = service.busca(filter, "FECHADA", pageable);
+
+        assertSame(esperado, resultado, "Deve retornar exatamente o Page do repositorio");
+    }
+
+    // ---- lista: cobre e mata EmptyObjectReturnVals (L150)
+
+    @Test
+    @DisplayName("lista: deve RETORNAR a lista de vendas do repositorio")
+    void lista_deveRetornarListaDoRepositorio() {
+        List<Venda> esperado = java.util.Arrays.asList(new Venda(), new Venda());
+        when(vendas.findAll()).thenReturn(esperado);
+
+        List<Venda> resultado = service.lista();
+
+        assertSame(esperado, resultado, "Deve retornar a mesma lista do repositorio");
+        assertEquals(2, resultado.size());
+    }
+
+    // ---- fechaVenda a prazo com 2 parcelas e desconto!=acrescimo:
+    //      mata MathMutator de desc/acre (L197/L198), de valor_parcela
+    //      (L266) e Increments/PrimitiveReturns da sequencia (L276/L277)
+
+    @Test
+    @DisplayName("fechaVenda: a prazo 2 parcelas captura valor_parcela e sequencia (mata mutantes de math/increment)")
+    void fechaVenda_aPrazoDuasParcelas_capturaValorParcelaESequencia() {
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("30/60"); // duas parcelas a prazo
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(any())).thenReturn(Optional.of(tituloDin()));
+
+        // vlprodutos=100, desconto=10, acrescimo=4, 2 parcelas de 50
+        // len=2 -> desc=10/2=5 ; acre=4/2=2
+        // aprazo recebe (desc, acre) nas posicoes (acre, desc) [DEF-VENDA-003],
+        // logo valor_parcela i=0 = (50 + 5) - 2 = 53.0
+        service.fechaVenda(1L, 1L, 100.0, 10.0, 4.0,
+                new String[]{"50", "50"}, new String[]{"30", "60"});
+
+        ArgumentCaptor<Double> valor = ArgumentCaptor.forClass(Double.class);
+        ArgumentCaptor<Integer> seq = ArgumentCaptor.forClass(Integer.class);
+        verify(parcelas, times(2)).gerarParcela(
+                valor.capture(), any(), any(), any(), any(), any(),
+                anyInt(), seq.capture(), any(), any());
+
+        assertEquals(53.0, valor.getAllValues().get(0), 0.0001,
+                "valor_parcela da 1a parcela deve ser (50 + 10/2) - 4/2 = 53.0");
+        assertEquals(1, seq.getAllValues().get(0), "1a parcela com sequencia 1");
+        assertEquals(2, seq.getAllValues().get(1), "2a parcela com sequencia 2 (increment)");
+    }
+
+    // ---- fechaVenda a vista dinheiro com desconto!=acrescimo:
+    //      mata MathMutator de valor_parcela em avistaDinheiro (L309),
+    //      o decremento qtdVezes (L290) e asserta o CaixaLancamento
+
+    @Test
+    @DisplayName("fechaVenda: a vista dinheiro captura valor do CaixaLancamento (mata math de avistaDinheiro)")
+    void fechaVenda_aVistaDinheiro_capturaValorLancamento() {
+        dadoUsuarioAutenticado();
+
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("00");
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(1L)).thenReturn(Optional.of(tituloDin()));
+        when(caixas.caixaIsAberto()).thenReturn(true);
+        when(caixas.caixaAberto()).thenReturn(Optional.of(new Caixa()));
+
+        // uma parcela de 50, vlprodutos=50 (para passar na checagem de soma),
+        // desconto=10, acrescimo=4 -> len=1 -> desc=10 ; acre=4
+        // valor_parcela = (50 + desc) - acre = (50 + 10) - 4 = 56.0 [DEF-VENDA-003]
+        service.fechaVenda(1L, 1L, 50.0, 10.0, 4.0,
+                new String[]{"50"}, new String[]{"1"});
+
+        ArgumentCaptor<CaixaLancamento> lanc = ArgumentCaptor.forClass(CaixaLancamento.class);
+        verify(lancamentos).lancamento(lanc.capture());
+
+        assertEquals(56.0, lanc.getValue().getValor(), 0.0001,
+                "valor do lancamento = (50 + 10) - 4 = 56.0 (comportamento atual)");
+    }
+
+    // ---- fechaVenda: captura os argumentos de vendas.fechaVenda,
+    //      matando o math de vlFinal (L237) e o VoidMethodCall (verifica
+    //      que o fechamento realmente ocorre)
+
+    @Test
+    @DisplayName("fechaVenda: captura vlFinal passado a vendas.fechaVenda (mata math de vlFinal)")
+    void fechaVenda_capturaVlFinal() {
+        dadoUsuarioAutenticado();
+
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("00");
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(1L)).thenReturn(Optional.of(tituloDin()));
+        when(caixas.caixaIsAberto()).thenReturn(true);
+        when(caixas.caixaAberto()).thenReturn(Optional.of(new Caixa()));
+
+        // vlprodutos=50, desconto=10, acrescimo=4 -> vlFinal=(50+4)-10=44.0
+        service.fechaVenda(1L, 1L, 50.0, 10.0, 4.0,
+                new String[]{"50"}, new String[]{"1"});
+
+        ArgumentCaptor<Double> vlFinal = ArgumentCaptor.forClass(Double.class);
+        verify(vendas).fechaVenda(eq(1L), eq(VendaSituacao.FECHADA),
+                vlFinal.capture(), any(), any(), any(), any());
+
+        assertEquals(44.0, vlFinal.getValue(), 0.0001,
+                "vlFinal = (vlprodutos + acrescimo) - desconto = (50 + 4) - 10 = 44.0");
+    }
+
+    // ---- fechaVenda: captura o Receber (mata math de vlTotal L169 e o
+    //      VoidMethodCall de receberServ.cadastrar L191)
+
+    @Test
+    @DisplayName("fechaVenda: captura o Receber cadastrado com vlTotal correto (mata math de vlTotal)")
+    void fechaVenda_capturaReceberComVlTotal() {
+        dadoUsuarioAutenticado();
+
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("00");
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(1L)).thenReturn(Optional.of(tituloDin()));
+        when(caixas.caixaIsAberto()).thenReturn(true);
+        when(caixas.caixaAberto()).thenReturn(Optional.of(new Caixa()));
+
+        // vlTotal = (vlprodutos + acrescimo) - desconto = (50 + 4) - 10 = 44.0
+        service.fechaVenda(1L, 1L, 50.0, 10.0, 4.0,
+                new String[]{"50"}, new String[]{"1"});
+
+        ArgumentCaptor<net.originmobi.pdv.model.Receber> receber =
+                ArgumentCaptor.forClass(net.originmobi.pdv.model.Receber.class);
+        verify(receberServ).cadastrar(receber.capture());
+
+        assertEquals(44.0, receber.getValue().getValor_total(), 0.0001,
+                "vlTotal do Receber = (50 + 4) - 10 = 44.0");
+    }
+
+    // ---- fechaVenda: setPagamentotipo na venda (mata VoidMethodCall L184)
+
+    @Test
+    @DisplayName("fechaVenda: deve aplicar a forma de pagamento na venda (mata remocao de setPagamentotipo)")
+    void fechaVenda_deveSetarFormaPagamentoNaVenda() {
+        dadoUsuarioAutenticado();
+
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("00");
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(1L)).thenReturn(Optional.of(tituloDin()));
+        when(caixas.caixaIsAberto()).thenReturn(true);
+        when(caixas.caixaAberto()).thenReturn(Optional.of(new Caixa()));
+
+        service.fechaVenda(1L, 1L, 50.0, 0.0, 0.0,
+                new String[]{"50"}, new String[]{"1"});
+
+        assertSame(formaPagamento, venda.getPagamentotipo(),
+                "A forma de pagamento deve ter sido aplicada na venda (setPagamentotipo)");
+    }
+
+    // ---- fechaVenda: distingue o ramo à vista do a prazo (mata
+    //      NegateConditionals de formaPagar[i].equals("00") — L179)
+
+    @Test
+    @DisplayName("fechaVenda: a vista deve lancar no caixa e NAO gerar parcela (mata negacao do ramo '00')")
+    void fechaVenda_aVista_naoDeveGerarParcela() {
+        dadoUsuarioAutenticado();
+
+        Venda venda = new Venda();
+        venda.setSituacao(VendaSituacao.ABERTA);
+        venda.setPessoa(new Pessoa());
+        when(vendas.findByCodigoEquals(1L)).thenReturn(venda);
+
+        PagamentoTipo formaPagamento = new PagamentoTipo();
+        formaPagamento.setFormaPagamento("00");
+        when(formaPagamentos.busca(1L)).thenReturn(formaPagamento);
+        when(tituloService.busca(1L)).thenReturn(Optional.of(tituloDin()));
+        when(caixas.caixaIsAberto()).thenReturn(true);
+        when(caixas.caixaAberto()).thenReturn(Optional.of(new Caixa()));
+
+        service.fechaVenda(1L, 1L, 50.0, 0.0, 0.0,
+                new String[]{"50"}, new String[]{"1"});
+
+        // ramo à vista: lancamento no caixa SIM, parcela a prazo NAO
+        verify(lancamentos).lancamento(any(CaixaLancamento.class));
+        verify(parcelas, never()).gerarParcela(
+                any(), any(), any(), any(), any(), any(), anyInt(), anyInt(), any(), any());
     }
 }
