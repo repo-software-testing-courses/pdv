@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -258,6 +259,7 @@ class VendaServiceTest {
      * <p>Este teste FALHA (assertThrows nao satisfeito) expondo o defeito.
      */
     @Test
+    @Tag("defeito")
     @DisplayName("abreVenda: venda nova — falha no save deve lancar excecao ao chamador [DEFEITO: excecao silenciada]")
     void abreVenda_vendaNova_saveComExcecao_devePropagarErro() {
         dadoUsuarioAutenticado();
@@ -413,6 +415,7 @@ class VendaServiceTest {
      * ou retornar uma mensagem de erro, nao "ok".
      */
     @Test
+    @Tag("defeito")
     @DisplayName("addProduto: falha no salvar deve propagar erro [DEFEITO: excecao silenciada, retorna ok]")
     void addProduto_salvarComExcecao_devePropagarErro() {
         when(vendas.verificaSituacao(1L)).thenReturn(VendaSituacao.ABERTA.toString());

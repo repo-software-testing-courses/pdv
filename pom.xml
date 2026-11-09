@@ -206,6 +206,15 @@
 						<outputFormat>XML</outputFormat>
 					</outputFormats>
 					<timestampedReports>false</timestampedReports>
+					<!-- Testes que documentam defeitos do codigo legado falham de
+					     proposito (asserem o comportamento CORRETO esperado). O PIT
+					     exige suite verde ("Mutation testing requires a green suite"),
+					     entao esses testes sao marcados com @Tag("defeito") e excluidos
+					     APENAS da medicao de mutacao. Eles continuam no `mvn test` e no
+					     JaCoCo como evidencia dos defeitos. Nenhum defeito e corrigido. -->
+					<excludedGroups>
+						<excludedGroup>defeito</excludedGroup>
+					</excludedGroups>
 				</configuration>
 			</plugin>
 		</plugins>
