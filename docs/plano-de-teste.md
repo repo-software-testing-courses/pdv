@@ -7,8 +7,8 @@
 **Alunos:** Alexandre Porto, Eloyse Fernanda e Natália Abreu
 
 > Cópia versionada no repositório. A versão editável (Google Docs), com o
-> histórico de colaboração de cada integrante, está linkada em
-> [`docs/README.md`](README.md).
+> histórico de colaboração de cada integrante, está linkada no
+> [README do repositório](../README.md).
 
 ---
 

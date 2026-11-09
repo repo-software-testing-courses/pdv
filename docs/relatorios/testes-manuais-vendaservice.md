@@ -49,8 +49,8 @@
 - **Resultado obtido:** "Venda finalizada com sucesso"; venda passa a FECHADA.
 - **Status:** Passou.
 - **Evidências:**
-  - ![Venda finalizada com sucesso](evidenciasVendaService/Evidencia%201.png)
-  - ![Pedido FECHADA](evidenciasVendaService/Evidencia%205.png)
+  - ![Venda finalizada com sucesso](../evidencias/venda/Evidencia%201.png)
+  - ![Pedido FECHADA](../evidencias/venda/Evidencia%205.png)
 
 ### CT-VENDA-02 — À vista em dinheiro, sem título selecionado
 
@@ -60,7 +60,7 @@
 - **Resultado obtido:** erro técnico **"Zero length string"**; venda não fecha.
 - **Status:** Falhou → **DEF-VENDA-001**.
 - **Evidência:**
-  - ![Zero length string](evidenciasVendaService/Evidencia%202.png)
+  - ![Zero length string](../evidencias/venda/Evidencia%202.png)
 
 ### CT-VENDA-03 — À vista cartão débito
 
@@ -70,7 +70,7 @@
 - **Resultado obtido:** **a venda não fecha**; erro "No message available" (NullPointerException).
 - **Status:** Falhou → **DEF-VENDA-002** (título de cartão sem máquina associada).
 - **Evidência:**
-  - ![Cartão débito - No message available](evidenciasVendaService/Evidencia%206.png)
+  - ![Cartão débito - No message available](../evidencias/venda/Evidencia%206.png)
 
 ### CT-VENDA-04 — À vista cartão crédito
 
@@ -80,7 +80,7 @@
 - **Resultado obtido:** **a venda não fecha**; erro "No message available" (NullPointerException).
 - **Status:** Falhou → **DEF-VENDA-002**.
 - **Evidência:**
-  - ![Cartão crédito - No message available](evidenciasVendaService/Evidencia%204.png)
+  - ![Cartão crédito - No message available](../evidencias/venda/Evidencia%204.png)
 
 ### CT-VENDA-05 — A prazo sem cliente
 
@@ -90,7 +90,7 @@
 - **Resultado obtido:** "Venda sem cliente, verifique"; venda bloqueada.
 - **Status:** Passou.
 - **Evidência:**
-  - ![Venda sem cliente, verifique](evidenciasVendaService/Evidencia%203.png)
+  - ![Venda sem cliente, verifique](../evidencias/venda/Evidencia%203.png)
 
 ### CT-VENDA-06 — Fechamento com desconto e acréscimo diferentes
 
@@ -101,8 +101,8 @@
 - **Resultado obtido:** o sistema exibe "Venda finalizada com sucesso", mas o valor final gravado permanece **R$ 3,50** (venda FECHADA com R$ 3,50).
 - **Status:** Falhou → **DEF-VENDA-003** (desconto/acréscimo trocados nos métodos auxiliares).
 - **Evidências:**
-  - ![Desconto 1,00 e acréscimo 0,95 - venda finalizada](evidenciasVendaService/Evidencia%20desc-acresc%201.png)
-  - ![Pedido FECHADA com valor 3,50](evidenciasVendaService/Evidencia%20desc-acresc%202.png)
+  - ![Desconto 1,00 e acréscimo 0,95 - venda finalizada](../evidencias/venda/Evidencia%20desc-acresc%201.png)
+  - ![Pedido FECHADA com valor 3,50](../evidencias/venda/Evidencia%20desc-acresc%202.png)
 
 ### CT-VENDA-07 — À vista em dinheiro com caixa fechado
 
@@ -112,7 +112,7 @@
 - **Resultado obtido:** "nenhum caixa aberto"; venda não fecha.
 - **Status:** Passou.
 - **Evidência:**
-  - ![nenhum caixa aberto](evidenciasVendaService/Evidencia%207.png)
+  - ![nenhum caixa aberto](../evidencias/venda/Evidencia%207.png)
 
 ### CT-VENDA-08 — Venda sem valor / sem produtos
 
@@ -122,7 +122,7 @@
 - **Resultado obtido:** "Venda sem valor, verifique".
 - **Status:** Passou.
 - **Evidência:**
-  - ![Venda sem valor, verifique](evidenciasVendaService/Evidencia%208.png)
+  - ![Venda sem valor, verifique](../evidencias/venda/Evidencia%208.png)
 
 ### CT-VENDA-09 — Fechar venda já fechada
 
@@ -132,7 +132,7 @@
 - **Resultado obtido:** venda permanece FECHADA (botões de ação desabilitados).
 - **Status:** Passou.
 - **Evidência:**
-  - ![Pedido FECHADA com cliente](evidenciasVendaService/Evidencia%209.png)
+  - ![Pedido FECHADA com cliente](../evidencias/venda/Evidencia%209.png)
 
 ### CT-VENDA-10 — Estoque insuficiente
 
@@ -142,7 +142,7 @@
 - **Resultado obtido:** "O produto de código 1 não tem estoque suficiente, verifique".
 - **Status:** Passou.
 - **Evidência:**
-  - ![Estoque insuficiente](evidenciasVendaService/Evidencia%2010.png)
+  - ![Estoque insuficiente](../evidencias/venda/Evidencia%2010.png)
 
 ## Defeitos encontrados
 

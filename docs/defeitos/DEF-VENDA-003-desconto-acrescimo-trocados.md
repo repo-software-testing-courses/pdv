@@ -71,8 +71,8 @@ para `..., Double desc, Double acre`) e revisar o cálculo interno
 
 ## Evidências
 
-- `docs/relatorios/evidenciasVendaService/Evidencia desc-acresc 1.png` — modal com desconto 1,00 e acréscimo 0,95, "Venda finalizada com sucesso".
-- `docs/relatorios/evidenciasVendaService/Evidencia desc-acresc 2.png` — pedido FECHADA com valor R$ 3,50.
+- `docs/evidencias/venda/Evidencia desc-acresc 1.png` — modal com desconto 1,00 e acréscimo 0,95, "Venda finalizada com sucesso".
+- `docs/evidencias/venda/Evidencia desc-acresc 2.png` — pedido FECHADA com valor R$ 3,50.
 
 ## Rastreamento
 
