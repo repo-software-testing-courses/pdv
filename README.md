@@ -52,6 +52,7 @@ Google Docs, está em **[`docs/README.md`](docs/README.md)**.
 | Plano de Teste | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) |
 | Casos de Teste (TestLink) | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) |
 | Relatórios (cobertura, mutação, inspeção) | [`docs/relatorios/`](docs/relatorios/) |
+| Teste de mutação (PIT) — CaixaService | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
 | Relatório de testes manuais — VendaService | [`docs/relatorios/relatorio-testes-manuais-vendaservice.md`](docs/relatorios/relatorio-testes-manuais-vendaservice.md) |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
 | **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
