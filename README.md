@@ -9,28 +9,26 @@ teste e qualidade produzidos pelo grupo.
 
 ## Equipe
 
-| Integrante | GitHub |
-| --- | --- |
-| Eloyse Fernanda | [@elojas2](https://github.com/elojas2) |
-| Natalia de Abreu Lamas | [@natalialamas73](https://github.com/natalialamas73) |
-| Alexandre Porto | [@AlexPortoNascimento](https://github.com/AlexPortoNascimento) |
+| Integrante | GitHub | Responsabilidades | Classe sob teste |
+| --- | --- | --- | --- |
+| Eloyse Fernanda | [@elojas2](https://github.com/elojas2) | Testes unitários e manuais | `CaixaService` |
+| Natalia de Abreu Lamas | [@natalialamas73](https://github.com/natalialamas73) | Testes unitários e manuais | `AjusteService` |
+| Alexandre Porto | [@AlexPortoNascimento](https://github.com/AlexPortoNascimento) | Testes unitários e manuais | `VendaService` |
 
-As responsabilidades de cada integrante e as classes sob teste estão em
-[`docs/README.md`](docs/README.md).
+## Entregas
 
-## Documentos principais
-
-| Documento | Versão no repositório | Versão editável |
-| --- | --- | --- |
-| **Plano de Teste** | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) | [Google Docs](https://docs.google.com/document/d/1b40d0Y7q8RmNOTqsJ-dV7mlSIBAJlqY2Q8F_PGl12M0/edit?usp=sharing) |
-| **Casos de Teste** | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) (exportação do TestLink) | [Google Docs](https://docs.google.com/document/d/1cpsUYGmLNs6N2mYzDVKepaeZyxAlKNn6bANoqa1tXVU/edit?usp=sharing) |
-| **Apresentação parcial (Entrega 1)** | [`docs/apresentacoes/`](docs/apresentacoes/) | [Google Slides](https://docs.google.com/presentation/d/1Vy5m1Brl0lf9eM_LRIxNzgr0ZdlR_FlJAifwIouKT-4/edit?usp=sharing) |
+| Entrega | Peso | Prazo | Status |
+| --- | --- | --- | --- |
+| Entrega 1 | 3 | 23/09/2026 | concluída |
+| Entrega 2 | 5 | 11/11/2026 | em andamento |
 
 ## Sumário
 
 - [Equipe](#equipe)
-- [Documentos principais](#documentos-principais)
-- [Artefatos do trabalho](#artefatos-do-trabalho)
+- [Entregas](#entregas)
+- [Documentos editáveis (Google Docs)](#documentos-editáveis-google-docs)
+- [Artefatos no repositório](#artefatos-no-repositório)
+- [Defeitos registrados](#defeitos-registrados)
 - [Recursos do sistema](#recursos-do-sistema)
 - [Tecnologias](#tecnologias)
 - [Executando com Docker (recomendado)](#executando-com-docker-recomendado)
@@ -40,27 +38,58 @@ As responsabilidades de cada integrante e as classes sob teste estão em
 - [Estrutura do projeto](#estrutura-do-projeto)
 - [Licença](#licença)
 
-## Artefatos do trabalho
+## Documentos editáveis (Google Docs)
+
+Os documentos de texto são elaborados no Google Docs, com todos os integrantes
+logados, para que a colaboração individual fique registrada no histórico de
+versões.
+
+| Documento | Link |
+| --- | --- |
+| Plano de Teste | [Google Docs](https://docs.google.com/document/d/1b40d0Y7q8RmNOTqsJ-dV7mlSIBAJlqY2Q8F_PGl12M0/edit?usp=sharing) |
+| Casos de Teste | [Google Docs](https://docs.google.com/document/d/1cpsUYGmLNs6N2mYzDVKepaeZyxAlKNn6bANoqa1tXVU/edit?usp=sharing) |
+| Importância das características de qualidade (ISO/IEC 25010) | [Google Docs](https://docs.google.com/document/d/1bvbjeAyXI9Dq8uSdElpbEgbwPHDD9hZkLoyM-19vwG8/edit?usp=sharing) |
+| Relatório de inspeção de código | _adicionar link_ |
+| Apresentação parcial (Entrega 1) | [Google Slides](https://docs.google.com/presentation/d/1Vy5m1Brl0lf9eM_LRIxNzgr0ZdlR_FlJAifwIouKT-4/edit?usp=sharing) |
+
+## Artefatos no repositório
 
 Todos os artefatos estão na branch principal (`master`), sob o diretório
-[`docs/`](docs/). O índice completo, com os links dos documentos editáveis no
-Google Docs, está em **[`docs/README.md`](docs/README.md)**.
+[`docs/`](docs/).
 
 | Artefato | Local |
 | --- | --- |
-| Índice geral da documentação | [`docs/README.md`](docs/README.md) |
-| Plano de Teste | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) |
-| Casos de Teste (TestLink) | [`docs/TestLink 1.9.20 [DEV].pdf`](<docs/TestLink 1.9.20 [DEV].pdf>) |
-| Relatórios (cobertura, mutação, inspeção) | [`docs/relatorios/`](docs/relatorios/) |
-| Teste de mutação (PIT) — CaixaService | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
-| Relatório de testes manuais — VendaService | [`docs/relatorios/relatorio-testes-manuais-vendaservice.md`](docs/relatorios/relatorio-testes-manuais-vendaservice.md) |
-| Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
-| **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
-| Testes gerados por IA — solução inicial (v0) | [`docs/ai/transcricoes/AI-002-v0-CaixaServiceTest.java`](docs/ai/transcricoes/AI-002-v0-CaixaServiceTest.java) |
-| Testes gerados por IA — descrição das alterações da revisão | [`docs/ai/transcricoes/AI-003-alteracoes-v0-para-final.md`](docs/ai/transcricoes/AI-003-alteracoes-v0-para-final.md) |
-| Slides das apresentações | [`docs/apresentacoes/`](docs/apresentacoes/) · [Apresentação parcial no Google Slides](https://docs.google.com/presentation/d/1Vy5m1Brl0lf9eM_LRIxNzgr0ZdlR_FlJAifwIouKT-4/edit?usp=sharing) |
+| Plano de Teste (cópia versionada) | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) |
+| Casos de Teste (exportação do TestLink) | [`docs/casos-de-teste-testlink.pdf`](docs/casos-de-teste-testlink.pdf) |
 | Código dos testes automatizados | [`src/test/java/`](src/test/java/) |
-| Defeitos reportados | [Issues do repositório](https://github.com/elojas2/trabalho-pdv-2026.1/issues) |
+| Teste de mutação (PIT) — `CaixaService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
+| Relatório de testes manuais — `VendaService` | [`docs/relatorios/testes-manuais-vendaservice.md`](docs/relatorios/testes-manuais-vendaservice.md) |
+| Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
+| Evidências (prints dos testes manuais) | [`docs/evidencias/`](docs/evidencias/) |
+| **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
+| Transcrições e versões iniciais (v0) geradas por IA | [`docs/ai/transcricoes/`](docs/ai/transcricoes/) |
+| Slides das apresentações | [`docs/apresentacoes/`](docs/apresentacoes/) |
+
+## Defeitos registrados
+
+O rastreador oficial é o [GitHub Issues](https://github.com/elojas2/trabalho-pdv-2026.1/issues);
+as fichas documentam a análise e as evidências.
+
+| Defeito | Módulo | Título | Ficha | Issue |
+| --- | --- | --- | --- | --- |
+| DEF-VENDA-001 | Venda | Fechamento sem título lança "Zero length string" | [ficha](docs/defeitos/DEF-VENDA-001-zero-length-string.md) | [#11](https://github.com/elojas2/trabalho-pdv-2026.1/issues/11) |
+| DEF-VENDA-002 | Venda | Cartão débito/crédito não fecha a venda (NPE) | [ficha](docs/defeitos/DEF-VENDA-002-cartao-nao-fecha.md) | [#12](https://github.com/elojas2/trabalho-pdv-2026.1/issues/12) |
+| DEF-VENDA-003 | Venda | Desconto e acréscimo aplicados trocados | [ficha](docs/defeitos/DEF-VENDA-003-desconto-acrescimo-trocados.md) | [#13](https://github.com/elojas2/trabalho-pdv-2026.1/issues/13) |
+| DEF-CAIXA-001 | Caixa | Fechar caixa já fechado exibe alerta vazio | [ficha](docs/defeitos/DEF-CAIXA-001-fechamento-duplicado-mensagem-vazia.md) | [#15](https://github.com/elojas2/trabalho-pdv-2026.1/issues/15) |
+| DEF-ESTOQUE-001 | Estoque | Entrada de estoque não aumenta o saldo (trigger) | [ficha](docs/defeitos/DEF-ESTOQUE-001-entrada-nao-aumenta-saldo.md) | [#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14) |
+
+Defeitos expostos pelos testes unitários (sem ficha própria; documentados nos
+comentários de `VendaServiceTest`): issues
+[#7](https://github.com/elojas2/trabalho-pdv-2026.1/issues/7),
+[#8](https://github.com/elojas2/trabalho-pdv-2026.1/issues/8),
+[#9](https://github.com/elojas2/trabalho-pdv-2026.1/issues/9) e
+[#10](https://github.com/elojas2/trabalho-pdv-2026.1/issues/10). Planejamento
+completo em [`docs/defeitos/planejamento-issues.md`](docs/defeitos/planejamento-issues.md).
 
 ## Recursos do sistema
 
@@ -168,7 +197,14 @@ docker compose exec pdv-app mvn test
 ## Estrutura do projeto
 
 ```
-├── docs/                  # artefatos do trabalho (ver docs/README.md)
+├── docs/                  # artefatos do trabalho
+│   ├── plano-de-teste.md
+│   ├── casos-de-teste-testlink.pdf
+│   ├── defeitos/          # fichas de defeitos
+│   ├── evidencias/        # prints dos testes manuais (venda/, caixa/)
+│   ├── relatorios/        # testes manuais, mutação (PIT)
+│   ├── ai/                # AI-LOG.md e transcrições
+│   └── apresentacoes/     # slides
 ├── src/main/java/         # código-fonte da aplicação
 ├── src/main/resources/    # templates, estáticos e migrações Flyway
 ├── src/test/java/         # testes automatizados

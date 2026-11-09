@@ -20,13 +20,8 @@ estrutural.
 | 73 | remoção de `System.out.println("agencia " + ...)` | equivalente |
 | 74 | remoção de `System.out.println("conta " + ...)` | equivalente |
 
-Trecho do relatório do PIT no método `cadastro`: as linhas em verde tiveram os
-mutantes mortos pelos testes; as duas em vermelho são os sobreviventes.
-
-![Mutantes sobreviventes nas linhas 73 e 74](pit-caixaservice-sobreviventes.png)
-
-Relatório completo do PIT para a classe, com o código linha a linha e a lista
-de todos os mutantes no final:
+Relatório completo do PIT para a classe, com o código linha a linha (verde:
+mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes no final:
 [`pit-caixaservice-relatorio.pdf`](pit-caixaservice-relatorio.pdf).
 
 Os dois são impressões de depuração esquecidas no método `cadastro`, sem efeito

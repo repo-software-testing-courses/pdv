@@ -22,7 +22,7 @@ aba, ou por outro operador —, o botão **Fechar** continua habilitado.
 
 Acessar diretamente `/caixa/gerenciar/{codigo}` de um caixa fechado **não**
 reproduz o defeito, porque nesse caso a página já carrega bloqueada
-([evidência](../relatorios/evidenciasCaixaService/DEF-CAIXA-001-bloqueio-ao-carregar.png)).
+([evidência](../evidencias/caixa/DEF-CAIXA-001-bloqueio-ao-carregar.png)).
 
 ## Passos para reproduzir
 
@@ -68,9 +68,9 @@ não manter o botão habilitado.
 ## Evidência
 
 - [x] Alerta vazio na segunda aba:
-  [`DEF-CAIXA-001-alerta-vazio.png`](../relatorios/evidenciasCaixaService/DEF-CAIXA-001-alerta-vazio.png)
+  [`DEF-CAIXA-001-alerta-vazio.png`](../evidencias/caixa/DEF-CAIXA-001-alerta-vazio.png)
 - [x] Página carregada já fechada bloqueia o botão:
-  [`DEF-CAIXA-001-bloqueio-ao-carregar.png`](../relatorios/evidenciasCaixaService/DEF-CAIXA-001-bloqueio-ao-carregar.png)
+  [`DEF-CAIXA-001-bloqueio-ao-carregar.png`](../evidencias/caixa/DEF-CAIXA-001-bloqueio-ao-carregar.png)
 
 ## Rastreamento
 
