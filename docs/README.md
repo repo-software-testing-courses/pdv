@@ -10,6 +10,7 @@ referenciado não é avaliado.
 | --- | --- |
 | [`plano-de-teste.md`](plano-de-teste.md) | Plano de Teste: escopo, estratégia, ferramentas, critérios de entrada/saída |
 | [`relatorios/`](relatorios/) | Relatórios de cobertura (JaCoCo), mutação (PIT), inspeção estática (SonarQube) e relatórios de testes manuais |
+| [`relatorios/mutacao-pit/`](relatorios/mutacao-pit/) | Teste de mutação (PIT): escore, print e análise dos sobreviventes |
 | [`relatorios/relatorio-testes-manuais-vendaservice.md`](relatorios/relatorio-testes-manuais-vendaservice.md) | Relatório de testes manuais de `VendaService` (fechamento de venda), com evidências |
 | [`defeitos/`](defeitos/) | Fichas de defeitos encontrados durante os testes |
 | [`ai/AI-LOG.md`](ai/AI-LOG.md) | Registro obrigatório do uso de Inteligência Artificial |

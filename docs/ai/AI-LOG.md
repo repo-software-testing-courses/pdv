@@ -224,3 +224,19 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | **Aceito pela integrante:** os 7 itens propostos. **Adiado:** três defeitos identificados por leitura do código (`fechaCaixa` com caixa inexistente → `NoSuchElementException`; senha `null` → `NullPointerException`; `listaBancosAbertosTipoFilterBanco` ignora o tipo quando não há data) — ficam para avaliação e registro em issues. **Não coberto, por decisão:** a aresta falsa do `else if (BANCO)` em `cadastro` (linha 62) é inalcançável, pois `CaixaTipo` só tem CAIXA, COFRE e BANCO. «completar com alterações feitas pela integrante na revisão» |
 | **Validação** | Execução real em container Java 8 (`docker run ... maven:3.8.8-eclipse-temurin-8 mvn -Dtest=CaixaServiceTest test`): **Tests run: 41, Failures: 0, Errors: 0, Skipped: 0**. JaCoCo em `CaixaService`: arestas 41/44 (93,2%) → **43/44 (97,7%)**, instruções 407/407. |
 | **Transcrição** | solução inicial da IA: [`transcricoes/AI-012-v0-CaixaServiceTest.java`](transcricoes/AI-012-v0-CaixaServiceTest.java); versão final: `src/test/java/net/originmobi/pdv/CaixaServiceTest.java`. |
+
+---
+
+## AI-013 — Entrega 2: configuração do PIT e teste de mutação de `CaixaService`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-08 |
+| **Responsável** | Eloyse Fernanda |
+| **Atividade** | Entrega 2 — técnica baseada em defeitos: escore de mutação ≥ 80% na classe `CaixaService` |
+| **Ferramenta** | Claude (Claude Code — agente com acesso de leitura e escrita ao repositório local) |
+| **Prompt/instrução** | A integrante pediu para configurar o PIT no `pom.xml`, restrito à análise do `CaixaService`. A IA rodou a mutação e apresentou o resultado; a integrante pediu ajuda para guardar as evidências (prints e relatório em PDF) sem commitar, para revisá-las antes. |
+| **Resultado** | A IA adicionou ao `pom.xml` o `pitest-maven` 1.15.8 com `pitest-junit5-plugin` 1.2.1 e `junit-platform-launcher` 1.8.2 (compatível com o JUnit 5.8.2 do projeto), **sem fixar a classe-alvo**, para que cada integrante rode o PIT na própria classe via `-DtargetClasses`/`-DtargetTests`. Rodou o PIT em `CaixaService` com `CaixaServiceTest`, gerou o print do resumo do relatório e documentou os sobreviventes em `docs/relatorios/mutacao-pit/README.md`. |
+| **Decisão** | **Aceito:** plugin genérico no `pom.xml` (arquivo compartilhado pelo grupo). **Sobreviventes:** os 2 mutantes restantes removem `System.out.println` de depuração em `cadastro` (linhas 73–74) e foram classificados como **equivalentes** — não se escreveu teste para capturar a saída do console; as linhas serão removidas na etapa do SonarQube. «completar com a análise da integrante» |
+| **Validação** | Execução real com JDK 8 (`mvn test-compile org.pitest:pitest-maven:mutationCoverage -DtargetClasses=net.originmobi.pdv.service.CaixaService -DtargetTests=net.originmobi.pdv.CaixaServiceTest`): **54 mutantes gerados, 52 mortos — escore 96%**, cobertura de linhas 80/80, 0 mutantes sem cobertura, `BUILD SUCCESS`. |
+| **Transcrição** | Não preservada. |
