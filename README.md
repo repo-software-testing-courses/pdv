@@ -62,7 +62,9 @@ Todos os artefatos estão na branch principal (`master`), sob o diretório
 | Plano de Teste (cópia versionada) | [`docs/plano-de-teste.md`](docs/plano-de-teste.md) |
 | Casos de Teste (exportação do TestLink) | [`docs/casos-de-teste-testlink.pdf`](docs/casos-de-teste-testlink.pdf) |
 | Código dos testes automatizados | [`src/test/java/`](src/test/java/) |
-| Teste de mutação (PIT) — `CaixaService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
+| Testes de integração — `VendaService` (banco real + triggers) | [`src/test/java/net/originmobi/pdv/VendaServiceIT.java`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) |
+| Cobertura estrutural (JaCoCo) — `VendaService` | [`docs/relatorios/cobertura-jacoco/`](docs/relatorios/cobertura-jacoco/) |
+| Teste de mutação (PIT) — `CaixaService` e `VendaService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
 | Relatório de testes manuais — `VendaService` | [`docs/relatorios/testes-manuais-vendaservice.md`](docs/relatorios/testes-manuais-vendaservice.md) |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
 | Evidências (prints dos testes manuais) | [`docs/evidencias/`](docs/evidencias/) |
@@ -202,7 +204,7 @@ docker compose exec pdv-app mvn test
 │   ├── casos-de-teste-testlink.pdf
 │   ├── defeitos/          # fichas de defeitos
 │   ├── evidencias/        # prints dos testes manuais (venda/, caixa/)
-│   ├── relatorios/        # testes manuais, mutação (PIT)
+│   ├── relatorios/        # testes manuais, cobertura (JaCoCo) e mutação (PIT)
 │   ├── ai/                # AI-LOG.md e transcrições
 │   └── apresentacoes/     # slides
 ├── src/main/java/         # código-fonte da aplicação
