@@ -52,6 +52,7 @@ import net.originmobi.pdv.model.Caixa;
 import net.originmobi.pdv.model.CaixaLancamento;
 import net.originmobi.pdv.model.Usuario;
 import net.originmobi.pdv.repository.CaixaRepository;
+import net.originmobi.pdv.service.CaixaException;
 import net.originmobi.pdv.service.CaixaLancamentoService;
 import net.originmobi.pdv.service.CaixaService;
 import net.originmobi.pdv.service.UsuarioService;
@@ -474,6 +475,33 @@ class CaixaServiceTest {
 				() -> service.fechaCaixa(1L, SENHA_CORRETA));
 
 		assertEquals("Ocorreu um erro ao fechar o caixa, chame o suporte", erro.getMessage());
+	}
+
+	@Test
+	@DisplayName("senha nula deve retornar mensagem em vez de NullPointerException")
+	void fechaCaixa_senhaNula_deveRetornarMensagem() {
+		dadoUsuarioAutenticado();
+		encoderConstruido = mockConstruction(BCryptPasswordEncoder.class);
+
+		assertEquals("Favor, informe a senha", service.fechaCaixa(1L, null));
+
+		verify(encoderUsado(), never()).matches(any(), anyString());
+		verify(caixas, never()).findById(anyLong());
+		verify(caixas, never()).save(any(Caixa.class));
+	}
+
+	@Test
+	@DisplayName("caixa inexistente deve lançar exceção de negócio em vez de NoSuchElementException")
+	void fechaCaixa_caixaInexistente_deveLancarExcecao() {
+		dadoUsuarioAutenticado();
+		dadoQueASenhaConfere(true);
+		when(caixas.findById(99L)).thenReturn(Optional.empty());
+
+		CaixaException erro = assertThrows(CaixaException.class,
+				() -> service.fechaCaixa(99L, SENHA_CORRETA));
+
+		assertEquals("Caixa não encontrado", erro.getMessage());
+		verify(caixas, never()).save(any(Caixa.class));
 	}
 
 	// ------------------------------------------------------------------

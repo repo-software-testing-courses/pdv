@@ -7,29 +7,36 @@ estrutural.
 
 | Métrica | Resultado |
 | --- | --- |
-| **Escore de mutação** | **96%** (52 de 54 mutantes mortos) |
+| **Escore de mutação** | **100%** (55 de 55 mutantes mortos) |
+| Test strength | 100% (55/55) |
 | Cobertura de linhas | 100% (80/80) |
 | Mutantes sem cobertura | 0 |
 
 ![Resumo do PIT para CaixaService](pit-caixaservice-resumo.png)
 
-### Mutantes sobreviventes
-
-| Linha | Mutação | Análise |
-| --- | --- | --- |
-| 73 | remoção de `System.out.println("agencia " + ...)` | equivalente |
-| 74 | remoção de `System.out.println("conta " + ...)` | equivalente |
-
 Relatório completo do PIT para a classe, com o código linha a linha (verde:
 mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes no final:
 [`pit-caixaservice-relatorio.pdf`](pit-caixaservice-relatorio.pdf).
 
-Os dois são impressões de depuração esquecidas no método `cadastro`, sem efeito
-nas regras de negócio: removê-las não muda nenhum valor salvo nem retornado.
-Escrever um teste que capture a saída do console só para matá-los seria
-artificial, por isso foram tratados como **mutantes equivalentes**. As duas
-linhas serão removidas na etapa de inspeção com o SonarQube, que também aponta
-o uso de `System.out` como problema de qualidade.
+### Evolução: 96% → 100%
+
+| Rodada | Mutantes | Mortos | Escore | Sobreviventes |
+| --- | --- | --- | --- | --- |
+| 1ª (08/11, antes do Sonar) | 54 | 52 | 96% | 2 |
+| 2ª (19/11, depois do Sonar) | 55 | 55 | **100%** | 0 |
+
+Na 1ª rodada sobreviveram 2 mutantes, nas linhas 73 e 74 de `cadastro`: a
+remoção dos `System.out.println("agencia " + ...)` e
+`System.out.println("conta " + ...)`. Eram impressões de depuração sem efeito
+nas regras de negócio — removê-las não mudava nenhum valor salvo nem retornado.
+Escrever um teste que capturasse a saída do console só para matá-los seria
+artificial, por isso foram classificados como **mutantes equivalentes**.
+
+Na etapa de inspeção ([relatório do Sonar](../inspecao-sonar/)), o SonarQube
+apontou o uso de `System.out` e as duas linhas foram removidas. Com isso os
+mutantes equivalentes deixaram de existir. A refatoração da classe mudou o
+total de mutantes gerados (54 → 55), e todos foram mortos pela suíte de 43
+casos.
 
 ### Como reproduzir
 
