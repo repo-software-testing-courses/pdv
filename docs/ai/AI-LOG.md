@@ -288,3 +288,17 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | A integrante revisou a proposta antes de qualquer alteração e tirou o print de antes. **Aceito:** as correções, incluindo as 2 que corrigem defeitos adiados no AI-012 (senha `null` e caixa inexistente). **Mantido com justificativa:** o item informativo "Use the java.time API", pois exigiria alterar a entidade `Caixa`. **Não corrigido:** `listaBancosAbertosTipoFilterBanco` ignorando o tipo, registrado para issue. |
 | **Validação** | 43 testes sem falhas; JaCoCo todas-arestas 38/38 (100%); PIT 55/55 (100%); Sonar 21 → 1 problema. |
 | **Transcrição** | Não preservada. Evidências em [`docs/relatorios/inspecao-sonar/`](../relatorios/inspecao-sonar/). |
+
+## AI-017 — Entrega 2: testes de integração de `CaixaService` (banco real + trigger)
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-21 |
+| **Responsável** | Eloyse Fernanda |
+| **Atividade** | Entrega 2 — testes de integração de `CaixaService` |
+| **Ferramenta** | Claude (Claude Code) |
+| **Prompt/instrução** | A integrante pediu os testes de integração de `CaixaService` seguindo o modelo de `VendaServiceIT`, revisou os cenários propostos e pediu cenários adicionais antes da implementação. |
+| **Resultado** | A IA criou `CaixaServiceIT` com 12 casos (`@SpringBootTest` + `@Transactional`, MySQL real): abertura de caixa, cofre e banco (incluindo o trigger que atualiza o total), bloqueios de abertura, fechamento com senha certa e errada, caixa já fechado e as consultas do `CaixaRepository`. |
+| **Decisão** | **Aceito.** Os 2 casos que falharam revelaram defeitos nas queries (filtro por data com `like` e native query de bancos), registrados em #24 e #25 e marcados com `@Tag("defeito")`. O código do sistema não foi alterado. |
+| **Validação** | Execução no container contra o `pdv-db`: **Tests run: 12, Failures: 1, Errors: 1** (as 2 falhas são os defeitos). |
+| **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/CaixaServiceIT.java`). |
