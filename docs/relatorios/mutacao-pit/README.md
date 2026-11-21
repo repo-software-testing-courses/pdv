@@ -117,3 +117,47 @@ O relatório completo, com o detalhe linha a linha, é gerado em
 `target/pit-reports/index.html`. PIT 1.15.8 com `pitest-junit5-plugin` 1.2.1,
 mutadores padrão (`DEFAULTS`). Os testes `@Tag("defeito")` são excluídos da
 medição pela configuração `<excludedGroups>` do `pitest-maven` no `pom.xml`.
+
+## AjusteService — Natalia de Abreu Lamas
+
+| Métrica | Resultado |
+| --- | --- |
+| **Escore de mutação** | **94%** (17 de 18 mutantes mortos) |
+| Test strength | 94% (17/18) |
+| Cobertura de linhas | 100% (38/38) |
+| Mutantes sem cobertura | 0 |
+
+![alt text](pit-ajusteservice-resumo.png)
+
+Relatório completo do PIT para a classe, com o código linha a linha (verde:
+mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes:
+[`pit-ajusteservice-relatorio.pdf`](pit-ajusteservice-relatorio.pdf).
+
+> **Nota sobre o teste de defeito.** `AjusteServiceTest` contém 1 teste que
+> falha de propósito, documentando que `processar` lança
+> `NoSuchElementException` quando o código do ajuste não existe. Ele é marcado
+> com `@Tag("defeito")` e excluído apenas da medição de mutação, pois o PIT
+> exige uma suíte verde.
+
+### Mutante sobrevivente
+
+| Linha | Método | Mutação | Análise |
+| --- | --- | --- | --- |
+| 69 | `processar` | remoção de `System.out.println(e)` (bloco `catch`) | equivalente |
+
+A linha apenas imprime a exceção no console: removê-la não altera o ajuste
+gravado, a mensagem da exceção lançada nem o retorno do método, então nenhum
+teste consegue distinguir o mutante do original. Mesma situação dos
+equivalentes de `CaixaService` e `VendaService`. O uso de `System.out` será
+tratado na inspeção com o Sonar.
+
+### Como reproduzir
+
+Execução via container Docker (Maven 3.8 + JDK 8):
+
+```sh
+docker run --rm -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn test-compile org.pitest:pitest-maven:mutationCoverage "-DtargetClasses=net.originmobi.pdv.service.AjusteService" "-DtargetTests=net.originmobi.pdv.AjusteServiceTest"
+```
+
+Relatório em `target/pit-reports/index.html`. PIT 1.15.8 com
+`pitest-junit5-plugin` 1.2.1, mutadores padrão (`DEFAULTS`).

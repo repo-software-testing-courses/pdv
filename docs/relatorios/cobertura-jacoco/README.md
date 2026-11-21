@@ -82,3 +82,41 @@ O relatório é gerado em `target/site/jacoco/index.html` (classe em
 `target/site/jacoco/net.originmobi.pdv.service/VendaService.html`). A flag
 `-Dmaven.test.failure.ignore=true` permite gerar o relatório mesmo com os 2
 testes `@Tag("defeito")` falhando de propósito. JaCoCo 0.8.11.
+
+## AjusteService — Natalia de Abreu Lamas
+
+| Métrica | Resultado |
+| --- | --- |
+| **Todas-arestas (branch)** | **100%** (10 de 10 arestas) |
+| Instruções | 100% (186/186) |
+| Linhas | 100% (38/38) |
+| Métodos | 100% (6/6) |
+| Complexidade coberta | 11/11 |
+
+Evidências (relatório HTML do JaCoCo exportado em PDF):
+
+- Resumo da classe: [`jacoco-ajusteservice-resumo.pdf`](jacoco-ajusteservice-resumo.pdf)
+- Código linha a linha (verde: coberto; amarelo: arestas parciais; vermelho: não coberto): [`jacoco-ajusteservice-detalhe.pdf`](jacoco-ajusteservice-detalhe.pdf)
+
+### Sobre as arestas
+
+As 10 arestas são os dois lados das 5 estruturas de controle da classe: o `if`
+de `lista` (com e sem código no filtro), o `if` de `processar` (ajuste já
+processado ou não), o laço `for` (com e sem produtos), o ternário que define
+ENTRADA ou SAÍDA e o `if` de `remover`. A fronteira do ternário
+(`qtd_alteracao > 0`) é coberta pelos testes de valor-limite com quantidade 1
+e 0. A complexidade ciclomática é 11 pelo JaCoCo e 14 pela definição de McCabe,
+que conta também os 3 blocos `catch` — acima do mínimo de 10 exigido.
+
+### Como reproduzir
+
+Execução via container Docker (Maven 3.8 + JDK 8):
+
+```sh
+docker run --rm -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn clean test "-Dtest=AjusteServiceTest" "-Dmaven.test.failure.ignore=true"
+```
+
+Relatório da classe em
+`target/site/jacoco/net.originmobi.pdv.service/AjusteService.html`. A flag
+`-Dmaven.test.failure.ignore=true` permite gerar o relatório mesmo com o teste
+`@Tag("defeito")` falhando de propósito. JaCoCo 0.8.11.
