@@ -101,7 +101,7 @@ Evidências (relatório HTML do JaCoCo exportado em PDF):
 ### Evolução
 
 | Momento | Arestas cobertas | Casos de teste |
-| --- | --- | --- |
+| Entrega 1 (suíte inicial, [medição](jacoco-ajusteservice-entrega1.pdf)) | 7/10 (70%) | 7 |
 | Entrega 2, testes unitários ampliados | 10/10 (100%) | 19 |
 | Entrega 2, depois das correções do Sonar | **10/10 (100%)** | 19 |
 
