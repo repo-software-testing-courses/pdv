@@ -2,9 +2,11 @@ package net.originmobi.pdv.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,18 +23,25 @@ import net.originmobi.pdv.singleton.Aplicacao;
 @Service
 public class AjusteService {
 
-	@Autowired
-	private AjusteRepository ajustes;
+	private static final Logger LOG = LoggerFactory.getLogger(AjusteService.class);
+	private static final ZoneId ZONA = ZoneId.of("America/Sao_Paulo");
+	private static final String MSG_ERRO_PROCESSAR = "Erro ao tentar processar o ajuste, chame o suporte";
 
-	@Autowired
-	private ProdutoService produtos;
+	private final AjusteRepository ajustes;
+
+	private final ProdutoService produtos;
 
 	LocalDate dataAtual;
+
+	public AjusteService(AjusteRepository ajustes, ProdutoService produtos) {
+		this.ajustes = ajustes;
+		this.produtos = produtos;
+	}
 
 	public Page<Ajuste> lista(Pageable pageable, AjusteFilter filter) {
 		if(filter.getCodigo() != null)
 			return ajustes.lista(filter.getCodigo(), pageable);
-		
+
 		return ajustes.lista(pageable);
 	}
 
@@ -41,7 +50,7 @@ public class AjusteService {
 	}
 
 	public Long novo() {
-		dataAtual = LocalDate.now();
+		dataAtual = LocalDate.now(ZONA);
 		Aplicacao aplicacao = Aplicacao.getInstancia();
 
 		Ajuste ajuste = new Ajuste(AjusteStatus.APROCESSAR, aplicacao.getUsuarioAtual(), Date.valueOf(dataAtual));
@@ -50,24 +59,24 @@ public class AjusteService {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public String processar(Long codajuste, String obs) {
-		dataAtual = LocalDate.now();
+		dataAtual = LocalDate.now(ZONA);
 		Optional<Ajuste> ajuste = ajustes.findById(codajuste);
 
 		if (ajuste.map(Ajuste::getStatus).get().equals(AjusteStatus.PROCESSADO))
-			throw new RuntimeException("Ajuste já processado");
+			throw new AjusteException("Ajuste já processado");
 
 		for (int i = 0; i < ajuste.get().getProdutos().size(); i++) {
 			Long codprod = ajuste.get().getProdutos().get(i).getProduto().getCodigo();
-			int qtd_alteracao = ajuste.get().getProdutos().get(i).getQtd_alteracao();
+			int qtdAlteracao = ajuste.get().getProdutos().get(i).getQtd_alteracao();
 
-			EntradaSaida tipo = qtd_alteracao > 0 ? EntradaSaida.ENTRADA : EntradaSaida.SAIDA;
-			String origem_operacao = "Referente ao ajuste de estoque " + codajuste;
+			EntradaSaida tipo = qtdAlteracao > 0 ? EntradaSaida.ENTRADA : EntradaSaida.SAIDA;
+			String origemOperacao = "Referente ao ajuste de estoque " + codajuste;
 
 			try {
-				produtos.ajusteEstoque(codprod, qtd_alteracao, tipo, origem_operacao, Date.valueOf(dataAtual));
+				produtos.ajusteEstoque(codprod, qtdAlteracao, tipo, origemOperacao, Date.valueOf(dataAtual));
 			} catch (Exception e) {
-				System.out.println(e);
-				throw new RuntimeException("Erro ao tentar processar o ajuste, chame o suporte");
+				LOG.error("Erro ao ajustar o estoque do produto {} no ajuste {}", codprod, codajuste, e);
+				throw new AjusteException(MSG_ERRO_PROCESSAR, e);
 			}
 		}
 
@@ -77,21 +86,21 @@ public class AjusteService {
 		try {
 			ajustes.save(ajuste.get());
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao tentar processar o ajuste, chame o suporte");
+			throw new AjusteException(MSG_ERRO_PROCESSAR, e);
 		}
 
 		return "Ajuste realizado com sucesso";
 	}
 
 	public void remover(Ajuste ajuste) {
-		
+
 		if(ajuste.getStatus().equals(AjusteStatus.PROCESSADO))
-			throw new RuntimeException("O ajuste já esta processado");
-		
+			throw new AjusteException("O ajuste já esta processado");
+
 		try {
 			ajustes.deleteById(ajuste.getCodigo());
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao tentar cancelar o ajuste");
+			throw new AjusteException("Erro ao tentar cancelar o ajuste", e);
 		}
 	}
 

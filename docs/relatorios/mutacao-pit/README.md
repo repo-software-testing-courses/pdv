@@ -122,15 +122,15 @@ medição pela configuração `<excludedGroups>` do `pitest-maven` no `pom.xml`.
 
 | Métrica | Resultado |
 | --- | --- |
-| **Escore de mutação** | **94%** (17 de 18 mutantes mortos) |
-| Test strength | 94% (17/18) |
-| Cobertura de linhas | 100% (38/38) |
+| **Escore de mutação** | **100%** (17 de 17 mutantes mortos) |
+| Test strength | 100% (17/17) |
+| Cobertura de linhas | 100% (43/43) |
 | Mutantes sem cobertura | 0 |
 
-![alt text](pit-ajusteservice-resumo.png)
+![Resumo do PIT para AjusteService](pit-ajusteservice-resumo.png)
 
 Relatório completo do PIT para a classe, com o código linha a linha (verde:
-mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes:
+mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes no final:
 [`pit-ajusteservice-relatorio.pdf`](pit-ajusteservice-relatorio.pdf).
 
 > **Nota sobre o teste de defeito.** `AjusteServiceTest` contém 1 teste que
@@ -139,17 +139,24 @@ mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes:
 > com `@Tag("defeito")` e excluído apenas da medição de mutação, pois o PIT
 > exige uma suíte verde.
 
-### Mutante sobrevivente
+### Evolução: 94% → 100%
 
-| Linha | Método | Mutação | Análise |
-| --- | --- | --- | --- |
-| 69 | `processar` | remoção de `System.out.println(e)` (bloco `catch`) | equivalente |
+| Rodada | Mutantes | Mortos | Escore | Sobreviventes |
+| --- | --- | --- | --- | --- |
+| 1ª (21/11, antes do Sonar) | 18 | 17 | 94% | 1 |
+| 2ª (21/11, depois do Sonar) | 17 | 17 | **100%** | 0 |
 
-A linha apenas imprime a exceção no console: removê-la não altera o ajuste
-gravado, a mensagem da exceção lançada nem o retorno do método, então nenhum
-teste consegue distinguir o mutante do original. Mesma situação dos
-equivalentes de `CaixaService` e `VendaService`. O uso de `System.out` será
-tratado na inspeção com o Sonar.
+Na 1ª rodada sobreviveu 1 mutante, na linha 69 de `processar`: a remoção do
+`System.out.println(e)` dentro do bloco `catch`. A linha apenas imprimia a
+exceção no console — removê-la não alterava o ajuste gravado, a mensagem da
+exceção lançada nem o retorno do método — por isso foi classificada como
+**mutante equivalente**.
+
+Na etapa de inspeção ([relatório do Sonar](../inspecao-sonar/)), o SonarQube
+apontou o uso de `System.out` e a linha foi substituída por um logger
+(`LOG.error`). O PIT não gera mutantes para chamadas de log, então o mutante
+equivalente deixou de existir e todos os 17 restantes foram mortos pela suíte
+de 19 casos.
 
 ### Como reproduzir
 

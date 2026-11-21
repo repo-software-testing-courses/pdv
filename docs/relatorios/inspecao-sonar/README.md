@@ -65,3 +65,55 @@ inspeção.
   simplificados; a aresta inalcançável do `else if (BANCO)` deixou de existir.
 - **Escore de mutação (PIT):** 96% (52/54) → 100% (55/55). Os dois mutantes
   sobreviventes eram as remoções dos `System.out`, que não existem mais.
+
+
+## AjusteService — Natalia de Abreu Lamas
+
+| | Antes | Depois |
+| --- | --- | --- |
+| Problemas no arquivo | **13** (8 médios, 2 baixos, 3 informativos) | **1** (informativo) |
+
+Ferramenta: extensão **SonarQube for IDE** no VS Code, com as regras padrão.
+
+### Antes
+
+![SonarQube antes das correções em AjusteService](ajusteservice-antes.png)
+
+### Depois
+
+![SonarQube depois das correções em AjusteService](ajusteservice-depois.png)
+
+### Problemas corrigidos
+
+| Regra apontada pelo Sonar | Qtd | Correção |
+| --- | --- | --- |
+| Injeção por campo (`@Autowired`) — java:S6813 | 2 | injeção por construtor, com campos `final` |
+| Exceção genérica (`RuntimeException`) — java:S112 | 5 | nova `AjusteException` (subclasse de `RuntimeException`), com as mesmas mensagens |
+| Nome de variável fora do padrão — java:S117 | 2 | `qtd_alteracao` → `qtdAlteracao`; `origem_operacao` → `origemOperacao` |
+| Uso de `System.out` — java:S106 | 1 | substituído por logger (`LOG.error`), registrando produto, ajuste e exceção |
+| `.now()` sem fuso horário — java:S8688 | 2 | `LocalDate.now(ZONA)`, com `ZONA = America/Sao_Paulo` |
+
+### Problema mantido (justificado)
+
+**"Use the java.time API for date and time"** (informativo). A entidade `Ajuste`
+exige `java.sql.Date` em `setData_processamento` e no construtor
+(`data_cadastro`). O serviço já calcula as datas com `java.time` (`LocalDate`,
+`ZoneId`) e só converte para o tipo antigo ao preencher a entidade. Zerar o item
+exigiria alterar a entidade, o mapeamento JPA e as telas — mesma justificativa
+adotada em `CaixaService`.
+
+### Efeitos das correções
+
+- **Comportamento preservado:** as mensagens de erro são as mesmas e
+  `AjusteException` é subclasse de `RuntimeException`, então o contrato com o
+  controller não mudou. Os 19 casos de `AjusteServiceTest` foram executados
+  novamente com o mesmo resultado (1 falha intencional, do teste
+  `@Tag("defeito")`).
+- **Cobertura todas-arestas (JaCoCo):** mantida em 100% (10/10)
+  ([relatório](../cobertura-jacoco/)).
+- **Escore de mutação (PIT):** 94% (17/18) → 100% (17/17). O mutante
+  sobrevivente era a remoção do `System.out.println(e)`, que não existe mais
+  ([relatório](../mutacao-pit/)).
+- **Defeito não corrigido:** `processar` com código de ajuste inexistente
+  continua lançando `NoSuchElementException`. Não foi apontado pelo Sonar e está
+  registrado em issue, documentado pelo teste `@Tag("defeito")`.

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -111,8 +112,9 @@ class AjusteServiceTest {
         when(ajusteRepository.findById(COD_AJUSTE)).thenReturn(Optional.of(ajuste));
     }
 
+    /** Data de hoje no mesmo fuso usado pelo AjusteService (America/Sao_Paulo). */
     private Date hoje() {
-        return Date.valueOf(LocalDate.now());
+        return Date.valueOf(LocalDate.now(ZoneId.of("America/Sao_Paulo")));
     }
 
     // ------------------------------------------------------------------
