@@ -27,13 +27,13 @@ teste e qualidade produzidos pelo grupo.
 | Requisito | CaixaService (Eloyse) | VendaService (Alexandre) | AjusteService (Natalia) |
 | --- | --- | --- | --- |
 | Testes unitários com dependências isoladas | [`CaixaServiceTest`](src/test/java/net/originmobi/pdv/CaixaServiceTest.java) — 43 casos (Mockito, `mockStatic`, `mockConstruction`) | [`VendaServiceTest`](src/test/java/net/originmobi/pdv/VendaServiceTest.java) | [`AjusteServiceTest`](src/test/java/net/originmobi/pdv/AjusteServiceTest.java) |
-| Testes de integração | pendente | [`VendaServiceIT`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) | pendente |
+| Testes de integração | [`CaixaServiceIT`](src/test/java/net/originmobi/pdv/CaixaServiceIT.java) — 12 casos, MySQL real (2 defeitos: [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24), [#25](https://github.com/elojas2/trabalho-pdv-2026.1/issues/25)) | [`VendaServiceIT`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) | pendente |
 | Estrutural — todas-arestas ≥ 80% (JaCoCo) | **100%** (38/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **89,5%** (34/38) — [relatório](docs/relatorios/cobertura-jacoco/) | pendente |
 | Baseada em defeitos — mutação ≥ 80% (PIT) | **100%** (55/55) — [relatório](docs/relatorios/mutacao-pit/) | **91%** (60/66) — [relatório](docs/relatorios/mutacao-pit/) | pendente |
 | Inspeção de código (Sonar) — antes e depois | **21 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) | pendente | pendente |
 | Testes de sistema (Selenium) | pendente | pendente | pendente |
 | ISO/IEC 25010 | [Google Docs](https://docs.google.com/document/d/1bvbjeAyXI9Dq8uSdElpbEgbwPHDD9hZkLoyM-19vwG8/edit?usp=sharing) (documento do grupo) | ← | ← |
-| Registro de uso de IA | [AI-012, AI-013, AI-016](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011](docs/ai/AI-LOG.md) |
+| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011](docs/ai/AI-LOG.md) |
 
 ## Sumário
 
@@ -77,6 +77,7 @@ Todos os artefatos estão na branch principal (`master`), sob o diretório
 | Casos de Teste (exportação do TestLink) | [`docs/casos-de-teste-testlink.pdf`](docs/casos-de-teste-testlink.pdf) |
 | Código dos testes automatizados | [`src/test/java/`](src/test/java/) |
 | Testes de integração — `VendaService` (banco real + triggers) | [`src/test/java/net/originmobi/pdv/VendaServiceIT.java`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) |
+| Testes de integração — `CaixaService` (banco real + trigger) | [`src/test/java/net/originmobi/pdv/CaixaServiceIT.java`](src/test/java/net/originmobi/pdv/CaixaServiceIT.java) |
 | Cobertura estrutural (JaCoCo) — `CaixaService` e `VendaService` | [`docs/relatorios/cobertura-jacoco/`](docs/relatorios/cobertura-jacoco/) |
 | Teste de mutação (PIT) — `CaixaService` e `VendaService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
 | Inspeção de código (SonarQube) — `CaixaService` | [`docs/relatorios/inspecao-sonar/`](docs/relatorios/inspecao-sonar/) |
@@ -112,7 +113,9 @@ Defeitos do `CaixaService` expostos pelos testes unitários:
 [#20](https://github.com/elojas2/trabalho-pdv-2026.1/issues/20) e
 [#21](https://github.com/elojas2/trabalho-pdv-2026.1/issues/21) (corrigidos na
 Entrega 2) e [#22](https://github.com/elojas2/trabalho-pdv-2026.1/issues/22)
-(aberto).
+(aberto). Pelos testes de integração:
+[#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24) e
+[#25](https://github.com/elojas2/trabalho-pdv-2026.1/issues/25) (abertos).
 
 ## Recursos do sistema
 
