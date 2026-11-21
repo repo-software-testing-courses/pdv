@@ -82,3 +82,46 @@ O relatório é gerado em `target/site/jacoco/index.html` (classe em
 `target/site/jacoco/net.originmobi.pdv.service/VendaService.html`). A flag
 `-Dmaven.test.failure.ignore=true` permite gerar o relatório mesmo com os 2
 testes `@Tag("defeito")` falhando de propósito. JaCoCo 0.8.11.
+
+## AjusteService — Natalia de Abreu Lamas
+
+| Métrica | Resultado |
+| --- | --- |
+| **Todas-arestas (branch)** | **100%** (10 de 10 arestas) |
+| Instruções | 100% (218/218) |
+| Linhas | 100% (43/43) |
+| Métodos | 100% (7/7) |
+| Complexidade coberta | 12/12 |
+
+Evidências (relatório HTML do JaCoCo exportado em PDF):
+
+- Resumo da classe: [`jacoco-ajusteservice-resumo.pdf`](jacoco-ajusteservice-resumo.pdf)
+- Código linha a linha (verde: coberto; amarelo: arestas parciais; vermelho: não coberto): [`jacoco-ajusteservice-detalhe.pdf`](jacoco-ajusteservice-detalhe.pdf)
+
+### Evolução
+
+| Momento | Arestas cobertas | Casos de teste |
+| Entrega 1 (suíte inicial, [medição](jacoco-ajusteservice-entrega1.pdf)) | 7/10 (70%) | 7 |
+| Entrega 2, testes unitários ampliados | 10/10 (100%) | 19 |
+| Entrega 2, depois das correções do Sonar | **10/10 (100%)** | 19 |
+
+As 10 arestas são os dois lados do `if` de `lista`, do `if` de `processar`, do
+laço `for`, do ternário que define ENTRADA ou SAÍDA (coberto nos valores-limite
+1 e 0) e do `if` de `remover`. As correções do Sonar não criaram nem removeram
+desvios: instruções, linhas e métodos aumentaram por causa do construtor e das
+constantes estáticas (`LOG`, `ZONA`, `MSG_ERRO_PROCESSAR`). A complexidade
+ciclomática é 12 pelo JaCoCo e 15 pela definição de McCabe, que conta também os
+3 blocos `catch` — acima do mínimo de 10 exigido.
+
+### Como reproduzir
+
+Execução via container Docker (Maven 3.8 + JDK 8):
+
+```sh
+docker run --rm -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn clean test "-Dtest=AjusteServiceTest" "-Dmaven.test.failure.ignore=true"
+```
+
+Relatório da classe em
+`target/site/jacoco/net.originmobi.pdv.service/AjusteService.html`. A flag
+`-Dmaven.test.failure.ignore=true` permite gerar o relatório mesmo com o teste
+`@Tag("defeito")` falhando de propósito. JaCoCo 0.8.11.

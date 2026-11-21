@@ -26,14 +26,14 @@ teste e qualidade produzidos pelo grupo.
 
 | Requisito | CaixaService (Eloyse) | VendaService (Alexandre) | AjusteService (Natalia) |
 | --- | --- | --- | --- |
-| Testes unitários com dependências isoladas | [`CaixaServiceTest`](src/test/java/net/originmobi/pdv/CaixaServiceTest.java) — 43 casos (Mockito, `mockStatic`, `mockConstruction`) | [`VendaServiceTest`](src/test/java/net/originmobi/pdv/VendaServiceTest.java) | [`AjusteServiceTest`](src/test/java/net/originmobi/pdv/AjusteServiceTest.java) |
-| Testes de integração | [`CaixaServiceIT`](src/test/java/net/originmobi/pdv/CaixaServiceIT.java) — 12 casos, MySQL real (2 defeitos: [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24), [#25](https://github.com/elojas2/trabalho-pdv-2026.1/issues/25)) | [`VendaServiceIT`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) | pendente |
-| Estrutural — todas-arestas ≥ 80% (JaCoCo) | **100%** (38/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **89,5%** (34/38) — [relatório](docs/relatorios/cobertura-jacoco/) | pendente |
-| Baseada em defeitos — mutação ≥ 80% (PIT) | **100%** (55/55) — [relatório](docs/relatorios/mutacao-pit/) | **91%** (60/66) — [relatório](docs/relatorios/mutacao-pit/) | pendente |
-| Inspeção de código (Sonar) — antes e depois | **21 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) | pendente | pendente |
-| Testes de sistema (Selenium) | pendente | pendente | pendente |
+| Testes unitários com dependências isoladas | [`CaixaServiceTest`](src/test/java/net/originmobi/pdv/CaixaServiceTest.java) — 43 casos (Mockito, `mockStatic`, `mockConstruction`) | [`VendaServiceTest`](src/test/java/net/originmobi/pdv/VendaServiceTest.java) | [`AjusteServiceTest`](src/test/java/net/originmobi/pdv/AjusteServiceTest.java) — 19 casos (Mockito, `mockStatic`; 1 defeito: [#28](https://github.com/elojas2/trabalho-pdv-2026.1/issues/28)) |
+| Testes de integração | [`CaixaServiceIT`](src/test/java/net/originmobi/pdv/CaixaServiceIT.java) — 12 casos, MySQL real (2 defeitos: [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24), [#25](https://github.com/elojas2/trabalho-pdv-2026.1/issues/25)) | [`VendaServiceIT`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) | [`AjusteServiceIT`](src/test/java/net/originmobi/pdv/AjusteServiceIT.java) — 7 casos, MySQL real (2 defeitos: [#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14), [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27)) |
+| Estrutural — todas-arestas ≥ 80% (JaCoCo) | **100%** (38/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **89,5%** (34/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **100%** (10/10) — [relatório](docs/relatorios/cobertura-jacoco/) |
+| Baseada em defeitos — mutação ≥ 80% (PIT) | **100%** (55/55) — [relatório](docs/relatorios/mutacao-pit/) | **91%** (60/66) — [relatório](docs/relatorios/mutacao-pit/) | **100%** (17/17) — [relatório](docs/relatorios/mutacao-pit/) |
+| Inspeção de código (Sonar) — antes e depois | **21 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) | pendente | **13 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) |
+| Testes de sistema (Selenium) | pendente | pendente | [`AjusteEstoque.side`](src/test/selenium/AjusteEstoque.side) — Selenium IDE — [relatório](docs/relatorios/testes-sistema-selenium.md) |
 | ISO/IEC 25010 | [Google Docs](https://docs.google.com/document/d/1bvbjeAyXI9Dq8uSdElpbEgbwPHDD9hZkLoyM-19vwG8/edit?usp=sharing) (documento do grupo) | ← | ← |
-| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011](docs/ai/AI-LOG.md) |
+| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011, AI-018, AI-019, AI-020](docs/ai/AI-LOG.md) |
 
 ## Sumário
 
@@ -78,10 +78,13 @@ Todos os artefatos estão na branch principal (`master`), sob o diretório
 | Código dos testes automatizados | [`src/test/java/`](src/test/java/) |
 | Testes de integração — `VendaService` (banco real + triggers) | [`src/test/java/net/originmobi/pdv/VendaServiceIT.java`](src/test/java/net/originmobi/pdv/VendaServiceIT.java) |
 | Testes de integração — `CaixaService` (banco real + trigger) | [`src/test/java/net/originmobi/pdv/CaixaServiceIT.java`](src/test/java/net/originmobi/pdv/CaixaServiceIT.java) |
-| Cobertura estrutural (JaCoCo) — `CaixaService` e `VendaService` | [`docs/relatorios/cobertura-jacoco/`](docs/relatorios/cobertura-jacoco/) |
-| Teste de mutação (PIT) — `CaixaService` e `VendaService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
-| Inspeção de código (SonarQube) — `CaixaService` | [`docs/relatorios/inspecao-sonar/`](docs/relatorios/inspecao-sonar/) |
+| Testes de integração — `AjusteService` (banco real + trigger de estoque) | [`src/test/java/net/originmobi/pdv/AjusteServiceIT.java`](src/test/java/net/originmobi/pdv/AjusteServiceIT.java) |
+| Cobertura estrutural (JaCoCo) — `CaixaService`, `VendaService` e `AjusteService` | [`docs/relatorios/cobertura-jacoco/`](docs/relatorios/cobertura-jacoco/) |
+| Teste de mutação (PIT) — `CaixaService`, `VendaService` e `AjusteService` | [`docs/relatorios/mutacao-pit/`](docs/relatorios/mutacao-pit/) |
+| Inspeção de código (SonarQube) — `CaixaService` e `AjusteService` | [`docs/relatorios/inspecao-sonar/`](docs/relatorios/inspecao-sonar/) |
 | Relatório de testes manuais — `VendaService` | [`docs/relatorios/testes-manuais-vendaservice.md`](docs/relatorios/testes-manuais-vendaservice.md) |
+| Relatório de testes manuais — `AjusteService` | [`docs/relatorios/testes-manuais-ajusteservice.md`](docs/relatorios/testes-manuais-ajusteservice.md) |
+| Testes de sistema (Selenium IDE) — `AjusteService` | [`docs/relatorios/testes-sistema-selenium.md`](docs/relatorios/testes-sistema-selenium.md) e [`src/test/selenium/`](src/test/selenium/) |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
 | Evidências (prints dos testes manuais) | [`docs/evidencias/`](docs/evidencias/) |
 | **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
@@ -116,6 +119,13 @@ Entrega 2) e [#22](https://github.com/elojas2/trabalho-pdv-2026.1/issues/22)
 (aberto). Pelos testes de integração:
 [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24) e
 [#25](https://github.com/elojas2/trabalho-pdv-2026.1/issues/25) (abertos).
+
+Defeitos do `AjusteService`: [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27) (ajuste de saída aumenta o saldo,
+exposto pelo teste de integração `AjusteServiceIT` e pelo teste manual
+CT-AJU-02) e [#28](https://github.com/elojas2/trabalho-pdv-2026.1/issues/28) (`processar` com código inexistente lança
+`NoSuchElementException`, exposto pelo teste unitário). O `AjusteServiceIT` e
+o teste manual CT-AJU-01 também confirmam, no módulo de ajuste,
+[#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14).
 
 ## Recursos do sistema
 
@@ -214,6 +224,23 @@ As migrações do Flyway são aplicadas automaticamente na subida.
 
 O relatório de cobertura é gerado em `target/site/jacoco/index.html`.
 
+Sem Maven instalado na máquina, os testes podem ser executados num container
+Maven com JDK 8 (exemplo no PowerShell, a partir da raiz do projeto):
+
+```sh
+docker run --rm -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn clean test "-Dtest=AjusteServiceTest" "-Dmaven.test.failure.ignore=true"
+```
+
+Testes de integração quando a porta 3306 da máquina já está ocupada (por
+exemplo, por um MySQL local): o banco sobe numa rede Docker própria, sem
+publicar a porta, com o nome `pdv-db` esperado pela aplicação.
+
+```sh
+docker network create pdv-teste
+docker run -d --name pdv-db-teste --network pdv-teste --network-alias pdv-db -e MYSQL_ROOT_PASSWORD=123456 -e "MYSQL_ROOT_HOST=%" -e MYSQL_DATABASE=pdv mysql:8.0
+docker run --rm --network pdv-teste -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn test "-Dtest=AjusteServiceIT" "-Dmaven.test.failure.ignore=true"
+```
+
 Dentro do container:
 
 ```sh
@@ -227,13 +254,14 @@ docker compose exec pdv-app mvn test
 │   ├── plano-de-teste.md
 │   ├── casos-de-teste-testlink.pdf
 │   ├── defeitos/          # fichas de defeitos
-│   ├── evidencias/        # prints dos testes manuais (venda/, caixa/)
-│   ├── relatorios/        # testes manuais, cobertura (JaCoCo) e mutação (PIT)
+│   ├── evidencias/        # prints dos testes manuais (venda/, caixa/, ajuste/)
+│   ├── relatorios/        # testes manuais e de sistema, cobertura (JaCoCo), mutação (PIT) e Sonar
 │   ├── ai/                # AI-LOG.md e transcrições
 │   └── apresentacoes/     # slides
 ├── src/main/java/         # código-fonte da aplicação
 ├── src/main/resources/    # templates, estáticos e migrações Flyway
 ├── src/test/java/         # testes automatizados
+├── src/test/selenium/     # testes de sistema (Selenium IDE, .side)
 ├── docker-compose.yml     # app + MySQL
 ├── Dockerfile             # imagem de build/execução
 └── pom.xml                # dependências e plugins Maven

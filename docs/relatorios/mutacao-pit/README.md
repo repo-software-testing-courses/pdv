@@ -117,3 +117,54 @@ O relatório completo, com o detalhe linha a linha, é gerado em
 `target/pit-reports/index.html`. PIT 1.15.8 com `pitest-junit5-plugin` 1.2.1,
 mutadores padrão (`DEFAULTS`). Os testes `@Tag("defeito")` são excluídos da
 medição pela configuração `<excludedGroups>` do `pitest-maven` no `pom.xml`.
+
+## AjusteService — Natalia de Abreu Lamas
+
+| Métrica | Resultado |
+| --- | --- |
+| **Escore de mutação** | **100%** (17 de 17 mutantes mortos) |
+| Test strength | 100% (17/17) |
+| Cobertura de linhas | 100% (43/43) |
+| Mutantes sem cobertura | 0 |
+
+![Resumo do PIT para AjusteService](pit-ajusteservice-resumo.png)
+
+Relatório completo do PIT para a classe, com o código linha a linha (verde:
+mutante morto; vermelho: sobrevivente) e a lista de todos os mutantes no final:
+[`pit-ajusteservice-relatorio.pdf`](pit-ajusteservice-relatorio.pdf).
+
+> **Nota sobre o teste de defeito.** `AjusteServiceTest` contém 1 teste que
+> falha de propósito, documentando que `processar` lança
+> `NoSuchElementException` quando o código do ajuste não existe. Ele é marcado
+> com `@Tag("defeito")` e excluído apenas da medição de mutação, pois o PIT
+> exige uma suíte verde.
+
+### Evolução: 94% → 100%
+
+| Rodada | Mutantes | Mortos | Escore | Sobreviventes |
+| --- | --- | --- | --- | --- |
+| 1ª (21/11, antes do Sonar) | 18 | 17 | 94% | 1 |
+| 2ª (21/11, depois do Sonar) | 17 | 17 | **100%** | 0 |
+
+Na 1ª rodada sobreviveu 1 mutante, na linha 69 de `processar`: a remoção do
+`System.out.println(e)` dentro do bloco `catch`. A linha apenas imprimia a
+exceção no console — removê-la não alterava o ajuste gravado, a mensagem da
+exceção lançada nem o retorno do método — por isso foi classificada como
+**mutante equivalente**.
+
+Na etapa de inspeção ([relatório do Sonar](../inspecao-sonar/)), o SonarQube
+apontou o uso de `System.out` e a linha foi substituída por um logger
+(`LOG.error`). O PIT não gera mutantes para chamadas de log, então o mutante
+equivalente deixou de existir e todos os 17 restantes foram mortos pela suíte
+de 19 casos.
+
+### Como reproduzir
+
+Execução via container Docker (Maven 3.8 + JDK 8):
+
+```sh
+docker run --rm -v "${PWD}:/app" -v pdv-m2:/root/.m2 -w /app maven:3.8.8-eclipse-temurin-8 mvn test-compile org.pitest:pitest-maven:mutationCoverage "-DtargetClasses=net.originmobi.pdv.service.AjusteService" "-DtargetTests=net.originmobi.pdv.AjusteServiceTest"
+```
+
+Relatório em `target/pit-reports/index.html`. PIT 1.15.8 com
+`pitest-junit5-plugin` 1.2.1, mutadores padrão (`DEFAULTS`).

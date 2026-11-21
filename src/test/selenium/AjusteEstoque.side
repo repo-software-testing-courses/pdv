@@ -1,0 +1,241 @@
+{
+  "id": "15199c77-5c26-49eb-9d8d-d492793d6ec7",
+  "version": "2.0",
+  "name": "AjusteEstoque",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "95e1999b-aec8-4aad-83b5-40c1e6cf6198",
+    "name": "CT-AJU-01 processar ajuste de entrada",
+    "commands": [{
+      "id": "466f1f7f-f547-42fe-afca-aa6cf6955221",
+      "comment": "",
+      "command": "open",
+      "target": "/logout",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cde7a132-6615-4463-a416-ff9d267bdb29",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f88549ee-b18a-433d-a23b-ca0698da9b44",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1550x830",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "64abe7d4-a280-4163-b676-da44707e0bb2",
+      "comment": "",
+      "command": "click",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//div[@id='painelLoginPrimaio']/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e028e919-3a51-480e-aca5-244431b4bdef",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('user').value = 'gerente'",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e0dae07d-21b6-46f0-914b-ba11a0eeab4e",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('password').value = '123'",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "74c58ce6-113c-49a6-b455-b012069fb37d",
+      "comment": "",
+      "command": "click",
+      "target": "id=btn-login",
+      "targets": [
+        ["id=btn-login", "id"],
+        ["css=#btn-login", "css:finder"],
+        ["xpath=//button[@id='btn-login']", "xpath:attributes"],
+        ["xpath=//div[@id='painelLoginPrimaio']/div[2]/form/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c64ad044-219d-4970-b137-bcfa5a916871",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Produtos",
+      "targets": [
+        ["linkText=Produtos", "linkText"],
+        ["css=.sidebar:nth-child(10) .collapsed", "css:finder"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Produtos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "077f205d-e50e-44c1-89c4-f493a4458108",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Ajuste Estoque",
+      "targets": [
+        ["linkText=Ajuste Estoque", "linkText"],
+        ["css=li:nth-child(5) > .opcoes", "css:finder"],
+        ["xpath=//a[contains(text(),'Ajuste Estoque')]", "xpath:link"],
+        ["xpath=//ul[@id='dashboard']/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/ajustes')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Ajuste Estoque')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bbe6165a-6fd7-4265-b20b-ddff19b15f10",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Novo",
+      "targets": [
+        ["linkText=Novo", "linkText"],
+        ["css=.btn-azul-padrao", "css:finder"],
+        ["xpath=//a[contains(text(),'Novo')]", "xpath:link"],
+        ["xpath=//div[@id='btn-padrao']/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/ajustes')])[2]", "xpath:href"],
+        ["xpath=//section[2]/div/div/div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Novo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3d6b51a-cbcc-4ea9-8159-2f82137493d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.filter-option",
+      "targets": [
+        ["css=.filter-option", "css:finder"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'O que procura?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6415786a-64a6-473a-a91e-0e7771181eb0",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(2) .text",
+      "targets": [
+        ["css=li:nth-child(2) .text", "css:finder"],
+        ["xpath=//li[2]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'COD: 1 - Picolé - Total Estoque: 3')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "127de7e1-ced6-4558-9bf4-a1b5c0d3def6",
+      "comment": "",
+      "command": "answerOnNextPrompt",
+      "target": "10",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2ba8557-b35b-47ac-96e1-985cf48d6ad3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Inserir",
+      "targets": [
+        ["linkText=Inserir", "linkText"],
+        ["css=.btn-info", "css:finder"],
+        ["xpath=//a[contains(text(),'Inserir')]", "xpath:link"],
+        ["xpath=//div[@id='addproduto']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/ajustes/addproduto')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Inserir')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a9a5c64-bc1b-4237-a389-a5455386b789",
+      "comment": "",
+      "command": "assertPrompt",
+      "target": "Informe a quantidade que deseja alterar",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2bf20951-6228-42a0-81f6-69f1555de1d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=obs",
+      "targets": [
+        ["id=obs", "id"],
+        ["name=observacao", "name"],
+        ["css=#obs", "css:finder"],
+        ["xpath=//input[@id='obs']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c3069286-3eaf-49c4-ae42-40cdbaff29f9",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('obs').value = 'Teste Selenium entrada'",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "162ae540-aa1a-4e23-9378-b370dc03e08e",
+      "comment": "",
+      "command": "executeScript",
+      "target": "window.confirm = function(){ return true; }; window.alert = function(msg){ window.ultimoAlerta = msg; };",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "faf99d7d-2187-41b4-88d4-e66e3fd9358a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Processar",
+      "targets": [
+        ["linkText=Processar", "linkText"],
+        ["css=.btn-ajuste-processar", "css:finder"],
+        ["xpath=//a[contains(text(),'Processar')]", "xpath:link"],
+        ["xpath=//div[@id='tabela-produtos']/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/ajustes/processar')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Processar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "de1a0637-9e37-40b7-ae54-674689a66275",
+      "comment": "",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "08ec14d3-3f65-4828-8188-b5f1914dbf57",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return window.ultimoAlerta;",
+      "targets": [],
+      "value": "mensagem"
+    }, {
+      "id": "8e7e4f80-b77c-4c29-b625-655397259060",
+      "comment": "",
+      "command": "assert",
+      "target": "mensagem",
+      "targets": [],
+      "value": "Ajuste realizado com sucesso"
+    }]
+  }],
+  "suites": [{
+    "id": "089553cc-dd49-404c-85ca-fded9715b4a9",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["95e1999b-aec8-4aad-83b5-40c1e6cf6198"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

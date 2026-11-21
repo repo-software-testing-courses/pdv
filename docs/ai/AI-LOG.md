@@ -302,3 +302,51 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | **Aceito.** Os 2 casos que falharam revelaram defeitos nas queries (filtro por data com `like` e native query de bancos), registrados em #24 e #25 e marcados com `@Tag("defeito")`. O código do sistema não foi alterado. |
 | **Validação** | Execução no container contra o `pdv-db`: **Tests run: 12, Failures: 1, Errors: 1** (as 2 falhas são os defeitos). |
 | **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/CaixaServiceIT.java`). |
+
+---
+
+## AI-018 — Entrega 2: ampliação dos testes unitários de `AjusteService`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-21 |
+| **Responsável** | Natalia de Abreu Lamas |
+| **Atividade** | Entrega 2 — "melhorar e aumentar os casos de testes unitários, isolando suas dependências", com as técnicas funcional, estrutural (≥ 80% todas-arestas) e baseada em defeitos (≥ 80% de mutação) |
+| **Ferramenta** | Claude (claude.ai, Claude Opus 5.5) |
+| **Prompt/instrução** | A integrante enviou o enunciado, os artefatos da Entrega 1 (AI-007, AI-008), a suíte atual de `AjusteServiceTest` (12 casos, AI-011) e o `AjusteService`, e pediu ajuda para cumprir a Entrega 2 na sua classe. |
+| **Resultado** | A IA propôs uma nova suíte com 19 casos: pacote corrigido, `mockStatic(Aplicacao.class)` para isolar o usuário logado, `ArgumentCaptor` em `novo()`, valores-limite 0 e 1 de `qtd_alteracao`, laço com vários produtos, falha no meio do laço, asserções sobre observação, data e origem gravadas, e um teste `@Tag("defeito")` para código inexistente. |
+| **Decisão** | **Aceito:** os 19 casos. **Alterado pela integrante:** o helper `hoje()` passou a usar o fuso `America/Sao_Paulo`, para acompanhar a correção do Sonar (AI-019). **Encaminhado:** o defeito exposto pelo teste `@Tag("defeito")` foi registrado pela integrante na issue [#28](https://github.com/elojas2/trabalho-pdv-2026.1/issues/28). |
+| **Validação** | Execução real em container JDK 8 (`maven:3.8.8-eclipse-temurin-8`): **Tests run: 19, Failures: 1** (apenas o teste de defeito). A integrante mediu também a suíte da Entrega 1 para comparação: JaCoCo todas-arestas **7/10 (70%) → 10/10 (100%)**. PIT **17/18 (94%)**, com o sobrevivente analisado como mutante equivalente (`System.out.println`); após o Sonar, **17/17 (100%)**. Evidências em [`cobertura-jacoco/`](../relatorios/cobertura-jacoco/) e [`mutacao-pit/`](../relatorios/mutacao-pit/). |
+| **Transcrição** | Solução inicial da IA (v0, 19 casos) em [`transcricoes/AI-018-v0-AjusteServiceTest.java`](transcricoes/AI-018-v0-AjusteServiceTest.java); versão final em `src/test/java/net/originmobi/pdv/AjusteServiceTest.java`; descrição das alterações em [`transcricoes/AI-018-alteracoes-v0-para-final-AjusteService.md`](transcricoes/AI-018-alteracoes-v0-para-final-AjusteService.md). |
+
+---
+
+## AI-019 — Entrega 2: correções do Sonar em `AjusteService`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-21 |
+| **Responsável** | Natalia de Abreu Lamas |
+| **Atividade** | Entrega 2 — inspeção de código com o Sonar em `AjusteService` (print antes, correções, print depois) |
+| **Ferramenta** | Claude (claude.ai, Claude Opus 5.5) e SonarQube for IDE (VS Code) |
+| **Prompt/instrução** | A integrante executou o SonarQube for IDE, tirou o print de antes (13 problemas) e enviou a lista de apontamentos, pedindo a correção. |
+| **Resultado** | A IA explicou cada regra e propôs a classe corrigida: injeção por construtor (S6813), nova `AjusteException` no lugar de `RuntimeException` (S112), renomeação de `qtd_alteracao`/`origem_operacao` (S117), logger no lugar de `System.out` (S106) e `LocalDate.now(ZONA)` (S8688). |
+| **Decisão** | **Aceito:** as correções, mantendo as mesmas mensagens de erro. **Mantido com justificativa:** o item informativo S2143 ("use java.time"), que exigiria alterar a entidade `Ajuste`. **Não corrigido:** o defeito de código inexistente (#28), que não foi apontado pelo Sonar. |
+| **Validação** | Sonar **13 → 1** problema (prints de antes e depois). Os 19 testes unitários foram executados de novo com o mesmo resultado (1 falha intencional). JaCoCo mantido em 10/10 arestas; PIT de 94% para **100%** (o mutante equivalente do `System.out` deixou de existir). Relatório em [`inspecao-sonar/`](../relatorios/inspecao-sonar/). |
+| **Transcrição** | Não preservada. |
+
+---
+
+## AI-020 — Entrega 2: testes de integração de `AjusteService` e redação de relatórios e issues
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-21 |
+| **Responsável** | Natalia de Abreu Lamas |
+| **Atividade** | Entrega 2 — testes de integração de `AjusteService`; documentação dos testes manuais, do teste de sistema (Selenium) e dos defeitos |
+| **Ferramenta** | Claude (claude.ai, Claude Opus 5.5) |
+| **Prompt/instrução** | A integrante pediu os testes de integração da sua classe no modelo de `VendaServiceIT`. Depois de executar os testes manuais e gravar o teste no Selenium IDE, pediu a redação dos relatórios e do texto das issues a partir dos seus resultados. |
+| **Resultado** | A IA criou `AjusteServiceIT` com 7 casos (`@SpringBootTest` + `@Transactional`, MySQL real): gravação do ajuste, status e movimentação de estoque, saldo após entrada e após saída, bloqueio de reprocessamento, produto sem controle de estoque e remoção. Redigiu também o relatório de testes manuais, o relatório do teste de sistema (Selenium) e o texto das issues #27 e #28, com os dados fornecidos pela integrante. |
+| **Decisão** | **Aceito.** Os 2 casos que falharam revelaram que o ajuste de estoque funciona ao contrário: entrada de +5 leva o saldo de 10 para 5 (confirma #14) e saída de -3 leva o saldo de 10 para 13 (novo defeito, registrado pela integrante em [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27)); ambos marcados com `@Tag("defeito")`. O código do sistema não foi alterado. **Execução da integrante:** os 4 casos de teste manuais (com 14 prints) e a gravação do teste no Selenium IDE; a IA indicou o contorno para a incompatibilidade do Selenium IDE 3.17.4 com o Firefox atual (`execute script` no lugar de `type` e das janelas `confirm`/`alert`). |
+| **Validação** | `AjusteServiceIT` executado em container contra MySQL 8 numa rede Docker própria (a porta 3306 da máquina estava ocupada): **Tests run: 7, Failures: 2** (as 2 falhas são os defeitos). Os mesmos defeitos foram reproduzidos pela interface nos casos manuais CT-AJU-01 e CT-AJU-02. Teste Selenium: **completed successfully**. Relatórios em [`testes-manuais-ajusteservice.md`](../relatorios/testes-manuais-ajusteservice.md) e [`testes-sistema-selenium.md`](../relatorios/testes-sistema-selenium.md). |
+| **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/AjusteServiceIT.java`). |
