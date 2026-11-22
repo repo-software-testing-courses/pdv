@@ -1,0 +1,674 @@
+{
+  "info": {
+    "name": "PDV – Caixa",
+    "description": "Testes de sistema do CaixaService pela camada HTTP.\n\nNão funcionais: segurança (acesso sem login, senha errada) e desempenho (toda requisição abaixo de 2000 ms).\n\nPré-requisito: sistema no ar (docker compose up -d) e nenhum caixa diário aberto. Diferente do teste de integração, não há rollback: a pasta 4 fecha o caixa aberto na pasta 3.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"[desempenho] responde em menos de 2000 ms\", () => pm.expect(pm.response.responseTime).to.be.below(2000));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "usuario",
+      "value": "gerente"
+    },
+    {
+      "key": "senha",
+      "value": "123"
+    },
+    {
+      "key": "caixaId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Segurança (sem login)",
+      "item": [
+        {
+          "name": "Logout (estado inicial)",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"sessão encerrada (302)\", () => pm.response.to.have.status(302));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listagem de caixas sem login redireciona para o login",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+                  "pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/caixa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fechar caixa sem login não é executado",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+                  "pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "caixa",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "senha",
+                  "value": "{{senha}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa/fechar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa",
+                "fechar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login com senha errada é recusado",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+                  "pm.test(\"vai para /login?error\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login?error\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "{{usuario}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "senha-errada",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Login",
+      "item": [
+        {
+          "name": "Login do gerente",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+                  "pm.test(\"não volta para o login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.not.include(\"/login\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "{{usuario}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{senha}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listagem de caixas abre logado",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"devolve a página HTML\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/caixa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Abertura",
+      "item": [
+        {
+          "name": "Abrir caixa diário com R$ 150,00",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"devolve o código do caixa criado\", () => {",
+                  "  const m = pm.response.text().match(/gerenciar\\/\\]\\}(\\d+)$/);",
+                  "  pm.expect(m, pm.response.text()).to.not.be.null;",
+                  "  pm.collectionVariables.set(\"caixaId\", m[1]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "tipo",
+                  "value": "CAIXA",
+                  "type": "text"
+                },
+                {
+                  "key": "descricao",
+                  "value": "Postman CAIXA",
+                  "type": "text"
+                },
+                {
+                  "key": "valor_abertura",
+                  "value": "150,00",
+                  "type": "text"
+                },
+                {
+                  "key": "agencia",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "conta",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Segundo caixa diário é bloqueado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"rejeitado pelo servidor (500)\", () => pm.response.to.have.status(500));",
+                  "pm.test(\"mensagem: Existe caixa de dias anteriores em aberto, favor verifique\", () => pm.expect(pm.response.json().message).to.eql(\"Existe caixa de dias anteriores em aberto, favor verifique\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "tipo",
+                  "value": "CAIXA",
+                  "type": "text"
+                },
+                {
+                  "key": "descricao",
+                  "value": "Postman CAIXA",
+                  "type": "text"
+                },
+                {
+                  "key": "valor_abertura",
+                  "value": "10,00",
+                  "type": "text"
+                },
+                {
+                  "key": "agencia",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "conta",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Valor de abertura negativo é recusado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"rejeitado pelo servidor (500)\", () => pm.response.to.have.status(500));",
+                  "pm.test(\"mensagem: Valor informado é inválido\", () => pm.expect(pm.response.json().message).to.eql(\"Valor informado é inválido\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "tipo",
+                  "value": "COFRE",
+                  "type": "text"
+                },
+                {
+                  "key": "descricao",
+                  "value": "Postman COFRE",
+                  "type": "text"
+                },
+                {
+                  "key": "valor_abertura",
+                  "value": "-0,01",
+                  "type": "text"
+                },
+                {
+                  "key": "agencia",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "conta",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Fechamento",
+      "item": [
+        {
+          "name": "Fechar sem senha",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"mensagem: Favor, informe a senha\", () => pm.expect(pm.response.text()).to.eql(\"Favor, informe a senha\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "caixa",
+                  "value": "{{caixaId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "senha",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa/fechar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa",
+                "fechar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fechar com senha errada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"mensagem: Senha incorreta, favor verifique\", () => pm.expect(pm.response.text()).to.eql(\"Senha incorreta, favor verifique\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "caixa",
+                  "value": "{{caixaId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "senha",
+                  "value": "senha-errada",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa/fechar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa",
+                "fechar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fechar com a senha correta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"mensagem: Caixa fechado com sucesso\", () => pm.expect(pm.response.text()).to.eql(\"Caixa fechado com sucesso\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "caixa",
+                  "value": "{{caixaId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "senha",
+                  "value": "{{senha}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa/fechar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa",
+                "fechar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "[defeito #15] Fechar caixa já fechado deveria avisar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"mensagem: Caixa já esta fechado\", () => pm.expect(pm.response.text()).to.eql(\"Caixa já esta fechado\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "caixa",
+                  "value": "{{caixaId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "senha",
+                  "value": "{{senha}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/caixa/fechar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "caixa",
+                "fechar"
+              ]
+            },
+            "description": "Falha de propósito: o serviço lança \"Caixa já esta fechado\", mas o controller engole a exceção e devolve texto vazio (issue #15)."
+          }
+        },
+        {
+          "name": "Logout",
+          "protocolProfileBehavior": {
+            "followRedirects": false
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"sessão encerrada (302)\", () => pm.response.to.have.status(302));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
