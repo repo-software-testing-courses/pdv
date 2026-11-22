@@ -130,5 +130,3 @@ target/site/jacoco/index.html
 - MySQL 8, Flyway, Docker e Docker Compose;
 - TestLink para gerenciamento e execução do caso de teste de sistema;
 - GitHub para versionamento, revisão por pull request, documentação e registro de defeitos.
-
-## Escopo da Entrega 2
