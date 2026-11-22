@@ -1,0 +1,162 @@
+<!--==========================
+          Intro Section
+		============================-->
+<ng-template #starts let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+    </span>
+</ng-template>
+
+<section id="intro">
+    <div class="intro-container">
+        <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+            <div *ngIf="book !== undefined" class="carousel-inner" role="listbox">
+                <div class="carousel-item active" [style.backgroundImage]="'url(' + URL + book.image +')'">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2>Sinopsis</h2>
+                            <p>{{book.synopsis}}</p>
+                            <ngb-rating [(rate)]="startBook" [starTemplate]="starts" [readonly]="true" max="5"></ngb-rating>
+                            <div *ngIf="userComponent.isModerator" class="text-center">
+                                <a [routerLink]="['/administracion/libros/' + book.name]" class="btn btn-primary mx-auto form-group">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- #intro -->
+
+<main id="main">
+    <!--==========================
+                      Services Section
+                    ============================-->
+    <section id="services">
+        <div class="container">
+
+            <div class="section-header wow fadeInUp">
+                <h3>
+                    <i class="ion-ios-information-outline"></i> Información
+                </h3>
+            </div>
+
+            <div *ngIf="book !== undefined" class="row">
+                <div class="col-lg-6 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+                    <div class="icon">
+                        <i class="ion-ios-paper-outline"></i>
+                    </div>
+                    <h4 class="title">
+                        <a href="">Autores</a>
+                    </h4>
+                    <p class="description">{{book.authors}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- #services -->
+    <!--==========================
+                        Call To Action Section
+                        ============================-->
+    <section *ngIf="book !== undefined && userComponent.isLogged" id="call-to-action" [style.backgroundImage]="'url(' + URL+ book.image +')'"
+        style="background: fixed center, rgba(0, 0, 0, 0.7) !important;" class="wow fadeIn">
+        <div class="container text-center prueba">
+            <h3>Puntua el Libro</h3>
+            <ngb-rating [(rate)]="startBookUser" (rateChange)='changePointUser()' [starTemplate]="starts" max="5"></ngb-rating>
+        </div>
+    </section>
+    <!-- #call-to-action -->
+    <!--==========================
+                          Contact Section
+                        ============================-->
+
+    <section id="portfolio" class="section-bg wow fadeInUp">
+        <div class="container">
+
+            <div class="section-header">
+                <h3>
+                    <i class="ion-ios-book-outline"></i> Contenido Relacionado
+                </h3>
+            </div>
+
+            <p *ngIf="relationBooks.length === 0" class="text-center">No hay contenido relacionado.</p>
+
+            <div id="elements" class="row">
+                <div *ngFor="let rBook of relationBooks" class="col-lg-3 col-md-3 portfolio-item filter-app wow fadeInUp">
+                    <div class="portfolio-wrap">
+                        <figure [style.backgroundImage]="'url(' + URL + rBook.image +')'">
+                            <p class="textPortfolio">{{rBook.synopsis}}</p>
+                        </figure>
+
+                        <div class="portfolio-info">
+                            <h4>
+                                <a name="nameBook" [routerLink]="['/libro', rBook.name]">{{rBook.name}}</a>
+                            </h4>
+                            <p>{{rBook.year}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- #contact -->
+    <!-- #call-to-action -->
+    <!--==========================
+                          Contact Section
+                        ============================-->
+
+    <section id="contact" class="wow fadeInUp">
+        <div class="container">
+
+            <div class="section-header">
+                <h3>
+                    <i class="ion-android-chat"></i> Comentarios
+                </h3>
+            </div>
+
+            <p *ngIf="book !== undefined && commentsBook.length === 0" class="text-center">{{book.name}} aún no tiene comentarios.</p>
+
+            <div class="row contact-info">
+                <div *ngFor="let comment of commentsBook" class="col-lg-12 col-md-12 wow bounceInUp box-comment" data-wow-duration="1.4s">
+                    <div class="profile-comment">
+                        <div class="icon">
+                            <i class="ion-ios-person-outline"></i>
+                        </div>
+                        <h4 class="col-lg-20 title">
+                            <a href="">
+                                <b>{{comment.user.name}}</b>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div *ngIf="userComponent.isModerator" class="text-right mt-1">
+                        <p class="reporte">
+                            <a [routerLink]="" (click)="deleteComment(comment.id)">Borrar Comentario</a>
+                        </p>
+                    </div>
+
+                    <div class="comment text-left">
+                        <p class="description">{{comment.comment}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="userComponent.isLogged" class="form">
+                <form (ngSubmit)="newComment(message.value)" class="contactForm">
+                    <div class="form-group">
+                        <textarea #message class="form-control" name="messageSent" rows="5" data-rule="required" data-msg="Introduzca un comentario."
+                            placeholder="Mensaje" [formControl]="validationMessageForm.controls['message']"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <input class="btn-primary" type="submit" value="Enviar Comentario" [disabled]="!validationMessageForm.valid">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- #contact -->
+</main>

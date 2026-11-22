@@ -1,0 +1,44 @@
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  position: relative !important;
+  background-color: black !important;
+}
+
+
+/*-------------------------------------------------------------------
+#Login/Registrar
+----------------------------------------------------------------------*/
+
+#recoverPass{
+	font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    margin-bottom: 2.5%;
+}
+
+#recoverHeader{
+	background-color: black;
+    margin-top: 2.5%;
+}
+
+#recover{
+	font-weight: 700; 
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+#buttonRecv{
+	background-color:#18d26e;
+	color: #fff;
+    font-family: "Montserrat", sans-serif;
+	font-weight: 700;
+	border-color: #18d26e;
+}
+
+#buttonRecv:hover {
+    color: #18d26e;
+    background-color: #fff;
+}
+

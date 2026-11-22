@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TrackOrJargh</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/animate/animate.min.css" rel="stylesheet">
+<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/styleContent.css" rel="stylesheet">
+
+<!-- Start Rating-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+</head>
+
+<body>
+
+	{{>header}}
+
+	<!--==========================
+          Intro Section
+        ============================-->
+	<section id="intro">
+		<div class="intro-container">
+			<div id="introCarousel" class="carousel  slide carousel-fade"
+				data-ride="carousel">
+
+				<div class="carousel-inner" role="listbox">
+					<div class="carousel-item active"
+						style="background-image: url('{{content.image}}');">
+						<div class="carousel-container">
+							<div class="carousel-content">
+								<h2>Sinopsis</h2>
+								<p>{{content.synopsis}}</p>
+								<span class="starts" id="totalPoints"></span>
+								{{#isUserAdmin}}
+								<br>
+								<a class="btn-get-started" id="edit" href="/editarContenido{{content.url}}{{content.name}}">Editar</a>
+								{{/isUserAdmin}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- #intro -->
+
+	<main id="main"> <!--==========================
+              Services Section
+            ============================-->
+	<section id="services">
+		<div class="container">
+
+			<header class="section-header wow fadeInUp">
+				<h3>
+					<i class="ion-ios-information-outline"></i> Información
+				</h3>
+			</header>
+
+			{{^isBook}}
+			<div class="text-center videoYoutube" style="width: 100%;"
+				data-wow-duration="1.4s">
+				<iframe style="width: 100%; height: 400px;"
+					src="{{content.trailer}}" frameborder="0"
+					allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			</div>
+			{{/isBook}} {{^isBook}}
+			<div class="row">
+				<div class="col-lg-6 col-md-6 box wow bounceInUp"
+					data-wow-duration="1.4s">
+					<div class="icon">
+						<i class="ion-ios-color-wand-outline"></i>
+					</div>
+					<h4 class="title">
+						<a href="">Director/es</a>
+					</h4>
+					<p class="description">{{content.directors}}</p>
+				</div>
+				<div class="col-lg-6 col-md-6 box wow bounceInUp"
+					data-wow-duration="1.4s">
+					<div class="icon">
+						<i class="ion-ios-paper-outline"></i>
+					</div>
+					<h4 class="title">
+						<a href="">Actores</a>
+					</h4>
+					<p class="description">{{content.actors}}</p>
+				</div>
+			</div>
+			{{/isBook}} {{#isBook}}
+			<div class="row">
+				<div class="col-lg-6 col-md-6 box wow bounceInUp"
+					data-wow-duration="1.4s">
+					<div class="icon">
+						<i class="ion-ios-paper-outline"></i>
+					</div>
+					<h4 class="title">
+						<a href="">Autores</a>
+					</h4>
+					<p class="description">{{content.authors}}</p>
+				</div>
+			</div>
+			{{/isBook}}
+
+		</div>
+	</section>
+	<!-- #services --> <!--==========================
+                Call To Action Section
+                ============================--> 
+    {{#userLogged}}
+	<section id="call-to-action" style="background: url('{{content.image}}') fixed center, rgba(0, 0, 0, 0.7) !important;" class="wow fadeIn">
+		<div class="container text-center prueba">
+			<h3>Puntua {{typeContent}}</h3>
+			<div class="starts">
+				<span id="rateYo"></span>
+			</div>
+
+			<form style="padding-top: 5%;" action="{{actionMessage}}"
+				method="POST">
+				<input type="hidden" name="pointsSent" value="0" />
+				<button class="btn">
+					<i class="fa fa-floppy-o fa-2x"></i>
+				</button>
+			</form>
+		</div>
+	</section>
+	{{/userLogged}} <!-- #call-to-action --> <!--==========================
+                  Contact Section
+                ============================-->
+
+	<section id="portfolio" class="section-bg wow fadeInUp">
+		<div class="container">
+
+			<div class="section-header">
+				<h3>
+					<i
+						class="{{#iconFilmShow}}ion-ios-film-outline{{/iconFilmShow}}{{#iconBook}}ion-ios-book-outline{{/iconBook}}"></i>
+					Contenido Relacionado
+				</h3>
+			</div>
+
+			{{^contentRelation}}
+			<p class="text-center">No hay contenido relacionado.</p>
+			{{/contentRelation}}
+
+			<div id="elements" class="row ">
+				{{#contentRelation}}
+				<div
+					class="col-lg-3 col-md-3 portfolio-item filter-app wow fadeInUp">
+					<div class="portfolio-wrap">
+						<figure style="background-image: url('{{image}}');">
+							<p class="textPortfolio">{{synopsis}}</p>
+						</figure>
+
+						<div class="portfolio-info">
+							<h4>
+								<a href="{{url}}{{name}}">{{name}}</a>
+							</h4>
+							<p>{{year}}</p>
+						</div>
+					</div>
+				</div>
+				{{/contentRelation}}
+			</div>
+
+		</div>
+	</section>
+
+	<!-- #contact --> <!-- #call-to-action --> <!--==========================
+                  Contact Section
+                ============================-->
+
+	<section id="contact" class="wow fadeInUp">
+		<div class="container">
+
+			<div class="section-header">
+				<h3>
+					<i class="ion-android-chat"></i> Comentarios
+				</h3>
+			</div>
+
+			{{^comments}}
+			<p class="text-center">{{name}} aún no tiene comentarios.</p>
+			{{/comments}}
+
+			<div class="row contact-info">
+				{{#comments}}
+				<div class="col-lg-12 col-md-12 wow bounceInUp box-comment"
+					data-wow-duration="1.4s">
+					<div class="profile-comment">
+						<div class="icon">
+							<i class="ion-ios-person-outline"></i>
+						</div>
+						<h4 class="col-lg-20 title">
+							<a href=""><b>{{name}}</b></a>
+						</h4>
+					</div>
+
+					{{#isUserModerator}} {{#isUserAdmin}}
+					<div class="text-right mt-1">
+						<p class="reporte">
+							<a href="{{deleteComment}}{{id}}/{{content.name}}">Borrar
+								Comentario</a>
+						</p>
+					</div>
+					{{/isUserAdmin}} {{/isUserModerator}} {{#isUserModerator}}
+					{{^isUserAdmin}}
+					<div class="text-right mt-1">
+						<p class="reporte">
+							<a href="{{deleteComment}}{{id}}/{{content.name}}">Borrar
+								Comentario</a>
+						</p>
+					</div>
+					{{/isUserAdmin}} {{/isUserModerator}}
+
+					<div class="comment text-left">
+						<p class="description">{{message}}</p>
+					</div>
+				</div>
+				{{/comments}}
+			</div>
+
+			{{#userLogged}}
+			<div class="form">
+				<form action="{{actionMessage}}" method="post" role="form"
+					class="contactForm">
+					<div class="form-group">
+						<textarea class="form-control" name="messageSent" rows="5"
+							data-rule="required" data-msg="Introduzca un comentario."
+							placeholder="Mensaje"></textarea>
+						<div class="validation"></div>
+					</div>
+					<div class="text-center">
+						<button type="submit">Enviar Comentario</button>
+					</div>
+				</form>
+			</div>
+			{{/userLogged}}
+		</div>
+	</section>
+	<!-- #contact --> </main>
+
+	{{>footer}}
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- JavaScript Libraries -->
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<script src="/lib/jquery/jquery-migrate.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/lib/easing/easing.min.js"></script>
+	<script src="/lib/superfish/hoverIntent.js"></script>
+	<script src="/lib/superfish/superfish.min.js"></script>
+	<script src="/lib/wow/wow.min.js"></script>
+	<script src="/lib/waypoints/waypoints.min.js"></script>
+	<script src="/lib/counterup/counterup.min.js"></script>
+	<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="/lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Contact Form JavaScript File -->
+	<script src="/contactform/contactform.js"></script>
+
+	<!-- Template Main Javascript File -->
+	<script src="/js/main.js"></script>
+
+	<!-- Start Rating -->
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+	<script>
+            $("#rateYo").rateYo({
+            rating : {{userPoints}},
+            spacing : "5px",
+            ratedFill : "#18d26e",
+            onSet: function (rating, rateYoInstance) {
+            $('[name="pointsSent"]').val(rating);
+            }
+            });
+
+            $("#totalPoints").rateYo({
+            rating : {{totalPoints}},
+            spacing : "5px",
+            ratedFill : "#18d26e",
+            readOnly: true
+            });
+        </script>
+
+</body>
+</html>

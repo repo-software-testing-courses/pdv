@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BizPage Bootstrap Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/styleLogin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+            <div class="container-fluid">
+
+                <div id="logo" class="pull-left">
+                    <h1><a href="#intro" class="scrollto">TrackOrJargh</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+                </div>
+
+                <div class="icon search" ><i class="ion-ios-search-strong text-center" ></i> </div>
+                <input type="text" name="user" id="search-bar" tabindex="1" class="form-control" placeholder="Busca tus películas, series o libros..." value="">
+
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#intro">Inicio</a></li>
+                        <li><a href="contentList.html">Películas</a></li>
+                        <li><a href="contentList.html">Series</a></li>
+                        <li><a href="contentList.html">Libros</a></li>
+                        <li class="menu-has-children"><a href="">Usuario</a>
+                            <ul>
+                                <li><a href="userProfile.html">Perfil</a></li>
+                                <li><a href="#">Mis listas</a></li>
+                                <li><a href="#">Ajustes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="contentProfile.html">PagContenido</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </header><!-- #header -->
+    
+    
+ 
+    
+    
+  <!-- Login / Register -->
+    <section id="loginRegister">
+        <div class="container">
+            <div class="form-control text-center" id="loginHeader">
+                <span><a href="#">Login/Registrarse</a>   </span>
+            </div>
+        </div>
+        <!-- Log-in div start hare-->
+            <div id="login">
+                <div class="container">
+                    <div class="form-control text-center">
+                        <!-- Log-In segment -->
+                        <span>Log-in</span>
+
+                        <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                            <div class="form-group">
+                                <input type="text" name="userL" id="userL" tabindex="1" class="form-control" placeholder="Usuario" value="">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="passwordL" id="passwordL" tabindex="2" class="form-control" placeholder="Contraseña">
+                            </div>
+                            <div class="form-group">
+								<div class="row">
+                                    <input type="submit" name="login-submit" id="buttonLog" tabindex="4" class="btn btn-login mx-auto" value="Iniciar sesion">
+								</div>
+                            </div>
+                            <div class="form-group text-center">
+                                <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                <label for="remember"> Recordarme</label>
+                            </div>
+                            <div class=" text-center">
+                                <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">He olvidado la contraseña</a>
+                            </div>       
+                        </form>
+                        
+                        <!-- Register segment -->
+                        <div class="card-header" role="tab" id="register">
+                          <h5 class="mb-0">
+                            <a id="RegsDropdown" data-toggle="collapse" data-parent="#accordion" href="#collapseRegt" aria-expanded="false" aria-controls="collapseRegt">
+                              Registrarse
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="collapseRegt" class="collapse" role="tabpanel" aria-expanded="false" aria-labelledby="register">
+                            <div class="card-block">
+                                <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: block;">
+                                    <div class="form-group">
+                                        <input type="text" name="userR" id="userR" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="passwordR" id="passwordR" tabindex="2" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar Contraseña">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <input type="submit" name="register-submit" id="buttonReg" tabindex="4" class="active btn btn-register mx-auto" value="Registrarse">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>                            
+                        </div>
+                        <!-- End Register segment -->
+                    </div>
+                </div> 
+            </div><!-- Login/Register -->
+    </section><!--login/ Register is finished-->
+  
+    
+
+   
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6 footer-info">
+                                <h3>TrackOrJargh</h3>
+                                <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-links">
+                                <h4>Nos puedes encontrar en</h4>
+                                <div class="social-links">
+                                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://github.com/krate95/TrackOrJargh" class="github"><i class="fa fa-github"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-contact">
+                                <h4>Contacto</h4>
+                                <p>
+                                    <strong>Email:</strong><br>
+                                    j.elvira@alumnos.urjc.es<br>
+                                    o.sotos@alumnos.urjc.es<br>
+                                    hs.dhanoya@alumnos.urjc.es<br>
+                                    a.casanovam@alumnos.urjc.es<br>
+                                    pm.garrido@alumnos.urjc.es<br>
+                                    <strong>Phone:</strong> +34 695 247 ???<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="copyright">
+                        &copy; Copyright <strong>Los subnormales estos SA</strong>. All Rights Reserved
+                    </div>
+                </div>
+            </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

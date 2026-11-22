@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: mysql/mysql-server:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=webapp1
+      - MYSQL_ROOT_HOST=%
+    command: mysqld --lower_case_table_names=1
+
+  webapp1:
+    image: codeurjc/webapp-1-master
+    entrypoint: ["./wait-for-it.sh", "db:3306", "--", "java", "-jar", "webapp-1.java"]
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/webapp1?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=pass

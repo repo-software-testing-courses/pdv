@@ -1,0 +1,44 @@
+<!--==========================
+          Header
+============================-->
+<header id="header">
+	<div class="container-fluid">
+
+		<div id="logo" class="pull-left">
+			<h1>
+				<a href="/" class="scrollto">TrackOrJargh</a>
+			</h1>
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+		</div>
+
+
+		<nav id="nav-menu-container">
+			<ul class="nav-menu">
+				<li {{#indexActive}}class="menu-active"{{/indexActive}}><a href="/">Inicio</a></li>
+				<li {{#searchActive}}class="menu-active"{{/searchActive}}><a href="/busqueda">Búsqueda</a></li>
+				<li {{#filmsActive}}class="menu-active"{{/filmsActive}}><a href="/peliculas">Películas</a></li>
+				<li {{#showsActive}}class="menu-active"{{/showsActive}}><a href="/series">Series</a></li>
+				<li {{#booksActive}}class="menu-active"{{/booksActive}}><a href="/libros">Libros</a></li>
+				
+				{{#isUserAdmin}}
+				<li {{#adminActive}}class="menu-active"{{/adminActive}}><a href="/administracion">Administración</a></li>
+				{{/isUserAdmin}}
+				
+				{{#userLogged}}
+				<li {{#myProfile}}class="menu-active"{{/myProfile}}><a href="/miperfil">{{name}}</a></li>
+				{{/userLogged}}
+				
+				{{^userLogged}}
+					<a href="/login">Login</a></li>
+				{{/userLogged}}
+				
+				{{#userLogged}}
+					<a href="/logout">Logout</a></li>
+				{{/userLogged}}
+			</ul>
+		</nav>
+		<!-- #nav-menu-container -->
+	</div>
+</header>
+<!-- #header -->

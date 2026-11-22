@@ -1,0 +1,41 @@
+#header{
+    padding-top: 1.5% !important;
+    padding-bottom: 1.5% !important;
+}
+
+#navIcon{
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+}
+
+#menuList{
+    padding-left: 1 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+.btn-primary {
+    color: black !important;
+    background-color: #18d26e !important;
+    border-color: #18d26e !important;
+}
+
+#menuNav{
+    text-align: right !important;
+    float: right !important;
+}
+
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus {
+  outline: 0 !important;
+  outline-offset: 0  !important;
+  background-image: none  !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
+}

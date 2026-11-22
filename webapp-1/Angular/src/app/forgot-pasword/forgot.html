@@ -1,0 +1,30 @@
+<section id="recoverPass">
+	<div class="container">
+		<div class="form-control text-center" id="recoverHeader">
+			<span>
+				<a href="">Recuperar contraseña</a>
+			</span>
+		</div>
+	</div>
+
+	<div id="recover">
+		<div class="container">
+			<div class="form-control text-center">
+				<form (ngSubmit)="checkEmail(email.value)" role="form" style="display: block;">
+
+					<input #email type="email" name="email" tabindex="2" class="form-group form-control" placeholder="Introduca su E-mail" value=""
+					 [formControl]="validatorEmail.controls['email']" />
+
+					<ngb-alert *ngIf="!validatorEmail.controls['email'].valid && email.value !== ''" type="danger" [dismissible]="false">Introduzca un email valido</ngb-alert>
+					<ngb-alert *ngIf="isViewErrorMessage" type="danger" (close)="closeIsViewErrorMessage()">{{errorMessage}}</ngb-alert>
+					<ngb-alert *ngIf="isViewSuccesMessage" type="success" (close)="closeIsViewSuccesMessage()">Se le ha enviado un correo a su email, revise su email para poder continuar</ngb-alert>
+
+					<div class="row form-group">
+						<input type="submit" name="login-submit" id="buttonRecv" tabindex="4" class="btn btn-login mx-auto form-group" value="Recuperar contraseña"
+						 [disabled]="!validatorEmail.valid">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

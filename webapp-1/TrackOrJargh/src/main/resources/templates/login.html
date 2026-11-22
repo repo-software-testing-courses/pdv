@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TrackOrJargh</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/animate/animate.min.css" rel="stylesheet">
+<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/styleLogin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	{{>header}}
+
+	<!-- Login / Register -->
+	<section id="loginRegister">
+		<div class="container">
+			<div class="form-control text-center" id="loginHeader">
+				<span><a href="/login">Login/Registrarse</a> </span>
+			</div>
+		</div>
+		<br/>
+		{{#registered}}
+		<h5 class="text-center">Has consegido registrarte correctamente. A continuación, active su cuenta para iniciar sesión.</h5>
+		{{/registered}}
+		
+		{{#activatedUser}}
+		<h5 class="text-center">Su cuenta se ha activado correctamente. A continuación, inicie sesión.</h5>
+		{{/activatedUser}}
+		
+		{{#errorActivatedUser}}
+		<h5 class="text-center">Este usuario ya esta activado. Por favor inicie sesión.</h5>
+		{{/errorActivatedUser}}
+		
+		{{#errorNotActivatedUser}}
+		<h5 class="text-center">Este usuario no esta activado. Por favor revise su correo.</h5>
+		{{/errorNotActivatedUser}}
+		
+		{{#errorUser}}
+		<h5 class="text-center">El usuario introducido no existe. Por favor vuelvalo a intentar.</h5>
+		{{/errorUser}}
+		
+		{{#errorWrongPass}}
+		<h5 class="text-center">Contraseña invalida. Por favor vuelvalo a intentar.</h5>
+		{{/errorWrongPass}}
+		
+		{{#changedPass}}
+		<h5 class="text-center">Contraseña cambiada correctamente. A continuación, inicie sesión.</h5>
+		{{/changedPass}}
+		
+		{{#sentChangePass}}
+		<h5 class="text-center">Se ha enviado un correo con la información para el cambio de contraseña. Por favor revise el correo.</h5>
+		{{/sentChangePass}}
+		
+		<!-- Log-in div start hare-->
+		<div id="login">
+			<div class="container">
+				<div class="form-control text-center">
+					<!-- Log-In segment -->
+					<span>Log-in</span>
+
+					<form method="post" role="form" action="/login"
+						style="display: block;">
+						<input type="text" name="username" id="userL" tabindex="1"
+							class="form-group form-control" placeholder="Usuario" value="{{#viewUser}}{{name}}{{/viewUser}}" required autofocus>
+
+						<input type="password" name="password" id="passwordL" tabindex="2"
+							class="form-group form-control" placeholder="Contraseña" required>
+
+						<div class="row form-group">
+							<input type="submit" name="login-submit" id="buttonLog"
+								tabindex="4" class="btn btn-login mx-auto form-group"
+								value="Iniciar sesion">
+						</div>
+						<div class=" text-center">
+							<a href="/olvidocontra" tabindex="5"
+								class="forgot-password">He olvidado la contraseña</a>
+						</div>
+					</form>
+					
+					<form action="/signin/facebook" method="POST">
+    						<input type="hidden" name="scope" value="public_profile" />
+    						<!--<button id="plusButton" class="btn btn-primary"
+									type="button" data-toggle="collapse"
+									data-target="#showAddList" aria-expanded="false"
+									aria-controls="showAddList"><i class="ion-plus-circled"></i></button>-->
+    						<button id="fcButton" class="btn btn-login"><i class="fa fa-facebook fa-2x"></i></button>
+					</form>
+
+					<!-- Register segment -->
+					<div class="card-header" role="tab" id="register">
+						<h5 class="mb-0">
+							<a id="RegsDropdown" data-toggle="collapse"
+								data-parent="#accordion" href="#collapseRegt"
+								aria-expanded="false" aria-controls="collapseRegt">
+								Registrarse </a>
+						</h5>
+					</div>
+					<div id="collapseRegt" class="collapse" role="tabpanel"
+						aria-expanded="false" aria-labelledby="register">
+						<div class="card-block">
+							<form method="post" id="register-form" role="form"
+								style="display: block;" action="/registrar">
+								<input type="text" name="name" tabindex="2"
+									class="form-group form-control" placeholder="Nombre de Usuario"
+									value="" required /> 
+								<input type="email" name="email" tabindex="2"
+									class="form-group form-control" placeholder="Email" value="" required />
+								<input id="password" type="password" name="pass"
+									class="form-group form-control" tabindex="2" role="form"
+									placeholder="Contraseña" required /> 
+								<input type="password" id="confirmPass" tabindex="2"
+									class="form-group form-control"
+									placeholder="Confirmar Contraseña" required />
+								<input type="hidden" name="registerUser" value="true"/>
+
+								<div class="row form-group">
+									<input type="submit" name="register-submit" id="buttonReg"
+										tabindex="3" class="active btn btn-register mx-auto"
+										value="Registrarse">
+								</div>
+
+							</form>
+						</div>
+					</div>
+					<!-- End Register segment -->
+				</div>
+			</div>
+		</div>
+		<!-- Login/Register -->
+	</section>
+	<!--login/ Register is finished-->
+
+	{{>footer}}
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- JavaScript Libraries -->
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<script src="/lib/jquery/jquery-migrate.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/lib/easing/easing.min.js"></script>
+	<script src="/lib/superfish/hoverIntent.js"></script>
+	<script src="/lib/superfish/superfish.min.js"></script>
+	<script src="/lib/wow/wow.min.js"></script>
+	<script src="/lib/waypoints/waypoints.min.js"></script>
+	<script src="/lib/counterup/counterup.min.js"></script>
+	<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="/lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Contact Form JavaScript File -->
+	<script src="/contactform/contactform.js"></script>
+
+	<!-- Template Main Javascript File -->
+	<script src="/js/main.js"></script>
+	
+	<!-- Password validation Javascript -->
+	<script src="/js/passwordValidation.js"></script>
+	
+	<!-- user and Email validation Javascript -->
+	<script src="/js/userEmailValidator.js"></script>
+	
+
+</body>
+</html>

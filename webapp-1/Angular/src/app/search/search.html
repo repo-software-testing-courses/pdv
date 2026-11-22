@@ -1,0 +1,61 @@
+<!--==========================
+      Portfolio Section
+    ============================-->
+<section id="portfolio" class="section-bg" style="padding-top: 7em;">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<ul id="portfolio-flters">
+					<input type="text" [formControl]="term" autofocus/>
+					<select name="optionSearch" [formControl]="termType">
+						<option value="titulo" [selected]="true">Titulo</option>
+						<option value="genero">Genero</option>
+					</select>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Clase abajo: portfolio-container -->
+		<div id="elements" class="row ">
+			<div *ngFor="let content of contents" class="col-lg-3 col-md-3 portfolio-item filter-app wow fadeInUp">
+				<div class="portfolio-wrap">
+					<figure [style.backgroundImage]="'url(' + URL + content.image +')'">
+						<p class="textPortfolio">{{content.synopsis}}</p>
+					</figure>
+
+					<div class="portfolio-info">
+						<h4>
+							<a *ngIf="content.type === 'film'" name="nameFilm" [routerLink]="['/pelicula', content.name]">{{content.name}}</a>
+							<a *ngIf="content.type === 'show'" name="nameFilm" [routerLink]="['/serie', content.name]">{{content.name}}</a>
+							<a *ngIf="content.type === 'book'" name="nameFilm" [routerLink]="['/libro', content.name]">{{content.name}}</a>
+						</h4>
+						<p>{{content.year}}</p>
+						<div *ngIf="userComponent.isLogged" class="col text-right">
+							<div ngbDropdown placement="top-right" class="d-inline-block">
+								<button class="btn btn-secondary dropdown-toggle" id="dropdownMenu2" ngbDropdownToggle>
+									<i class="ion-plus-round"></i>
+								</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownMenu2">
+									<button *ngFor="let item of userComponent.lists" name="buttonList" class="dropdown-item" type="button" (click)="addElemToList(item.name, content.url, content.name)">{{item.name}}</button>
+									<a class="dropdown-item" [routerLink]="['/perfil']">Crear lista</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<p *ngIf="contents.length === 0 && search === ''" class="text-center">Esta usted en la página de búsqueda, introduzca algúna palabra para buscar.</p>
+		<p *ngIf="contents.length === 0 && search !== ''" class="text-center">La búsqueda '{{search}}' no ha devuelto ningún resultado.</p>
+		<div class="text-center moreContentButton">
+			<i [ngClass]="decorator.setStyleMoreContent()" *ngIf="morePages" (click)="loadMore()"></i>
+		</div>
+		<div class="popup-message">
+			<ngb-alert *ngIf="addedContent" type="success" (close)="closeAddedContentAlert()">Se ha añadido correctamente a tu lista</ngb-alert>
+			<ngb-alert *ngIf="errorAddedContent" type="danger" (close)="closeErrorAddedContentAlert()">Vaya!! Parece que ya se encontraba en tu lista</ngb-alert>
+		</div>
+	</div>
+</section>

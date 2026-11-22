@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>TrackOrJargh</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <!-- Favicons -->
+        <link href="/img/favicon.png" rel="icon">
+        <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+            rel="stylesheet">
+        <!-- Bootstrap CSS File -->
+        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Libraries CSS Files -->
+        <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <!-- Main Stylesheet File -->
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="/css/styleUserProfile.css" rel="stylesheet">
+    </head>
+    <body>
+        {{>header}}
+        <div id="report" class="container contents form-control">
+            <div class="text-center" id="header-Report">
+                <a class="h5" href="/administracion">Administración</a>
+            </div>
+            <ul class="nav nav-tabs" id="adminTab" role="tablist">
+                <li class="nav-item"><a class="nav-link {{#adminFilm}}active{{/adminFilm}}" id="films-tab"
+                                        data-toggle="tab" href="#films" role="tab" aria-controls="films" aria-selected="false">Películas</a></li>
+                <li class="nav-item"><a class="nav-link {{#adminShow}}active{{/adminShow}}" id="shows-tab"
+                                        data-toggle="tab" href="#shows" role="tab" aria-controls="shows" aria-selected="false">Series</a></li>
+                <li class="nav-item"><a class="nav-link {{#adminBook}}active{{/adminBook}}" id="books-tab"
+                                        data-toggle="tab" href="#books" role="tab" aria-controls="books" aria-selected="false">Libros</a></li>
+            </ul>
+            <div class="tab-content" id="adminTabContent">
+                <div class="tab-pane fade show active" id="films" role="tabpanel"
+                     aria-labelledby="films-tab">
+                    <form action="/nuevaPelicula" enctype="multipart/form-data" method="post">
+                        <div class="form-group pt-3">
+                        	<label for="imageFilm">Selecccionar imagen:</label>
+                            <input required type="file" id="imageFilm" name="imageFilm">
+                        <br>
+                            <label for="name">Nombre</label> <input required
+                                type="text" class="form-control" id="newName" placeholder="Nombre"
+                                value="" name="newName"> <label for="actors">Actores</label> <input required type="text"
+                                class="form-control" id="actors" name="actors" value=""> <label
+                                for="directors">Directores</label> <input required type="text" class="form-control" id="actors"
+                                name="directors" value="">
+                             <label for="synopsis">Sinopsis:</label>
+                             <textarea required type="text" class="form-control" rows="5" name="synopsis" value="" id="synopsis" placeholder="Sinopsis"></textarea>
+                             <label for="trailer">Trailer</label>
+                             <input required type="text" class="form-control" id="trailer" name="trailer" value="" placeholder="Trailer">
+                             <label for="year">Año</label>
+                             <input required type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                            {{#genres}} 
+                            <label for="{{name}}Genre">{{name}}</label>
+                            <input class="mr-1" id="{{name}}Genre" type="checkbox" value="{{name}}" name="newGenres">
+                            {{/genres}} 
+                            <br> 
+                            <input required name="filmModSubmit" type="submit"
+                                   class="btn-get-started border" value="Enviar"> 
+                        </div>
+                    </form>
+                </div>
+               <div class="tab-pane fade" id="shows" role="tabpanel"
+                     aria-labelledby="shows-tab">
+                    <form action="/nuevaSerie" enctype="multipart/form-data" method="post">
+                        <div class="form-group pt-3">
+                        	<label for="imageShow">Selecccionar imagen:</label>
+                            <input required type="file" id="imageShow" name="imageShow">
+                        <br>
+                            <label for="name">Nombre</label> <input required
+                                type="text" class="form-control" id="newName" placeholder="Nombre"
+                                value="" name="newName"> <label for="actors">Actores</label> <input required type="text"
+                                class="form-control" id="actors" name="actors" value=""> <label
+                                for="directors">Directores</label> <input required type="text" class="form-control" id="actors"
+                                name="directors" value="">
+                             <label for="synopsis">Sinopsis:</label>
+                             <textarea required type="text" class="form-control" rows="5" name="synopsis" value="" id="synopsis" placeholder="Sinopsis"></textarea>
+                             <label for="trailer">Trailer</label>
+                             <input required type="text" class="form-control" id="trailer" name="trailer" value="" placeholder="Trailer">
+                             <label for="year">Año</label>
+                             <input required type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                            {{#genres}} 
+                            <label for="{{name}}Genre">{{name}}</label>
+                            <input class="mr-1" id="{{name}}Genre" type="checkbox" value="{{name}}" name="genreContent">
+                            {{/genres}} 
+                            <br> 
+                            <input required name="filmModSubmit" type="submit"
+                                   class="btn-get-started border" value="Enviar"> 
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="books" role="tabpanel"
+                     aria-labelledby="books-tab">
+                    <form action="/nuevoLibro" enctype="multipart/form-data" method="post">
+                        <div class="form-group pt-3">
+                        	<label for="imageBook">Selecccionar imagen:</label>
+                            <input required type="file" id="imageBook" name="imageBook">
+                        <br>
+                            <label for="name">Nombre</label> <input required
+                                type="text" class="form-control" id="newName" placeholder="Nombre"
+                                value="" name="newName"> <label for="authors">Autor/es</label> <input required type="text"
+                                class="form-control" id="authors" name="authors" value="">
+                             <label for="synopsis">Trailer</label>
+                             <textarea required type="text" class="form-control" rows="5" id="synopsis" name="synopsis" value="" placeholder="Synopsis"></textarea>
+                             <label for="year">Año</label>
+                             <input required type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                            {{#genres}} 
+                            <label for="{{name}}Genre">{{name}}</label>
+                            <input class="mr-1" id="{{name}}Genre" type="checkbox" value="{{name}}" name="genreContent">
+                            {{/genres}} 
+                            <br> 
+                            <input required name="filmModSubmit" type="submit"
+                                   class="btn-get-started border" value="Enviar"> 
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        {{>footer}}
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="/lib/jquery/jquery.min.js"></script>
+        <script src="/lib/jquery/jquery-migrate.min.js"></script>
+        <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/lib/easing/easing.min.js"></script>
+        <script src="/lib/superfish/hoverIntent.js"></script>
+        <script src="/lib/superfish/superfish.min.js"></script>
+        <script src="/lib/wow/wow.min.js"></script>
+        <script src="/lib/waypoints/waypoints.min.js"></script>
+        <script src="/lib/counterup/counterup.min.js"></script>
+        <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="/lib/lightbox/js/lightbox.min.js"></script>
+        <script src="/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+        <!-- Contact Form JavaScript File -->
+        <script src="/contactform/contactform.js"></script>
+        <!-- Template Main Javascript File -->
+        <script src="/js/main.js"></script>
+        <!-- Password validation Javascript -->
+        <script src="/js/adminValidator.js"></script>
+    </body>
+</html>

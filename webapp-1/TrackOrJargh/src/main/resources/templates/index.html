@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TrackOrJargh</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/animate/animate.min.css" rel="stylesheet">
+<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/styleIndex.css" rel="stylesheet">
+
+<!-- Load c3.css -->
+<link href="/css/c3.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	{{>header}}
+
+	<!--==========================
+          Intro Section
+        ============================-->
+	<section id="intro">
+		<div class="intro-container">
+			<div id="introCarousel" class="carousel  slide carousel-fade"
+				data-ride="carousel">
+
+				<ol class="carousel-indicators"></ol>
+
+				<div class="carousel-inner" role="listbox">
+					{{#contentCarousel}}
+					<div class="carousel-item {{#firstInList}}active{{/firstInList}}"
+						style="background-image: url('{{image}}');">
+						<div class="carousel-container">
+							<div class="carousel-content">
+								<h2>{{name}}</h2>
+								<p>{{synopsis}}</p>
+								<a href="{{url}}{{name}}" class="btn-get-started scrollto">Ver</a>
+							</div>
+						</div>
+					</div>
+					{{/contentCarousel}}
+
+				</div>
+
+				<a class="carousel-control-prev" href="#introCarousel" role="button"
+					data-slide="prev"> <span
+					class="carousel-control-prev-icon ion-chevron-left"
+					aria-hidden="true"></span> <span class="sr-only">Anterior</span>
+				</a> <a class="carousel-control-next" href="#introCarousel"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon ion-chevron-right"
+					aria-hidden="true"></span> <span class="sr-only">Siguiente</span>
+				</a>
+
+			</div>
+		</div>
+	</section>
+	<!-- #intro -->
+
+	<!-- #featured-services --> <!--==========================
+              Interactions Section
+            ============================-->
+	<section id="interactions">
+		<div class="container">
+
+			<header class="section-header">
+				<h3><i class="fa fa-line-chart" aria-hidden="true"></i> Gráficos</h3>
+			</header>
+
+			<div class="row interactions-cols">
+
+				<div class="col-md-6 wow fadeInUp">
+					<h4 class="text-center">Películas mejor valoradas</h4>
+					<div class="interactions-col">
+						<div id="bestFilmsPoints"></div>
+					</div>
+				</div>
+
+				<div class="col-md-6 wow fadeInUp">
+					<h4 class="text-center">Series mejor valoradas</h4>
+					<div class="interactions-col">
+						<div id="bestShowsPoints"></div>
+					</div>
+				</div>
+				
+				<div class="col-md-6 wow fadeInUp">	
+					<h4 class="text-center">Libros mejor valorados</h4>			
+					<div class="interactions-col">
+						<div id="bestBooksPoints"></div>
+					</div>
+				</div>
+				
+				<div class="col-md-12 wow fadeInUp">	
+					<h4 class="text-center">Tipos de contenido</h4>			
+					<div class="interactions-col">
+						<div id="gende"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- #interactions --> </main>
+
+	{{>footer}}
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- JavaScript Libraries -->
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<script src="/lib/jquery/jquery-migrate.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/lib/easing/easing.min.js"></script>
+	<script src="/lib/superfish/hoverIntent.js"></script>
+	<script src="/lib/superfish/superfish.min.js"></script>
+	<script src="/lib/wow/wow.min.js"></script>
+	<script src="/lib/waypoints/waypoints.min.js"></script>
+	<script src="/lib/counterup/counterup.min.js"></script>
+	<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="/lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<script src="/js/jsIndex.js"></script>
+	<!-- Contact Form JavaScript File -->
+	<script src="/contactform/contactform.js"></script>	
+	<!-- Load d3.js and c3.js -->
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="/js/c3.min.js"></script>
+
+	<!-- Template Main Javascript File -->
+	<script src="/js/main.js"></script>
+	<script src="/js/grafics.js"></script>
+	
+
+
+</body>
+</html>

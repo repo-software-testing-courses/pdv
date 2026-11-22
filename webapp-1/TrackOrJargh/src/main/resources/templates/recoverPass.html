@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TrackOrJargh</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/animate/animate.min.css" rel="stylesheet">
+<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/StyleRecover.css" rel="stylesheet">
+<html>
+<body>
+	{{>header}}
+	
+	<section id="recoverPass">
+		<div class="container">
+			<div class="form-control text-center" id="recoverHeader">
+				<span><a href="">Recuperar contraseña</a> </span>
+			</div>
+		</div>
+		
+		<div id="recover">
+			<div class="container">
+				<div class="form-control text-center">
+					<!-- Log-In segment -->
+					{{#wrongEmail}}
+					<p>El email introducido es incorrecto, vuelvalo a intentar.</p>
+					{{/wrongEmail}}
+					
+					{{#changePass}}
+					<p>Introduzca el email para recuperar su contraseña.</p>
+					{{/changePass}}
+					
+					{{#wrongCode}}
+					<p>Este usuario no ha solicitado cambio de contraseña, lo puedes solicitar aquí.</p>
+					{{/wrongCode}}
+					
+					{{#sentEmail}}
+					<p>Este usuario ya ha solicitado un cambio de contraseña. Resiva tu bandeja de entrada.</p>
+					{{/sentEmail}}
+
+					<form method="post" role="form" action="/olvidocontra"
+						style="display: block;">
+						
+						<input type="email" name="email" tabindex="2"
+							class="form-group form-control" placeholder="Introduca su E-mail" value="" />
+
+						<div class="row form-group">
+							<input type="submit" name="login-submit" id="buttonRecv"
+								tabindex="4" class="btn btn-login mx-auto form-group"
+								value="Recuperar contraseña">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{>footer}}
+</body>
+</html>

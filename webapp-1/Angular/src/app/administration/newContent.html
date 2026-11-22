@@ -1,0 +1,218 @@
+
+<section id="administration" class="mt-5">
+
+	<!-- Mirar esta section -->
+	<div class="container">
+		<div class="form-control text-center mx-auto" id="header-Report">
+			<span>
+				<a [routerLink]="['/subirContenido']">Subir Contenido</a>
+			</span>
+		</div>
+
+		<br/>
+
+		<div id="report" class="container contents form-control">
+
+			<ngb-tabset #t="ngbTabset" type="pills">
+				<ngb-tab id="films" title="Películas">
+					<ng-template ngbTabContent>
+						<form (ngSubmit)="uploadContent('film')" ngNativeValidate>
+							<label for="image">Cambiar imagen</label>
+							<input type="file" (change)="fileChange(image)" #image required>
+							<label for="newName">Nombre:</label>
+							<input #name type="text" tabindex="2" class="form-group form-control" placeholder="Nuevo nombre" name="name" [(ngModel)]="film.name"
+							 required>
+							<label for="actors">Actores:</label>
+							<input #actors type="text" tabindex="2" class="form-group form-control" placeholder="Actores" name="actors" [(ngModel)]="film.actors"
+							 required>
+							<label for="directors">Directores:</label>
+							<input #directors type="text" tabindex="2" class="form-group form-control" placeholder="Directores" name="directors" [(ngModel)]="film.directors"
+							 required>
+							<label for="year">Año:</label>
+							<input #year type="number" tabindex="2" class="form-group form-control" placeholder="Año" name="year" [(ngModel)]="film.year"
+							 required>
+							<label for="trailer">Trailer:</label>
+							<input #trailer type="text" tabindex="2" class="form-group form-control" placeholder="trailer" name="trailer" [(ngModel)]="film.trailer"
+							 required>
+							<label for="synopsis">Sinopsis:</label>
+							<textarea #synopsis tabindex="2" class="form-group form-control" placeholder="Sinopsis" name="synopsis" [(ngModel)]="film.synopsis"
+							 required></textarea>
+							<div class=" btn-group-toggle">
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.aventuras" name="Aventuras" (change)="updateGenres('Aventuras', genres.aventuras)"> Aventuras
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.superheroes" name="Superheroes" (change)="updateGenres('Superheroes', genres.superheroes)"> Superhéroes
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.comedia" name="Comedia" (change)="updateGenres('Comedia', genres.comedia)"> Comedia
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.accion" name="Accion" (change)="updateGenres('Accion', genres.accion)"> Acción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.cienciaFiccion" name="Ciencia-ficcion" (change)="updateGenres('Ciencia-ficcion', genres.cienciaFiccion)"> Ciencia Ficción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.terror" name="Terror" (change)="updateGenres('Terror', genres.terror)"> Terror
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.romantica" name="Romantica" (change)="updateGenres('Romantica', genres.romantica)"> Romántica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.thriller" name="Thriller" (change)="updateGenres('Thriller', genres.thriller)"> Thriller
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.animacion" name="Animacion" (change)="updateGenres('Animacion', genres.animacion)"> Animación
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.drama" name="Drama" (change)="updateGenres('Drama', genres.drama)"> Drama
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.historica" name="Historica" (change)="updateGenres('Historica', genres.historica)"> Histórica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.musical" name="Musical" (change)="updateGenres('Musical', genres.musical)"> Musical
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.fantasia" name="Fantasia" (change)="updateGenres('Fantasia', genres.fantasia)"> Fantasía
+								</label>
+							</div>
+							<input id="send" class="btn-primary" type="submit" value="Enviar">
+						</form>
+					</ng-template>
+				</ngb-tab>
+				<ngb-tab id="shows" title="Series">
+					<ng-template ngbTabContent>
+						<form (ngSubmit)="uploadContent('show')" ngNativeValidate>
+							<label for="image">Cambiar imagen</label>
+							<input type="file" (change)="fileChange(image)" #image required>
+							<label for="name">Nombre:</label>
+							<input #name type="text" tabindex="2" class="form-group form-control" placeholder="Nombre" name="name" [(ngModel)]="show.name"
+							 required>
+							<label for="actors">Actores:</label>
+							<input #actors type="text" tabindex="2" class="form-group form-control" placeholder="Actores" name="actors" [(ngModel)]="show.actors"
+							 required>
+							<label for="directors">Directores:</label>
+							<input #directors type="text" tabindex="2" class="form-group form-control" placeholder="Directores" name="directors" [(ngModel)]="show.directors"
+							 required>
+							<label for="year">Año:</label>
+							<input #year type="number" tabindex="2" class="form-group form-control" placeholder="Año" name="year" [(ngModel)]="show.year"
+							 required>
+							<label for="trailer">Trailer:</label>
+							<input #trailer type="text" tabindex="2" class="form-group form-control" placeholder="trailer" name="trailer" [(ngModel)]="show.trailer"
+							 required>
+							<label for="synopsis">Sinopsis:</label>
+							<textarea #synopsis tabindex="2" class="form-group form-control" placeholder="Sinopsis" name="synopsis" [(ngModel)]="show.synopsis"
+							 required></textarea>
+							<div class=" btn-group-toggle">
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.aventuras" name="Aventuras" (change)="updateGenres('Aventuras', genres.aventuras)"> Aventuras
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.superheroes" name="Superheroes" (change)="updateGenres('Superheroes', genres.superheroes)"> Superhéroes
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.comedia" name="Comedia" (change)="updateGenres('Comedia', genres.comedia)"> Comedia
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.accion" name="Accion" (change)="updateGenres('Accion', genres.accion)"> Acción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.cienciaFiccion" name="Ciencia-ficcion" (change)="updateGenres('Ciencia-ficcion', genres.cienciaFiccion)"> Ciencia Ficción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.terror" name="Terror" (change)="updateGenres('Terror', genres.terror)"> Terror
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.romantica" name="Romantica" (change)="updateGenres('Romantica', genres.romantica)"> Romántica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.thriller" name="Thriller" (change)="updateGenres('Thriller', genres.thriller)"> Thriller
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.animacion" name="Animacion" (change)="updateGenres('Animacion', genres.animacion)"> Animación
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.drama" name="Drama" (change)="updateGenres('Drama', genres.drama)"> Drama
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.historica" name="Historica" (change)="updateGenres('Historica', genres.historica)"> Histórica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.musical" name="Musical" (change)="updateGenres('Musical', genres.musical)"> Musical
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.fantasia" name="Fantasia" (change)="updateGenres('Fantasia', genres.fantasia)"> Fantasía
+								</label>
+							</div>
+							<input id="send" class="btn-primary" type="submit" value="Enviar">
+						</form>
+					</ng-template>
+				</ngb-tab>
+				<ngb-tab id="books" title="Libros">
+					<ng-template ngbTabContent>
+						<form (ngSubmit)="uploadContent('book')" ngNativeValidate>
+							<label for="image">Cambiar imagen</label>
+							<input type="file" (change)="fileChange(image)" #image required>
+							<label for="name">Nombre:</label>
+							<input #name type="text" tabindex="2" class="form-group form-control" placeholder="Nombre" name="name" [(ngModel)]="book.name"
+							 required>
+							<label for="authors">Autor/es:</label>
+							<input #authors type="text" tabindex="2" class="form-group form-control" placeholder="Autor/es" name="authors" [(ngModel)]="book.authors"
+							 required>
+							<label for="directors">Directores:</label>
+							<input #directors type="text" tabindex="2" class="form-group form-control" placeholder="Directores" name="directors" [(ngModel)]="book.directors"
+							 required>
+							<label for="year">Año:</label>
+							<input #year type="number" tabindex="2" class="form-group form-control" placeholder="Año" name="year" [(ngModel)]="book.year"
+							 required>
+							<label for="synopsis">Sinopsis:</label>
+							<textarea #synopsis tabindex="2" class="form-group form-control" placeholder="Sinopsis" name="synopsis" [(ngModel)]="book.synopsis"
+							 required></textarea>
+							<div class=" btn-group-toggle">
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.aventuras" name="Aventuras" (change)="updateGenres('Aventuras', genres.aventuras)"> Aventuras
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.superheroes" name="Superheroes" (change)="updateGenres('Superheroes', genres.superheroes)"> Superhéroes
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.comedia" name="Comedia" (change)="updateGenres('Comedia', genres.comedia)"> Comedia
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.accion" name="Accion" (change)="updateGenres('Accion', genres.accion)"> Acción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.cienciaFiccion" name="Ciencia-ficcion" (change)="updateGenres('Ciencia-ficcion', genres.cienciaFiccion)"> Ciencia Ficción
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.terror" name="Terror" (change)="updateGenres('Terror', genres.terror)"> Terror
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.romantica" name="Romantica" (change)="updateGenres('Romantica', genres.romantica)"> Romántica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.thriller" name="Thriller" (change)="updateGenres('Thriller', genres.thriller)"> Thriller
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.animacion" name="Animacion" (change)="updateGenres('Animacion', genres.animacion)"> Animación
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.drama" name="Drama" (change)="updateGenres('Drama', genres.drama)"> Drama
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.historica" name="Historica" (change)="updateGenres('Historica', genres.historica)"> Histórica
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.musical" name="Musical" (change)="updateGenres('Musical', genres.musical)"> Musical
+								</label>
+								<label class="btn-primary" ngbButtonLabel>
+									<input type="checkbox" ngbButton [(ngModel)]="genres.fantasia" name="Fantasia" (change)="updateGenres('Fantasia', genres.fantasia)"> Fantasía
+								</label>
+							</div>
+							<input id="send" class="btn-primary" type="submit" value="Enviar">
+						</form>
+					</ng-template>
+				</ngb-tab>
+			</ngb-tabset>

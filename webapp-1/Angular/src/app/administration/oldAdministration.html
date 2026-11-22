@@ -1,0 +1,171 @@
+<div class="tab-content" id="adminTabContent">
+
+    <div class="container">
+        <div class="form-control text-center mx-auto" id="header-Report">
+            <span>
+                <a [routerLink]="['/administracion']">Administración</a>
+            </span>
+        </div>
+
+
+        <div class="tab-pane fade " id="users" role="tabpanel" aria-labelledby="users-tab">
+
+            <form action="/seleccionarUsuario" method="post">
+                <label for="user">Usuario a modificar: </label>
+                <select name="name">
+
+                    <option value=""></option>
+
+                </select>
+                <button type="submit" name="targetUser">Enviar</button>
+            </form>
+
+            <form action="" method="post">
+                <div class="form-group pt-3">
+                    <label for="deleteUser">Eliminar usuario</label>
+                    <input type="checkbox" class="form-check-input ml-2" name="confirmDelete" value="false">
+                    <br>
+                    <label for="user">Usuario a modificar:</label>
+                    <input type="text" class="form-control" id="user" placeholder="Usuario a modificar" name="name" value="" readonly>
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" class="form-control" id="targetEmail" placeholder="Correo electrónico" value="" name="email">
+                    <label for="userType">Tipo de cuenta</label>
+                    <fieldset>
+                        <select id="userType" class="form-control" name="userType">
+                            <option value="Usuario">Usuario</option>
+                            <option value="Moderador">Moderador</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </fieldset>
+                    <input name="administrationSubmit" type="submit" class="btn-get-started border" value="Enviar">
+                </div>
+            </form>
+
+        </div>
+        <div class="tab-pane fade " id="films" role="tabpanel" aria-labelledby="films-tab">
+
+            <form action="/seleccionarPelicula" method="post">
+                <label for="user">Película a modificar: </label>
+                <select name="name">
+
+                    <option value=""></option>
+
+                </select>
+                <button type="submit" name="targetFilm">Enviar</button>
+            </form>
+
+            <form action="/adminPelicula" method="post" enctype="multipart/form-data">
+                <label for="film">Película a modificar:</label>
+                <input type="text" class="form-control" id="film" placeholder="Película a modificar" name="name" value=" " readonly>
+                <label for="deleteFilm">Eliminar película</label>
+                <input type="checkbox" class="form-check-input ml-2" name="confirmDelete">
+                <div class="form-group pt-3">
+                    <label for="imageFilm">Cambiar imagen:</label>
+                    <input type="file" id="imageFilm" name="imageFilm">
+                    <br>
+                    <label for="name">Modificar nombre</label>
+                    <input type="text" class="form-control" id="newName" placeholder="Nuevo nombre" value="" name="newName">
+                    <label for="actors">Actores</label>
+                    <input type="text" class="form-control" id="actors" name="actors" value="">
+                    <label for="directors">Directores</label>
+                    <input type="text" class="form-control" id="actors" name="directors" value="">
+                    <label for="synopsis">Sinopsis:</label>
+                    <textarea type="text" class="form-control" rows="5" name="synopsis" id="synopsis" placeholder="Sinopsis"></textarea>
+                    <label for="trailer">Trailer</label>
+                    <input type="text" class="form-control" id="trailer" name="trailer" value="" placeholder="Trailer">
+                    <label for="year">Año</label>
+                    <input type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                    <label for="Genre"> </label>
+                    <input class="mr-1" id="Genre" type="checkbox" value=" " name="genreContent" checked>
+                    <label for=" Genre"> </label>
+                    <input class="mr-1" id=" Genre" type="checkbox" value=" " name="newGenres">
+                    <br>
+                    <input name="filmModSubmit" type="submit" class="btn-get-started border" value="Enviar">
+                </div>
+            </form>
+
+        </div>
+        <div class="tab-pane fade " id="shows" role="tabpanel" aria-labelledby="shows-tab">
+
+            <form action="/seleccionarSerie" method="post">
+                <label for="user">Serie a modificar: </label>
+                <select name="name">
+
+                    <option value=" "> </option>
+
+                </select>
+                <button type="submit" name="targetShow">Enviar</button>
+            </form>
+
+            <form action="/adminSerie" method="post" enctype="multipart/form-data">
+                <label for="show">Película a modificar:</label>
+                <input type="text" class="form-control" id="show" placeholder="Serie a modificar" name="name" value=" " readonly>
+                <label for="deleteFilm">Eliminar serie</label>
+                <input type="checkbox" class="form-check-input ml-2" name="confirmDelete">
+                <div class="form-group pt-3">
+                    <label for="imageShow">Cambiar imagen:</label>
+                    <input type="file" id="imageShow" name="imageShow">
+                    <br>
+                    <label for="name">Modificar nombre</label>
+                    <input type="text" class="form-control" id="newName" placeholder="Nuevo nombre" value=" " name="newName">
+                    <label for="actors">Actores</label>
+                    <input type="text" class="form-control" id="actors" name="actors" value="">
+                    <label for="directors">Directores</label>
+                    <input type="text" class="form-control" id="actors" name="directors" value=" ">
+                    <label for="synopsis">Sinopsis:</label>
+                    <textarea type="text" class="form-control" rows="5" name="synopsis" id="synopsis" placeholder="Sinopsis"> </textarea>
+                    <label for="trailer">Trailer</label>
+                    <input type="text" class="form-control" id="trailer" name="trailer" value=" " placeholder="Trailer">
+                    <label for="year">Año</label>
+                    <input type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                    <label for=" Genre"> </label>
+                    <input class="mr-1" id=" Genre" type="checkbox" value=" " name="genreContent" checked>
+                    <label for=" Genre"> </label>
+                    <input class="mr-1" id=" Genre" type="checkbox" value=" " name="newGenres">
+                    <br>
+                    <input name="filmModSubmit" type="submit" class="btn-get-started border" value="Enviar">
+                </div>
+            </form>
+
+        </div>
+        <div class="tab-pane fade }" id="books" role="tabpanel" aria-labelledby="books-tab">
+
+            <form action="/seleccionarLibro" method="post">
+                <label for="user">Libro a modificar: </label>
+                <select name="name">
+
+                    <option value=" "> </option>
+
+                </select>
+                <button type="submit" name="targetBook">Enviar</button>
+            </form>
+
+            <form action="/adminLibro" method="post" enctype="multipart/form-data">
+                <label for="book">Libro a modificar:</label>
+                <input type="text" class="form-control" id="book" placeholder="Libro a modificar" name="name" value=" " readonly>
+                <label for="deleteBook">Eliminar Libro</label>
+                <input type="checkbox" class="form-check-input ml-2" name="confirmDelete">
+                <div class="form-group pt-3">
+                    <label for="imageBook">Cambiar imagen:</label>
+                    <input type="file" id="imageBook" name="imageBook">
+                    <br>
+                    <label for="name">Modificar nombre</label>
+                    <input type="text" class="form-control" id="newName" placeholder="Nuevo nombre" value=" " name="newName">
+                    <label for="authors">Autor/es</label>
+                    <input type="text" class="form-control" id="authors" name="authors" value="">
+                    <label for="synopsis">Sinopsis:</label>
+                    <textarea type="text" class="form-control" rows="5" name="synopsis" id="synopsis" placeholder="Sinopsis"></textarea>
+                    <label for="year">Año</label>
+                    <input type="text" class="form-control" id="year" name="year" value="" placeholder="Año">
+                    <label for=" Genre"> </label>
+                    <input class="mr-1" id=" Genre" type="checkbox" value=" " name="genreContent" checked>
+                    <label for=" Genre"> </label>
+                    <input class="mr-1" id=" Genre" type="checkbox" value=" " name="newGenres">
+                    <br>
+                    <input name="filmModSubmit" type="submit" class="btn-get-started border" value="Enviar">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

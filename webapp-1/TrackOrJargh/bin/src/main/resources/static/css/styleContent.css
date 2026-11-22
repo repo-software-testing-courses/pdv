@@ -1,0 +1,104 @@
+#intro {
+    height: 80vh !important;
+}
+
+#intro .carousel-item {
+    height: 80vh !important;
+}
+
+.videoYoutube{
+    margin-bottom: 2%;
+}
+
+
+.carousel-starts {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    z-index: 15;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    font-size: xx-large;
+    color: #18d26e;
+}
+
+.message-icon {
+    font-size: xx-large;
+    color: #111;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+#call-to-action {
+    background: url(../img/Guardianes2.jpg) fixed center center, rgba(0, 0, 0, 0.7) !important;
+    background-size: cover !important;
+	background-blend-mode: darken, normal !important;
+}
+
+.starts{
+    position: absolute;
+    left: calc(50% - 6em);
+}
+
+.box-comment{
+    padding-bottom: 2%;
+    border-bottom-style: solid; 
+    border-bottom-width: 1px;   
+}
+
+.profile-comment {
+    float: left;
+}
+
+.starts-comment {
+    float: right;
+}
+
+.starts-comment i{
+    font-size: xx-large !important;
+}
+
+.comment {
+    clear: left;
+}
+
+.reporte{
+    text-align: left;
+    float: right;
+    
+}
+
+/* Episode section */
+
+#v-pills-tab{
+    border-radius: 4px 4px 4px 4px;
+    background-color: #f7f7f7;
+}
+
+.form-report {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black;
+    background-color: #18d26e;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #18d26e;
+    background-color: transparent;
+}

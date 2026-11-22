@@ -1,0 +1,43 @@
+<!--==========================
+          Header
+============================-->
+<div id="header" [ngStyle]="decorator.setStyleHead()">
+	<div class="container-fluid">
+
+		<div id="logo" class="pull-left">
+			<h1>
+				<a href="/" class="scrollto">TrackOrJargh</a>
+			</h1>
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+		</div>
+		<div>
+			<nav id="navIcon" class="navbar navbar-expand-md">
+			<button class="navbar-toggler hidden-sm-up navbar-dark btn btn-primary" id="dropdownMain"
+				type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#nav-menu-container" 
+				aria-controls="nav-menu-container" aria-expanded="false" aria-label="Toggle navigation">
+					<span id="navIcon" class="navbar-toggler-icon"></span>
+			</button>
+			</nav>
+			<nav class="navbar navbar-expand-md" id="nav-menu-container">
+				
+				<nav [ngbCollapse]="!isNavbarCollapsed" class="collapse navbar-collapse navbar-dark" >  
+					<ul id="menuList" class="nav-menu">
+						<li [ngClass]="decorator.pButton[0]"><a [routerLink]="['/']">Inicio</a></li>
+						<li [ngClass]="decorator.pButton[1]"><a [routerLink]="['/busqueda']">Búsqueda</a></li>
+						<li [ngClass]="decorator.pButton[2]"><a [routerLink]="['/peliculas']">Películas</a></li>
+						<li [ngClass]="decorator.pButton[3]"><a [routerLink]="['/series']">Series</a></li>
+						<li [ngClass]="decorator.pButton[4]"><a [routerLink]="['/libros']">Libros</a></li>
+						
+						<li *ngIf="decorator.userAdmin" [ngClass]="decorator.pButton[5]"><a [routerLink]="['/administracion']">Administración</a></li>
+						<li *ngIf="decorator.loggedUser" [ngClass]="decorator.pButton[6]"><a [routerLink]="['/perfil']">{{userComponent.user.name}}</a></li>
+						<li *ngIf="decorator.loggedUser"><a [routerLink]="" (click)="logout()">Logout</a></li>
+						<li *ngIf="!decorator.loggedUser" [ngClass]="decorator.pButton[7]"><a [routerLink]="['/login']">Login</a></li>	
+					</ul>
+				</nav>
+			</nav>
+			<!-- #nav-menu-container -->
+		</div>
+	</div>
+</div>
+<!-- #header -->

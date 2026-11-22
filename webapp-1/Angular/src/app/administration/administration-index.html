@@ -1,0 +1,62 @@
+<section id="administration" class="mt-5">
+
+	<div class="container">
+		<div class="text-center mx-auto" id="header-Report">
+			<span>
+				<a [routerLink]="['/administracion']">Administración</a>
+			</span>
+		</div>
+
+
+		<!-- Mirar esta section -->
+		<div id="report" class="container contents">
+
+			<ngb-tabset type="pills">
+				<ngb-tab title="Usuarios">
+					<ng-template ngbTabContent>
+						<label for="user">Usuario a modificar: </label>
+						<select [(ngModel)]="selectUser">
+							<option *ngFor="let user of users" [value]="user.name">{{user.name}}</option>
+						</select>
+						<button class="btn-primary" (click)="modifyElem('user')">Seleccionar</button>
+					</ng-template>
+				</ngb-tab>
+
+				<ngb-tab title="Películas">
+					<ng-template ngbTabContent>
+						<label for="user">Pelicula a modificar: </label>
+						<select [(ngModel)]="selectFilm">
+							<option *ngFor="let film of films" [value]="film.name">{{film.name}}</option>
+						</select>
+						<button class="btn-primary" (click)="modifyElem('film')">Seleccionar</button>
+					</ng-template>
+				</ngb-tab>
+
+				<ngb-tab title="Series">
+					<ng-template ngbTabContent>
+						<label for="user">Serie a modificar: </label>
+						<select [(ngModel)]="selectShow">
+							<option *ngFor="let show of shows" [value]="show.name">{{show.name}}</option>
+						</select>
+						<button class="btn-primary" (click)="modifyElem('show')">Seleccionar</button>
+					</ng-template>
+				</ngb-tab>
+
+				<ngb-tab title="Libros">
+					<ng-template ngbTabContent>
+						<label for="user">Libro a modificar: </label>
+						<select [(ngModel)]="selectBook">
+							<option *ngFor="let book of books" [value]="book.name">{{book.name}}</option>
+						</select>
+						<button class="btn-primary" (click)="modifyElem('book')">Seleccionar</button>
+					</ng-template>
+				</ngb-tab>
+			</ngb-tabset>
+
+			<div class="text-center">
+				<a [routerLink]="['/subirContenido']" class="btn btn-primary mx-auto form-group">Subir contenido</a>
+			</div>
+
+		</div>
+	</div>
+</section>

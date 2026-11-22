@@ -1,0 +1,31 @@
+#administration{
+    margin-top: 10.5% !important;
+    margin-bottom: 1.5%;
+    font-family: "Montserrat", sans-serif;
+}
+
+#header-Report{
+    margin-top: 15.5%;
+    margin-bottom: 1.5%;
+    background-color: black;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.btn-primary {
+    color: white ;
+    background-color: #18d26e ;
+    border-color: #18d26e ;
+    margin-bottom: 0.5% ;
+}
+
+.btn-primary:hover {
+    color: #18d26e;
+    background-color: white;
+    border-color: #18d26e ;
+}
+
+#send{
+    margin-top: 2.5%;
+}

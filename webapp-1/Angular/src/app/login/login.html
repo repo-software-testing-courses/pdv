@@ -1,0 +1,69 @@
+<!-- Login / Register -->
+<section id="loginRegister" [ngStyle]="marginFooter">
+	<div class="container">
+		<div class="text-center" id="loginHeader">
+			<span>
+				<a [routerLink]="['/login']">Login/Registrarse</a>
+			</span>
+		</div>
+	</div>
+	<br/>
+	
+	<!-- Log-in div start hare-->
+	<div id="login">
+		<div class="container">
+			<div class="text-center">
+				<!-- Log-In segment -->
+				<span>Log-in</span>
+
+				<form (ngSubmit)="loginUser(user.value, pass.value)" style="display: block;">
+					
+					<input #user type="text" tabindex="1" class="form-group form-control" placeholder="Usuario" name="user" ngModel [formControl]="validationLoginForm.controls['user']" value="{{userName}}">
+
+					<input #pass type="password" tabindex="2" class="form-group form-control" placeholder="Contraseña" name="password" ngModel [formControl]="validationLoginForm.controls['pass']">
+					
+					<ngb-alert *ngIf="isChangePass" type="success" (close)="closeActivateUser()">Contraseña cambiada, ingrese porfavor</ngb-alert>
+					<ngb-alert *ngIf="activateUser" type="success" (close)="closeActivateUser()">El usuario esta activado, ingrese porfavor</ngb-alert>
+					<ngb-alert *ngIf="userComponent.userWrongLogin" type="danger" (close)="closeShowMessageLogin()">{{userComponent.userWronLoginMessage}}</ngb-alert>
+
+					<div class="row form-group">
+						<input type="submit" name="login-submit" tabindex="4" class="btn btn-primary mx-auto form-group" value="Iniciar sesion" [disabled]="!validationLoginForm.valid">
+					</div>
+					<div class=" text-center">
+						<a [routerLink]="['/olvidocontra']" tabindex="5" class="forgot-password">He olvidado la contraseña</a>
+					</div>
+				</form>
+
+				<!-- Register segment -->
+				<div class="card-header" role="tab" id="register">
+					<h5 class="mb-0">
+						<a id="RegsDropdown" (click)="changeMarginFooter()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
+							Registrarse </a>
+					</h5>
+				</div>
+				<div id="collapse" [ngbCollapse]="isCollapsed">
+					<div class="card-block">
+						<form (ngSubmit)="registerUser(name.value, passOne.value, email.value)" style="display: block;">
+							<input #name type="text" tabindex="2" class="form-group form-control" placeholder="Nombre de Usuario" name="name" ngModel [formControl]="validationRegisterForm.controls['name']" value=""/>
+							<input #email type="email" tabindex="2" class="form-group form-control" placeholder="Email" value="" name="email" ngModel [formControl]="validationRegisterForm.controls['email']" />
+							<input #passOne id="password" type="password" class="form-group form-control" tabindex="2" role="form" placeholder="Contraseña" name="password" ngModel [formControl]="validationRegisterForm.controls['password']" />
+							<input #passTwo type="password" tabindex="2" class="form-group form-control" placeholder="Confirmar Contraseña" name="passwordConfirm" ngModel [formControl]="validationRegisterForm.controls['passwordConfirm']" />
+
+							<ngb-alert *ngIf="!validationRegisterForm.controls['email'].valid && email.value !== ''" type="danger" [dismissible]="false">Introduzca un email valido</ngb-alert>
+							<ngb-alert *ngIf="(passOne.value !== passTwo.value) && (passOne.value !== '' && passTwo.value !== '')" type="danger" [dismissible]="false">Las contraseñas no coinciden</ngb-alert>
+							<ngb-alert *ngIf="isEmailOrNameUsed" type="danger" (close)="closeIsEmailOrNameUsed()">El usuario o el email ya estan en uso</ngb-alert>
+							<ngb-alert *ngIf="isNewUser" type="success" (close)="closeIsNewUser()">Se le ha enviado un correo a su email, active su usuario para poder continuar</ngb-alert>
+
+							<div class="row form-group">
+								<input type="submit" name="register-submit" tabindex="3" class="active btn btn-primary mx-auto" value="Registrarse" [disabled]="!validationRegisterForm.valid">
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<!-- End Register segment -->
+			</div>
+		</div>
+	</div>
+	<!-- Login/Register -->
+</section>

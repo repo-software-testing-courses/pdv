@@ -1,0 +1,33 @@
+<section id="recoverPass">
+	<div class="container">
+		<div class="form-control text-center" id="recoverHeader">
+			<span>
+				<a href="">Recuperar contraseña</a>
+			</span>
+		</div>
+	</div>
+
+	<div id="recover">
+		<div class="container">
+			<div class="form-control text-center">
+				<!-- Log-In segment -->
+				<span>Nueva contraseña</span>
+
+				<form (ngSubmit)="changePass(passOne.value)" role="form" style="display: block;">
+
+					<input type="text" tabindex="2" class="form-group form-control" placeholder="Usuario" value="{{username}}" disabled/>
+
+					<input #passOne type="password" name="pass" id="passwordL" tabindex="2" class="form-group form-control" placeholder="Nueva contraseña" [formControl]="validatorPass.controls['password']">
+
+					<input #passTwo type="password" id="passwordL" tabindex="2" class="form-group form-control" placeholder="Repita la nueva contraseña" [formControl]="validatorPass.controls['passwordConfirm']">
+
+					<ngb-alert *ngIf="(passOne.value !== passTwo.value) && (passOne.value !== '' && passTwo.value !== '')" type="danger" [dismissible]="false">Las contraseñas no coinciden</ngb-alert>
+
+					<div class="row form-group">
+						<input type="submit" name="login-submit" id="buttonRecv" tabindex="4" class="btn btn-login mx-auto form-group" value="Cambiar contraseña" [disabled]="!validatorPass.valid">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

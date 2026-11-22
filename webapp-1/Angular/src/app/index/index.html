@@ -1,0 +1,71 @@
+<!--==========================
+          Intro Section
+        ============================-->
+<section id="intro">
+	<div class="intro-container">
+		<div id="introCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+			<ngb-carousel class="carousel-inner">
+				<ng-template *ngFor="let elem of carousel" ngbSlide>
+					<div class="carousel-item active" [style.backgroundImage]="'url(' + URL + elem.image +')'">
+						<div class="carousel-container">
+							<div class="carousel-content">
+								<h2>{{elem.name}}</h2>
+								<p>{{elem.synopsis}}</p>
+								<a *ngIf="elem.type === 'film'" [routerLink]="['/pelicula', elem.name]" class="btn-get-started scrollto">Ver</a>
+								<a *ngIf="elem.type === 'show'" [routerLink]="['/serie', elem.name]" class="btn-get-started scrollto">Ver</a>
+								<a *ngIf="elem.type === 'book'" [routerLink]="['/libro', elem.name]" class="btn-get-started scrollto">Ver</a>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</ngb-carousel>
+		</div>
+	</div>
+</section>
+<!-- #intro -->
+
+<!-- #featured-services -->
+<!--==========================
+              Interactions Section
+            ============================-->
+<section id="interactions">
+	<div class="container">
+
+		<header class="section-header">
+			<h3>
+				<i class="fa fa-line-chart" aria-hidden="true"></i> Gráficos</h3>
+		</header>
+
+		<div class="row interactions-cols">
+
+			<div class="col-md-6 wow fadeInUp">
+				<h4 class="text-center">Películas mejor valoradas</h4>
+				<div class="interactions-col">
+					<div id="bestFilmsPoints"></div>
+				</div>
+			</div>
+
+			<div class="col-md-6 wow fadeInUp">
+				<h4 class="text-center">Series mejor valoradas</h4>
+				<div class="interactions-col">
+					<div id="bestShowsPoints"></div>
+				</div>
+			</div>
+
+			<div class="col-md-6 wow fadeInUp">
+				<h4 class="text-center">Libros mejor valorados</h4>
+				<div class="interactions-col">
+					<div id="bestBooksPoints"></div>
+				</div>
+			</div>
+
+			<div class="col-md-12 wow fadeInUp">
+				<h4 class="text-center">Tipos de contenido</h4>
+				<div class="interactions-col">
+					<div id="gende"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- #interactions -->

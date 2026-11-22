@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TrackOrJargh</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+	rel="stylesheet">
+<!-- Bootstrap CSS File -->
+<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Libraries CSS Files -->
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/animate/animate.min.css" rel="stylesheet">
+<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<!-- Main Stylesheet File -->
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/styleUserProfile.css" rel="stylesheet">
+</head>
+<body>
+	{{>header}}
+	<!--=========================
+        slide menu 
+        ==========================-->
+	<section>
+		<div class="container contents">
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-PersonalData-tab" data-toggle="pill"
+							href="#v-pills-PersonalData" role="tab" aria-controls="v-pills-home" aria-selected="true">Mi
+							cuenta</a> <a class="nav-link" id="v-pills-MyLists-tab" data-toggle="pill"
+							href="#v-pills-MyLists" role="tab" aria-controls="v-pills-profile" aria-selected="false">Mis
+							Listas</a>
+					</div>
+				</div>
+				<div class="tab-content col-lg-9" id="v-pills-tabContent">
+					<div class="tab-pane fade show active border rounded p-3" id="v-pills-PersonalData"
+						role="tabpanel" aria-labelledby="v-pills-PersonalData-tab">
+						<div class="text-center rounded mb-3 h2">Mi cuenta</div>
+						{{#userLogged}}
+						<form method="post" enctype="multipart/form-data" role="form" action="/miperfil" style="display: block;">
+							<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+								<img id="userImage" class="img-responsive rounded-circle" src="{{image}}"
+									alt="Imagen de perfil">
+							</div>
+							<label for="userImage">Cambiar imagen</label>
+							<br>
+							<input type="file" name="imageShow"></input>
+							<div class="form-group pt-3">
+								<label for="userName">Nombre de usuario</label> <input type="text" class="form-control"
+									id="userName" placeholder="{{name}}" readonly> <label for="email">Correo
+									electrónico</label> <input type="email" class="form-control was-validated" id="email"
+									placeholder="Correo electrónico" value="{{email}}" name="emailUser"> <label
+									for="password">Cambio de contraseña</label> <input type="password" class="form-control"
+									id="password" placeholder="Nueva contraseña" name="passUser"> <input
+									type="password" class="form-control mt-3 mb-2" id="confirmPass"
+									placeholder="Confirmar contraseña" name="confirmPass"> <label for="disabledSelect">Tipo
+									de cuenta</label>
+								<fieldset disabled>
+									<select id="userType" class="form-control" name="userType">
+										<option value="Usuario">Usuario</option>
+										<option value="Moderador"{{#isModerator}}selected{{/isModerator}}>Moderador</option>
+										<option value="Administrador"{{#isAdmin}}selected{{/isAdmin}}>Administrador</option>
+									</select>
+								</fieldset>
+								<input type="hidden" name="sent" value="true" />
+								<input id="acceptBtn" type="submit" class="btn btn-login form-group form-contro mx-auto"
+									value="Aceptar">
+							</div>
+						</form>
+						{{/userLogged}}
+					</div>
+					<div class="tab-pane fade" id="v-pills-MyLists" role="tabpanel"
+						aria-labelledby="v-pills-MyLists-tab">
+						<div id="MyLists" class="container">
+							<div class="text-center " id="header-Report">
+								<a class="MyListsTitle">Mis Listas</a>
+							</div>
+							<form class="text-center" action="/listaNueva">
+								<div id="" class="form-control">
+									{{#listsUser}}
+									<div id="CreateList" class="form-control">
+										<div class="d-flex">
+											<a id="CreatedLists" name="deleteListName" class="mr-auto p-2">{{name}}</a>
+											<button id="deleteButton" class="p-2" type="button" name="deleteList" value="{{name}}">
+												<i class="ion-trash-a text-right"></i>
+											</button>
+										</div>
+										<div id="printListContent"  class="form-control border-right-0 border-left-0 border-bottom-0 rounded-0">
+											{{#printList}}
+											<div id="listContentToShow" class="d-flex">
+												<a href="{{url}}{{name}}" name="deleteContentName" class="mr-auto p-2">{{name}}</a>
+												<button id="deleteButton" class="p-2" type="button" name="deleteContentURL"
+													value="{{url}}">
+													<i class="ion-trash-a text-right"></i>
+												</button>
+											</div>
+											{{/printList}}
+										</div>
+									</div>
+									{{/listsUser}} {{^listsUser}}
+									<p>Aún no ha creado ninguna lista, animate y crea una.</p>
+									{{/listsUser}}
+									<button id="plusButton" class="btn btn-login" type="button" data-toggle="collapse"
+										data-target="#showAddList" aria-expanded="false" aria-controls="showAddList">
+										<i class="ion-plus-circled"></i>
+									</button>
+									{{#listUserTrue}} <br /> <br /> <a href="/crearpdflistas">Crear PDF de las listas</a>
+									{{/listUserTrue}}
+									<div class="collapse" id="showAddList">
+										<input type="text" name="listName" tabindex="2" class="form-group form-control"
+											placeholder="Nombre de la lista" value="" />
+										<div class="row form-group">
+											<input type="submit" name="list-submit" id="sendButton" tabindex="3"
+												class="active btn btn-register mx-auto" value="Crear">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{>footer}}
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<!-- JavaScript Libraries -->
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<script src="/lib/jquery/jquery-migrate.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/lib/easing/easing.min.js"></script>
+	<script src="/lib/superfish/hoverIntent.js"></script>
+	<script src="/lib/superfish/superfish.min.js"></script>
+	<script src="/lib/wow/wow.min.js"></script>
+	<script src="/lib/waypoints/waypoints.min.js"></script>
+	<script src="/lib/counterup/counterup.min.js"></script>
+	<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="/lib/isotope/isotope.pkgd.min.js"></script>
+	<script src="/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Contact Form JavaScript File -->
+	<script src="/contactform/contactform.js"></script>
+	<!-- Template Main Javascript File -->
+	<script src="/js/main.js"></script>
+	<!-- Password validation Javascript -->
+	<script src="/js/passwordValidation.js"></script>
+	<script src="/js/userProfile.js"></script>	
+
+    </body>
+</html>

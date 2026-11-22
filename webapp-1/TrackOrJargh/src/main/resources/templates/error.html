@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="es">
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/lib/ionicons/css/ionicons.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/error.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <title th:text="${status}">404</title>
+    
+</head>
+<body style="background-color: #f7f7f7">
+	<h1>|TrackOrJargh</h1>
+	<div class="d-flex justify-content-center align-self-center flex-wrap h-50 w-100" >
+		<i class="p-2 ion-sad-outline align-self-center" style="font-size: 1200%; color: #18d26e"></i>
+		<div class ="p-2 align-self-center flex-wrap">
+    	<h2 th:text="${error}">ERROR 404</h2>
+    	<p th:text="${message}">
+        	Esta página no esta disponible en estos momentos o no existe, perdone las molestias
+    	</p>
+    	<a href="javascript:history.go(-1)" class="btn-get-started scrollto justify-self-center">Volver</a>
+    	</div>
+	</div>
+</body>
+</html>

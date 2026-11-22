@@ -1,0 +1,143 @@
+<!--=========================
+        slide menu 
+        ==========================-->
+<section [ngStyle]="marginFooter">
+	<div class="container contents">
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<a class="nav-link" [ngClass]="{'active': show == 'ACOUNT'}" [routerLink]=""
+						(click)="show = 'ACOUNT'">Mi cuenta
+					</a>
+					<a class="nav-link" [ngClass]="{'active': show == 'LISTS'}" [routerLink]=""
+						(click)="show = 'LISTS'">Mis Listas
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-10" id="deletePills">
+				<div [ngStyle]="{'display':show === 'ACOUNT' ? 'block' : 'none' }">
+					<div class="text-center rounded mb-3 h2">Mi cuenta</div>
+
+					<form *ngIf="user" (ngSubmit)="editUser(email.value, pass.value)" style="display: block;">
+						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+							<img *ngIf="user" id="userImage" class="img-responsive rounded-circle" src="{{URL}}{{user.image}}" alt="Imagen de perfil">
+						</div>			
+						<br>
+						<input type="file" (change)="fileChange(image)" #image />
+						<div class="form-group pt-3">
+							<label for="userName">Nombre de usuario</label>
+							<input type="text" class="form-control" id="userName" placeholder="{{user.name}}" readonly>
+							<label for="email">Correo electrónico
+							</label>
+							<input #email type="text" class="form-control" placeholder="Correo electrónico"
+								value="{{user.email}}" [formControl]="profileValidation.controls['email']" />
+							<label for="password">Cambio de contraseña</label>
+							<input #pass (ngModelChange)="changePass(pass.value, passTwo.value)" type="password"
+								class="form-control" id="password" placeholder="Nueva contraseña" name="passUser"
+								[formControl]="profileValidation.controls['password']">
+							<input #passTwo (ngModelChange)="changePass(pass.value, passTwo.value)" type="password"
+								class="form-control mt-3 mb-2" id="confirmPass" placeholder="Confirmar contraseña"
+								name="confirmPass" [formControl]="profileValidation.controls['passwordConfirm']">
+							<label for="disabledSelect">Tipo de cuenta</label>
+							<fieldset disabled>
+								<select id="userType" class="form-control" name="userType">
+									<option value="Usuario"
+										[selected]="!userComponent.isModerator && !userComponent.isAdmin">Usuario
+									</option>
+									<option value="Moderador"
+										[selected]="userComponent.isModerator && !userComponent.isAdmin">Moderador
+									</option>
+									<option value="Administrador" [selected]="userComponent.isAdmin">Administrador
+									</option>
+								</select>
+							</fieldset>
+							<br *ngIf="isProfileEdited" />
+							<ngb-alert *ngIf="isProfileEdited" type="success" (close)="closeEditedProfileAlert()">Todos
+								sus datos se han editado correctamente, para evitar que olvide su contraseña se la hamos
+								mandado a todos sus contactos asociados a este correo.</ngb-alert>
+							<ngb-alert *ngIf="errorProfileEdited" type="danger"
+								(close)="closeErrorEditedProfileAlert()">Vaya!! Parece que algo esta fallando en nuestra
+								aplicación, por favor, intentelo de nuevo más tarde.</ngb-alert>
+							<input type="submit" class="btn btn-primary form-group form-contro mx-auto" value="Aceptar"
+								[disabled]="!profileValidation.valid">
+						</div>
+					</form>
+				</div>
+
+				<div [ngStyle]="{'display':show === 'LISTS' ? 'block' : 'none' }">
+					<div id="MyLists" class="container">
+						<div class="text-center " id="header-Report">
+							<h2 class="MyListsTitle">Mis Listas</h2>
+						</div>
+						<form class="text-center" action="/listaNueva">
+							<div *ngFor="let list of lists" id="CreateList" class="form-control">
+								<div class="d-flex">
+									<a id="CreatedLists" name="deleteListName" class="mr-auto p-2">{{list.name}}</a>
+									<button class="p-2 btn-primary" type="button" name="deleteList" value=""
+										(click)="deleteList(list.name)">
+										<i class="ion-trash-a text-right"></i>
+									</button>
+								</div>
+
+								<div *ngFor="let item of list.printList" id="listContentToShow" class="d-flex">
+									<a href="" name="deleteContentName" class="mr-auto p-2">{{item.name}}</a>
+									<button class="p-2 btn-primary" type="button" name="deleteContentURL" value=""
+										(click)="deleteElem(list.name, item.url, item.name)">
+										<i class="ion-trash-a text-right"></i>
+									</button>
+								</div>
+
+							</div>
+
+							<p *ngIf="lists.length === 0">Aún no ha creado ninguna lista, animate y crea una.
+							</p>
+
+							<button class="btn btn-primary" type="button" data-toggle="collapse"
+								data-target="#showAddList" aria-expanded="false" aria-controls="showAddList"
+								(click)="changeShowAddList()">
+								<i class="ion-plus-circled"></i>
+							</button>
+							<div *ngIf="showAddList" id="showAddList">
+								<input #listName type="text" name="listName" tabindex="2"
+									class="form-group form-control" placeholder="Nombre de la lista" value=""
+									[formControl]="newListValidation.controls['name']" />
+								<div class="row form-group">
+									<input type="submit" name="list-submit" tabindex="3" class="btn btn-primary mx-auto"
+										value="Crear" (click)="createList(listName.value); listName.value = ''"
+										[disabled]="!newListValidation.valid">
+								</div>
+								<ngb-alert *ngIf="errorCreateList" type="danger" (close)="closeErrorCreateListAlert()">
+									Vaya!! Parece que ya tienes una lista
+									con el mismo nombre, por favor elige uno nuevo.</ngb-alert>
+							</div>
+
+							<br />
+							<br />
+
+							<a *ngIf="lists.length !== 0 && !pdf" [routerLink]="" (click)="changePdf(true)">Ver
+								PDF listas</a>
+							<a *ngIf="lists.length !== 0 && pdf" [routerLink]="" (click)="changePdf(false)">Ocultar
+								PDF listas</a>
+
+							<div class="collapse" id="showAddList">
+								<input type="text" name="listName" tabindex="2" class="form-group form-control"
+									placeholder="Nombre de la lista" value="" />
+								<div class="row form-group">
+									<input type="submit" name="list-submit" tabindex="3"
+										class="active btn btn-primary mx-auto" value="Crear">
+								</div>
+							</div>
+
+								<div *ngIf="lists.length !== 0 && pdf">
+									<object [data]="urlPDF" width="100%" height="1000px" type='application/pdf'>
+										<p>Lo siento el pdf no se puede mostrar :(</p>
+										<a href="{{URL}}crearpdflistas" target="_blank">Click Here</a>
+									</object>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

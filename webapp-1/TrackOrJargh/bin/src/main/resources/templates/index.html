@@ -1,0 +1,678 @@
+<<<<<<< HEAD:TrackOrJargh/src/main/resources/templates/index.html
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>TrackOrJargh</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicons -->
+        <link href="img/favicon.png" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+        <!-- Bootstrap CSS File -->
+        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/styleIndex.css" rel="stylesheet">
+
+        <!-- =======================================================
+          Theme Name: BizPage
+          Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+          Author: BootstrapMade.com
+          License: https://bootstrapmade.com/license/
+        ======================================================= -->
+    </head>
+
+    <body>
+
+        <!--==========================
+          Header
+        ============================-->
+        <header id="header">
+            <div class="container-fluid">
+
+                <div id="logo" class="pull-left">
+                    <h1><a href="#intro" class="scrollto">TrackOrJargh</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+                </div>
+
+                <div class="icon search" ><i class="ion-ios-search-strong text-center" ></i> </div>
+                <input type="text" name="user" id="search-bar" tabindex="1" class="form-control" placeholder="Busca tus películas, series o libros..." value="">
+
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#intro">Inicio</a></li>
+                        <li><a href="contentList.html">Películas</a></li>
+                        <li><a href="contentList.html">Series</a></li>
+                        <li><a href="contentList.html">Libros</a></li>
+                        <li class="menu-has-children"><a href="">Usuario</a>
+                            <ul>
+                                <li><a href="userProfile.html">Perfil</a></li>
+                                <li><a href="#">Mis listas</a></li>
+                                <li><a href="#">Ajustes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="contentProfile.html">PagContenido</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </header><!-- #header -->
+
+        <!--==========================
+          Intro Section
+        ============================-->
+        <section id="intro">
+            <div class="intro-container">
+                <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+                    <ol class="carousel-indicators"></ol>
+
+                    <div class="carousel-inner" role="listbox">
+
+                        <div class="carousel-item active" style="background-image: url('img/intro-carousel/1.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>TrackOrJargh</h2>
+                                    <p>TrackOrJArgh es un sitio web destinado al seguimiento de películas, series y libros, una manera de tener organizado el contenido que estás siguiendo.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Conócenos</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/pelicula.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Película destacada</h2>
+                                    <p>Descripción de la película.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir a la película</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/serie.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Serie destacada</h2>
+                                    <p>Descripción de la serie.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir a la serie</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/libro.jpeg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Libro destacado</h2>
+                                    <p>Descripción del libro.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir al libro</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+
+                </div>
+            </div>
+        </section><!-- #intro -->
+
+        <main id="main">
+
+            <!--==========================
+              Featured Services Section
+            ============================-->
+            <section id="featured-services">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-4 box">
+                            <i class="ion-ios-film-outline"></i>
+                            <h4 class="title"><a href="">Películas</a></h4>
+                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+
+                        <div class="col-lg-4 box box-bg">
+                            <i class="ion-ios-monitor-outline"></i>
+                            <h4 class="title"><a href="">Series</a></h4>
+                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        </div>
+
+                        <div class="col-lg-4 box">
+                            <i class="ion-ios-book-outline"></i>
+                            <h4 class="title"><a href="">Libros</a></h4>
+                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section><!-- #featured-services -->
+
+            <!--==========================
+              Interactions Section
+            ============================-->
+            <section id="interactions">
+                <div class="container">
+
+                    <header class="section-header">
+                        <h3>Interacciones</h3>
+                        <p>Aquí puedes encontrar los mensajes recibidos de otros usuarios, así como las alertas de tu contenido preferido y las respuestas a tus comentarios.</p>
+                    </header>
+
+                    <div class="row interactions-cols">
+
+                        <div class="col-md-6 wow fadeInUp">
+                            <div class="interactions-col">
+                                <div class="img">
+                                    <img src="img/about-mission.jpg" alt="" class="img-fluid">
+                                    <div class="icon"><i class="ion-ios-bell-outline"></i></div>
+                                </div>
+                                <h2 class="title">
+                                    <button id="notificationButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNotification" aria-expanded="false" aria-controls="collapseNotification">Notificaciones
+                                      
+                                    </button>
+                                  <div class="collapse" id="collapseNotification">
+                                    <div class="card card-body">
+                                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                    </div>
+                                  </div>
+                                </h2>
+                                <p id="hideNotification">
+                                    Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="interactions-col">
+                                <div class="img">
+                                    <img src="img/about-plan.jpg" alt="" class="img-fluid">
+                                    <div class="icon"><i class="ion-ios-email-outline"></i></div>
+                                </div>
+                                <h2 class="title">
+                                  <button id="messageButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMessage" aria-expanded="false" aria-controls="collapseMessage">Mensajes
+                                    
+                                  </button>
+                                  <div class="collapse" id="collapseMessage">
+                                    <div class="card card-body">
+                                      ed ut perspiciatis unde omnis iste natus error sit voluptatem  doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                    </div>
+                                    
+                                  </div>
+                                      </h2>
+                                <p id="hideMessages">
+                                    ed ut perspiciatis unde omnis iste natus error sit voluptatem  doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section><!-- #interactions -->
+
+            <!--==========================
+              Footer
+            ============================-->
+            <footer id="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6 footer-info">
+                                <h3>TrackOrJargh</h3>
+                                <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-links">
+                                <h4>Nos puedes encontrar en</h4>
+                                <div class="social-links">
+                                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://github.com/krate95/TrackOrJargh" class="github"><i class="fa fa-github"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-contact">
+                                <h4>Contacto</h4>
+                                <p>
+                                    <strong>Email:</strong><br>
+                                    j.elvira@alumnos.urjc.es<br>
+                                    o.sotos@alumnos.urjc.es<br>
+                                    hs.dhanoya@alumnos.urjc.es<br>
+                                    a.casanovam@alumnos.urjc.es<br>
+                                    pm.garrido@alumnos.urjc.es<br>
+                                    <strong>Phone:</strong> +34 695 247 ???<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="copyright">
+                        &copy; Copyright <strong>Los subnormales estos SA</strong>. All Rights Reserved
+                    </div>
+                </div>
+            </footer><!-- #footer -->
+
+            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+            <!-- JavaScript Libraries -->
+            <script src="lib/jquery/jquery.min.js"></script>
+            <script src="lib/jquery/jquery-migrate.min.js"></script>
+            <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/superfish/hoverIntent.js"></script>
+            <script src="lib/superfish/superfish.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/counterup/counterup.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/isotope/isotope.pkgd.min.js"></script>
+            <script src="lib/lightbox/js/lightbox.min.js"></script>
+            <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+            <script src="js/jsIndex.js"></script>
+            <!-- Contact Form JavaScript File -->
+            <script src="contactform/contactform.js"></script>
+
+            <!-- Template Main Javascript File -->
+            <script src="js/main.js"></script>
+
+    </body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>TrackOrJargh</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicons -->
+        <link href="img/favicon.png" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+        <!-- Bootstrap CSS File -->
+        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/styleIndex.css" rel="stylesheet">
+
+        <!-- =======================================================
+          Theme Name: BizPage
+          Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+          Author: BootstrapMade.com
+          License: https://bootstrapmade.com/license/
+        ======================================================= -->
+    </head>
+
+    <body>
+
+        <!--==========================
+          Header
+        ============================-->
+        <header id="header">
+            <div class="container-fluid">
+
+                <div id="logo" class="pull-left">
+                    <h1><a href="#intro" class="scrollto">TrackOrJargh</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+                </div>
+
+                <div class="icon search" ><i class="ion-ios-search-strong text-center" ></i> </div>
+                <input type="text" name="user" id="search-bar" tabindex="1" class="form-control" placeholder="Busca tus películas, series o libros..." value="">
+
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#intro">Inicio</a></li>
+                        <li><a href="contentList.html">Películas</a></li>
+                        <li><a href="contentList.html">Series</a></li>
+                        <li><a href="contentList.html">Libros</a></li>
+                        <li class="menu-has-children"><a href="">Usuario</a>
+                            <ul>
+                                <li><a href="userProfile.html">Perfil</a></li>
+                                <li><a href="#">Mis listas</a></li>
+                                <li><a href="#">Ajustes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="contentProfile.html">PagContenido</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </header><!-- #header -->
+
+        <!--==========================
+          Intro Section
+        ============================-->
+        <section id="intro">
+            <div class="intro-container">
+                <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+                    <ol class="carousel-indicators"></ol>
+
+                    <div class="carousel-inner" role="listbox">
+
+                        <div class="carousel-item active" style="background-image: url('img/intro-carousel/1.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>TrackOrJargh</h2>
+                                    <p>TrackOrJArgh es un sitio web destinado al seguimiento de películas, series y libros, una manera de tener organizado el contenido que estás siguiendo.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Conócenos</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/pelicula.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Película destacada</h2>
+                                    <p>Descripción de la película.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir a la película</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/serie.jpg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Serie destacada</h2>
+                                    <p>Descripción de la serie.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir a la serie</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item" style="background-image: url('img/carousel-index/libro.jpeg');">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>Libro destacado</h2>
+                                    <p>Descripción del libro.</p>
+                                    <a href="#featured-services" class="btn-get-started scrollto">Ir al libro</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+
+                </div>
+            </div>
+        </section><!-- #intro -->
+
+        <main id="main">
+
+            <!--==========================
+              Featured Services Section
+            ============================-->
+            <section id="featured-services">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-4 box">
+                            <i class="ion-ios-film-outline"></i>
+                            <h4 class="title"><a href="">Películas</a></h4>
+                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+
+                        <div class="col-lg-4 box box-bg">
+                            <i class="ion-ios-monitor-outline"></i>
+                            <h4 class="title"><a href="">Series</a></h4>
+                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        </div>
+
+                        <div class="col-lg-4 box">
+                            <i class="ion-ios-book-outline"></i>
+                            <h4 class="title"><a href="">Libros</a></h4>
+                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section><!-- #featured-services -->
+
+            <!--==========================
+              Interactions Section
+            ============================-->
+            <section id="interactions">
+                <div class="container">
+
+                    <header class="section-header">
+                        <h3>Interacciones</h3>
+                        <p>Aquí puedes encontrar los mensajes recibidos de otros usuarios, así como las alertas de tu contenido preferido y las respuestas a tus comentarios.</p>
+                    </header>
+
+                    <div class="row interactions-cols">
+
+                        <div class="col-md-6 wow fadeInUp">
+                            <div class="interactions-col">
+                                <div class="img">
+                                    <img src="img/about-mission.jpg" alt="" class="img-fluid">
+                                    <div class="icon"><i class="ion-ios-bell-outline"></i></div>
+                                </div>
+                                <h2 class="title">
+                                    <button id="notificationButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNotification" aria-expanded="false" aria-controls="collapseNotification">Notificaciones
+                                      
+                                    </button>
+                                  <div class="collapse" id="collapseNotification">
+                                    <div class="card card-body">
+                                      
+                                        <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Notificacion</th>
+                                            
+                                            
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">11.02.18</th>
+                                            <td>¡Hay un nuevo capítulo de "Stranger things!"</td>
+                                            
+                                            
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">10.02.18</th>
+                                            <td>Óscar te ha recomendado una serie: "Black Lightning"</td>
+                                            
+                                            
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">09.02.18</th>
+                                            <td>Has puntuado "juego de Tronos" con 5 estrellas</td>               
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      
+                                    </div>
+                                  </div>
+                                </h2>
+                                <p id="hideNotification">
+                                    Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="interactions-col">
+                                <div class="img">
+                                    <img src="img/about-plan.jpg" alt="" class="img-fluid">
+                                    <div class="icon"><i class="ion-ios-email-outline"></i></div>
+                                </div>
+                                <h2 class="title">
+                                  <button id="messageButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMessage" aria-expanded="false" aria-controls="collapseMessage">Mensajes
+                                    
+                                  </button>
+                                  <div class="collapse" id="collapseMessage">
+                                    <div class="card card-body">
+                                      <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Rte</th>
+                                            <th scope="col">Asunto</th>
+                                            
+                                            
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">11.02.18</th>
+                                            <td>Óscar</td>
+                                            <td>Tu, mirate esto</td>
+                                            
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">10.02.18</th>
+                                            <td>Jesús</td>
+                                            <td>Me termine la serie en 2 dias lol</td>
+                                            
+                                            
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">09.02.18</th>
+                                            <td>Harender</td>
+                                            <td>Tunak tunak</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    
+                                  </div>
+                                      </h2>
+                                <p id="hideMessages">
+                                    ed ut perspiciatis unde omnis iste natus error sit voluptatem  doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section><!-- #interactions -->
+
+            <!--==========================
+              Footer
+            ============================-->
+            <footer id="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6 footer-info">
+                                <h3>TrackOrJargh</h3>
+                                <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-links">
+                                <h4>Nos puedes encontrar en</h4>
+                                <div class="social-links">
+                                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://github.com/krate95/TrackOrJargh" class="github"><i class="fa fa-github"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-contact">
+                                <h4>Contacto</h4>
+                                <p>
+                                    <strong>Email:</strong><br>
+                                    j.elvira@alumnos.urjc.es<br>
+                                    o.sotos@alumnos.urjc.es<br>
+                                    hs.dhanoya@alumnos.urjc.es<br>
+                                    a.casanovam@alumnos.urjc.es<br>
+                                    pm.garrido@alumnos.urjc.es<br>
+                                    <strong>Phone:</strong> +34 695 247 ???<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="copyright">
+                        &copy; Copyright <strong>Los subnormales estos SA</strong>. All Rights Reserved
+                    </div>
+                </div>
+            </footer><!-- #footer -->
+
+            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+            <!-- JavaScript Libraries -->
+            <script src="lib/jquery/jquery.min.js"></script>
+            <script src="lib/jquery/jquery-migrate.min.js"></script>
+            <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/superfish/hoverIntent.js"></script>
+            <script src="lib/superfish/superfish.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/counterup/counterup.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/isotope/isotope.pkgd.min.js"></script>
+            <script src="lib/lightbox/js/lightbox.min.js"></script>
+            <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+            <script src="js/jsIndex.js"></script>
+            <!-- Contact Form JavaScript File -->
+            <script src="contactform/contactform.js"></script>
+
+            <!-- Template Main Javascript File -->
+            <script src="js/main.js"></script>
+
+    </body>
+</html>
+>>>>>>> 054099352f56c0bf2a6e2874146ffefceb5a9449:index.html

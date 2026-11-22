@@ -1,0 +1,81 @@
+<!--==========================
+    Intro Section
+  ============================-->
+<section id="intro">
+	<div class="intro-container">
+		<div id="introCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+			<ngb-carousel class="carousel-inner">
+				<ng-template *ngFor="let film of filmsCarousel" ngbSlide>
+					<div class="carousel-item active" [style.backgroundImage]="'url(' + URL + film.image +')'">
+						<div class="carousel-container">
+							<div class="carousel-content">
+								<h2>{{film.name}}</h2>
+								<p>{{film.synopsis}}</p>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</ngb-carousel>
+		</div>
+	</div>
+</section>
+<!-- #intro -->
+
+<main id="main">
+	<!--==========================
+      Portfolio Section
+    ============================-->
+	<section id="portfolio" class="section-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul id="portfolio-flters">
+						<li [ngClass]="allFilms" (click)="showFilms()">Todas</li>
+						<li [ngClass]="bestFilms" (click)="showBestFilms()">Mejores Valoradas</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Clase abajo: portfolio-container -->
+			<div id="elements" class="row ">
+				<div *ngFor="let film of films" class="col-lg-3 col-md-3 portfolio-item filter-app wow fadeInUp">
+					<div class="portfolio-wrap">
+						<figure [style.backgroundImage]="'url(' + URL + film.image +')'">
+							<p class="textPortfolio">{{film.synopsis}}</p>
+						</figure>
+
+						<div class="portfolio-info">
+							<h4>
+								<a name="nameFilm" [routerLink]="['/pelicula', film.name]">{{film.name}}</a>
+							</h4>
+							<p>{{film.year}}</p>
+
+							<div *ngIf="userComponent.isLogged" class="col text-right">
+								<div ngbDropdown placement="top-right" class="d-inline-block">
+									<button class="btn btn-secondary dropdown-toggle" id="dropdownMenu2" ngbDropdownToggle>
+										<i class="ion-plus-round"></i>
+									</button>
+									<div ngbDropdownMenu aria-labelledby="dropdownMenu2">
+										<button *ngFor="let item of userComponent.lists" name="buttonList" class="dropdown-item" type="button" (click)="addElemToList(item.name, film.name)">{{item.name}}</button>
+										<a class="dropdown-item" [routerLink]="['/perfil']">Crear lista</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center moreContentButton">
+				<i [ngClass]="decorator.setStyleMoreContent()" *ngIf="morePages" (click)="loadMore()"></i>
+			</div>
+			<div class="popup-message">
+				<ngb-alert *ngIf="addedContent" type="success" (close)="closeAddedContentAlert()">Se ha añadido la pelicula correctamente a tu lista</ngb-alert>
+				<ngb-alert *ngIf="errorAddedContent" type="danger" (close)="closeErrorAddedContentAlert()">Vaya!! Parece que esa pelicula ya se encontraba en tu lista</ngb-alert>
+			</div>
+
+		</div>
+	</section>
+</main>
+<!-- #portfolio -->

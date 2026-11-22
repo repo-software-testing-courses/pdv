@@ -1,0 +1,67 @@
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  position: relative !important;
+  background-color: black !important;
+}
+
+
+/*-------------------------------------------------------------------
+#Login/Registrar
+----------------------------------------------------------------------*/
+#loginRegister{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    margin-bottom: 2.5%;
+}
+#loginHeader{
+    background-color: black;
+    margin-top: 2.5%;
+}
+
+#login{
+    margin-top: 2.5%;
+}
+
+#register{
+    font-weight: 700; 
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+#buttonLog{
+    margin-bottom: 1%;
+    
+}
+
+#buttonLog {
+	background-color:#18d26e;
+	color: #fff;
+    font-family: "Montserrat", sans-serif;
+	font-weight: 700;
+	border-color: #18d26e;
+}
+
+#buttonLog:hover {
+    color: #18d26e;
+    background-color: #fff;
+}
+
+#buttonReg{
+    background-color:#18d26e;
+	color: #fff;
+	font-weight: 700;
+	border-color: #18d26e;
+}
+
+#buttonReg:hover {
+    color: #18d26e;
+    background-color: #fff;
+}
+
+#RegsDropdown{
+    font-weight: 700;
+}
+
