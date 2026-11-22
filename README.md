@@ -33,8 +33,9 @@ teste e qualidade produzidos pelo grupo.
 | Funcional — partições de equivalência e valores-limite | [Google Docs](https://docs.google.com/document/d/1seAIKsU1c7LtvKjygsobeBPUuppfPHea4utl7ZjaEUY/edit?usp=sharing) (documento do grupo) | ← | ← |
 | Inspeção de código (Sonar) — antes e depois | **21 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) | pendente | **13 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) |
 | Testes de sistema (Selenium) | [`CaixaSeleniumIT`](src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java) — 8 cenários (1 expõe o defeito [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24)) | pendente | [`AjusteSeleniumIT`](src/test/java/net/originmobi/pdv/sistema/AjusteSeleniumIT.java) — 6 cenários (2 expõem os defeitos [#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14) e [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27)) e [`AjusteEstoque.side`](src/test/selenium/AjusteEstoque.side) — Selenium IDE, complementar — [relatório](docs/relatorios/testes-sistema-selenium.md) |
+| Requisito não funcional (segurança e desempenho) — Postman | [`Caixa.postman_collection.json`](src/test/postman/Caixa.postman_collection.json) — 14 requisições, 40 verificações (1 expõe o defeito [#15](https://github.com/elojas2/trabalho-pdv-2026.1/issues/15)) — [prints](docs/relatorios/teste-postman/) | pendente | pendente |
 | ISO/IEC 25010 | [Google Docs](https://docs.google.com/document/d/1bvbjeAyXI9Dq8uSdElpbEgbwPHDD9hZkLoyM-19vwG8/edit?usp=sharing) (documento do grupo) | ← | ← |
-| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017, AI-021](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011, AI-018, AI-019, AI-020, AI-022](docs/ai/AI-LOG.md) |
+| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017, AI-021, AI-023](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011, AI-018, AI-019, AI-020, AI-022](docs/ai/AI-LOG.md) |
 
 ## Sumário
 
@@ -88,6 +89,7 @@ Todos os artefatos estão na branch principal (`master`), sob o diretório
 | Relatório de testes manuais — `AjusteService` | [`docs/relatorios/testes-manuais-ajusteservice.md`](docs/relatorios/testes-manuais-ajusteservice.md) |
 | Testes de sistema (Selenium) — `CaixaService` | [`src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java`](src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java) |
 | Testes de sistema (Selenium) — `AjusteService` | [`src/test/java/net/originmobi/pdv/sistema/AjusteSeleniumIT.java`](src/test/java/net/originmobi/pdv/sistema/AjusteSeleniumIT.java) e [`docs/relatorios/testes-sistema-selenium.md`](docs/relatorios/testes-sistema-selenium.md) (teste complementar em Selenium IDE: [`src/test/selenium/`](src/test/selenium/)) |
+| Testes de sistema e não funcionais (Postman) — `CaixaService` | [`src/test/postman/Caixa.postman_collection.json`](src/test/postman/Caixa.postman_collection.json) e prints em [`docs/relatorios/teste-postman/`](docs/relatorios/teste-postman/). Rodar pelo Runner do Postman (*Import* → *Run collection*) ou `npx newman run src/test/postman/Caixa.postman_collection.json`, com o sistema no ar |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
 | Evidências (prints dos testes manuais) | [`docs/evidencias/`](docs/evidencias/) |
 | **Registro de uso de IA** | [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md) |
