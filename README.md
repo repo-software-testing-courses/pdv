@@ -31,9 +31,9 @@ teste e qualidade produzidos pelo grupo.
 | Estrutural — todas-arestas ≥ 80% (JaCoCo) | **100%** (38/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **89,5%** (34/38) — [relatório](docs/relatorios/cobertura-jacoco/) | **100%** (10/10) — [relatório](docs/relatorios/cobertura-jacoco/) |
 | Baseada em defeitos — mutação ≥ 80% (PIT) | **100%** (55/55) — [relatório](docs/relatorios/mutacao-pit/) | **91%** (60/66) — [relatório](docs/relatorios/mutacao-pit/) | **100%** (17/17) — [relatório](docs/relatorios/mutacao-pit/) |
 | Inspeção de código (Sonar) — antes e depois | **21 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) | pendente | **13 → 1** problemas — [relatório](docs/relatorios/inspecao-sonar/) |
-| Testes de sistema (Selenium) | pendente | pendente | [`AjusteEstoque.side`](src/test/selenium/AjusteEstoque.side) — Selenium IDE — [relatório](docs/relatorios/testes-sistema-selenium.md) |
+| Testes de sistema (Selenium) | [`CaixaSeleniumIT`](src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java) — 8 cenários (1 expõe o defeito [#24](https://github.com/elojas2/trabalho-pdv-2026.1/issues/24)) | pendente | [`AjusteEstoque.side`](src/test/selenium/AjusteEstoque.side) — Selenium IDE — [relatório](docs/relatorios/testes-sistema-selenium.md) |
 | ISO/IEC 25010 | [Google Docs](https://docs.google.com/document/d/1bvbjeAyXI9Dq8uSdElpbEgbwPHDD9hZkLoyM-19vwG8/edit?usp=sharing) (documento do grupo) | ← | ← |
-| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011, AI-018, AI-019, AI-020](docs/ai/AI-LOG.md) |
+| Registro de uso de IA | [AI-012, AI-013, AI-016, AI-017, AI-021](docs/ai/AI-LOG.md) | [AI-014, AI-015](docs/ai/AI-LOG.md) | [AI-011, AI-018, AI-019, AI-020](docs/ai/AI-LOG.md) |
 
 ## Sumário
 
@@ -84,6 +84,7 @@ Todos os artefatos estão na branch principal (`master`), sob o diretório
 | Inspeção de código (SonarQube) — `CaixaService` e `AjusteService` | [`docs/relatorios/inspecao-sonar/`](docs/relatorios/inspecao-sonar/) |
 | Relatório de testes manuais — `VendaService` | [`docs/relatorios/testes-manuais-vendaservice.md`](docs/relatorios/testes-manuais-vendaservice.md) |
 | Relatório de testes manuais — `AjusteService` | [`docs/relatorios/testes-manuais-ajusteservice.md`](docs/relatorios/testes-manuais-ajusteservice.md) |
+| Testes de sistema (Selenium) — `CaixaService` | [`src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java`](src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java) |
 | Testes de sistema (Selenium IDE) — `AjusteService` | [`docs/relatorios/testes-sistema-selenium.md`](docs/relatorios/testes-sistema-selenium.md) e [`src/test/selenium/`](src/test/selenium/) |
 | Fichas de defeitos | [`docs/defeitos/`](docs/defeitos/) |
 | Evidências (prints dos testes manuais) | [`docs/evidencias/`](docs/evidencias/) |

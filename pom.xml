@@ -36,8 +36,17 @@
 		<mockito.version>3.12.4</mockito.version>
 		<!-- exigido pelo mockito 3.x (a versão herdada do Spring Boot 2.0 é antiga demais) -->
 		<byte-buddy.version>1.11.13</byte-buddy.version>
+		<!-- testes de sistema: 4.13.0 é a última versão do Selenium compatível com Java 8
+		     (a versão herdada do Spring Boot 2.0 é a 3.x) -->
+		<selenium.version>4.13.0</selenium.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
