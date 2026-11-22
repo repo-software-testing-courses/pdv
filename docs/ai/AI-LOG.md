@@ -364,3 +364,17 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | **Alterado.** A versão inicial tinha 2 erros encontrados na execução: lia o menu lateral em vez do campo de usuário (os dois têm `id="usuario"`) e travava ao esperar o alerta de bloqueio. Ambos foram corrigidos. A classe foi renomeada de `CaixaSistemaIT` para `CaixaSeleniumIT` para deixar a ferramenta explícita. O cenário de filtro por data falha de propósito e mostra na tela o defeito #24 (`@Tag("defeito")`). |
 | **Validação** | Execução com o sistema no ar (Docker) e Chrome: **Tests run: 8, Failures: 1** (a falha é o #24). Conferido no banco que nenhum caixa ficou aberto após a execução. |
 | **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java`). |
+
+## AI-023 — Entrega 2: testes de sistema e não funcionais de `CaixaService` com Postman
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-22 |
+| **Responsável** | Eloyse Fernanda |
+| **Atividade** | Entrega 2 — testes de sistema pela camada HTTP e requisito não funcional (segurança e desempenho) do módulo de caixa |
+| **Ferramenta** | Claude (Claude Code) |
+| **Prompt/instrução** | A integrante perguntou onde o Postman entraria no trabalho e pediu uma coleção para o caixa, validada antes de ser importada no Postman. |
+| **Resultado** | A IA criou `Caixa.postman_collection.json` com 14 requisições em 4 pastas: segurança sem login (listagem e fechamento redirecionam para o login, senha errada é recusada), login, abertura (caixa de R$ 150,00, bloqueio do segundo caixa, valor negativo) e fechamento (sem senha, senha errada, senha correta e caixa já fechado). Toda requisição verifica também o tempo de resposta. A coleção fecha o caixa que abre, para poder ser executada de novo. |
+| **Decisão** | **Alterado.** O limite de tempo começou em 1000 ms. Nas execuções, a primeira rejeição do segundo caixa levou de 820 a 958 ms (aquecimento da JVM) e depois 15 ms, então o teste falharia ao acaso. O limite passou para 2000 ms. O caso de caixa já fechado falha de propósito e mostra o defeito #15 (o controller devolve texto vazio em vez da mensagem). |
+| **Validação** | Executada 4 vezes com o Newman contra o sistema no Docker e depois pela integrante no Runner do Postman: **40 verificações, 39 passam, 1 falha** (a falha é o #15). Conferido que a execução não deixa caixa aberto. |
+| **Transcrição** | Não preservada (a coleção final está em `src/test/postman/Caixa.postman_collection.json`). |
