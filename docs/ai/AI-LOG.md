@@ -350,3 +350,17 @@ Para testes gerados ou melhorados com auxílio de IA, preserve também:
 | **Decisão** | **Diagnóstico e decisões da integrante:** ao executar `AjusteServiceIT`, 2 casos falharam e a integrante identificou que o ajuste de estoque operava invertido — entrada de +5 reduziu o saldo de 10 para 5 (confirmando #14) e saída de -3 aumentou o saldo de 10 para 13 (novo defeito, aberto pela integrante na issue [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27)). Optou-se por não alterar o código de produção e marcar ambos os testes com `@Tag("defeito")`. A execução dos 4 casos manuais (com 14 prints), a gravação do teste de sistema no Selenium e a configuração da rede Docker isolada (devido ao conflito na porta 3306 local) foram conduzidas integralmente pela integrante. |
 | **Validação** | Execução de `AjusteServiceIT` em container contra MySQL 8: **Tests run: 7, Failures: 2** (correspondentes aos 2 defeitos). Os mesmos comportamentos foram reproduzidos manualmente pela interface nos casos CT-AJU-01 e CT-AJU-02. Execução do teste de sistema no Selenium IDE: **completed successfully**. Relatórios em [`testes-manuais-ajusteservice.md`](../relatorios/testes-manuais-ajusteservice.md) e [`testes-sistema-selenium.md`](../relatorios/testes-sistema-selenium.md). |
 | **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/AjusteServiceIT.java`). |
+
+## AI-021 — Entrega 2: testes de sistema de `CaixaService` com Selenium
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Data** | 2026-11-21 e 2026-11-22 |
+| **Responsável** | Eloyse Fernanda |
+| **Atividade** | Entrega 2 — testes de sistema (Selenium) do módulo de caixa |
+| **Ferramenta** | Claude (Claude Code) |
+| **Prompt/instrução** | A integrante pediu os testes de sistema do caixa com Selenium. Questionou se a primeira proposta não repetia os testes unitários e pediu que fossem combinados os fluxos principais com casos que só o nível de sistema alcança (JavaScript, máscara de valor, controller). Depois pediu um cenário a mais para abertura de banco. |
+| **Resultado** | A IA configurou o Selenium 4.13.0 (última versão compatível com Java 8) e criou `CaixaSeleniumIT` com 8 cenários: abertura com e sem máscara, fechamento com senha certa e errada, bloqueio de segundo caixa, listagem, filtro por data e abertura de banco. Cada teste fecha pela tela o caixa que abriu. |
+| **Decisão** | **Alterado.** A versão inicial tinha 2 erros encontrados na execução: lia o menu lateral em vez do campo de usuário (os dois têm `id="usuario"`) e travava ao esperar o alerta de bloqueio. Ambos foram corrigidos. A classe foi renomeada de `CaixaSistemaIT` para `CaixaSeleniumIT` para deixar a ferramenta explícita. O cenário de filtro por data falha de propósito e mostra na tela o defeito #24 (`@Tag("defeito")`). |
+| **Validação** | Execução com o sistema no ar (Docker) e Chrome: **Tests run: 8, Failures: 1** (a falha é o #24). Conferido no banco que nenhum caixa ficou aberto após a execução. |
+| **Transcrição** | Não preservada (o código final está em `src/test/java/net/originmobi/pdv/sistema/CaixaSeleniumIT.java`). |
