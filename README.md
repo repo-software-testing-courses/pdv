@@ -174,3 +174,80 @@ docker compose up --build
 ```sh
 docker compose down
 ```
+
+## Testes unitários após as melhorias — PDV
+ 
+Foram acrescentados testes para eliminar mutantes sobreviventes e cobrir decisões ainda não exercitadas. Os testes da Entrega 1 foram mantidos.
+ 
+| Classe | Integrante | Testes (Entrega 1 → Entrega 2) | Escore de mutação (Pitest) |
+|---|---|---|---|
+| `VendaService` | Pedro | 28 → xx | xxxxx |
+| `CaixaService` | Arthur | 22 → 27 | 52/54 (96%) |
+| `RecebimentoService` | Rodrigo | 21 → xx | xxxxx |
+| `NotaFiscalItemService` | João Paulo | 17 → xx | xxxxx |
+ 
+Os mutantes que sobreviveram são equivalentes (por exemplo, remoção de `System.out.println`, ou variáveis que nunca são lidas).
+ 
+### Como gerar os relatórios
+ 
+```sh
+cd pdv-qa/pdv
+mvn clean test "-Dtest=*ServiceTest"          # cobertura: target/site/jacoco/index.html
+mvn org.pitest:pitest-maven:mutationCoverage  # mutação:  target/pit-reports/
+```
+ 
+O `PdvApplicationTests` carrega o contexto Spring e exige o MySQL ativo; por isso a execução acima roda apenas as suítes `*ServiceTest`.
+ 
+## Testes de sistema (E2E) — webapp-1
+ 
+Os testes usam Selenium (JUnit 5) e ficam em
+[`webapp-1/TrackOrJargh/src/test/java/com/trackorjargh/e2e/`](webapp-1/TrackOrJargh/src/test/java/com/trackorjargh/e2e/).
+ 
+### Automação dos casos manuais da Entrega 1
+ 
+| Caso manual | Responsável | Teste automatizado |
+|---|---|---|
+| U1 — Visualizar comentários de uma série | Arthur | `TestE2EU1VisualizarComentarios` |
+
+ 
+### Testes adicionais
+ 
+| Teste | O que verifica |
+|---|---|
+| `TestE2ERegisterAndLogin` | Cadastro de usuário, ativação da conta e login (relacionado ao caso VU-2 do TestLink) |
+
+ 
+### Como executar os testes E2E
+ 
+**Pré-requisitos:** Docker Desktop, Java 8 e Maven. Portas `8000` e `3306` livres.
+ 
+1. Suba o webapp-1:
+```sh
+cd pdv-qa/webapp-1/docker
+docker compose up --build
+```
+ 
+Confirme que <http://localhost:8000> abre o TrackOrJargh.
+ 
+2. Em outro terminal, rode os testes (requer o Google Chrome instalado):
+```sh
+cd pdv-qa/webapp-1/TrackOrJargh
+mvn test -Dtest="TestE2E*"
+```
+ 
+**Sem Chrome instalado**, use um navegador em contêiner:
+ 
+```sh
+docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome
+$env:ET_EUS_API=http://localhost:4444/wd/hub
+$env:SUT_URL=http://host.docker.internal:8000/
+mvn test -Dtest="TestE2E*"
+```
+ 
+No PowerShell, defina as variáveis com `$env:ET_EUS_API = "http://localhost:4444/wd/hub"` e `$env:SUT_URL = "http://host.docker.internal:8000/"`.
+ 
+ 
+## Testes de integração
+ 
+Link para o Postman e para o relatório de execução.
+ 
