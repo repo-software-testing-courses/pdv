@@ -254,10 +254,10 @@ Os papéis ficam invertidos e o valor final fica incorreto quando
 desconto ≠ acréscimo.
 
 **Passos para reproduzir** — ver ficha DEF-VENDA-003 (produtos 3,50; desconto
-1,00; acréscimo 0,95; esperado 3,45; obtido 3,50).
+1,00; acréscimo 0,95; esperado 3,45; lançamento no caixa obtido 3,55).
 
 **Comportamento atual**
-Valor final gravado incorreto (R$ 3,50).
+Lançamento no caixa incorreto (R$ 3,55); a venda e o recebível gravam 3,45.
 
 **Comportamento esperado**
 `(produtos + acréscimo) − desconto` = R$ 3,45.

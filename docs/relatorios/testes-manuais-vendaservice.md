@@ -94,15 +94,17 @@
 
 ### CT-VENDA-06 — Fechamento com desconto e acréscimo diferentes
 
-- **Pré-condições:** venda aberta com produtos totalizando R$ 3,50.
-- **Passos:** modal → desconto 1,00 e acréscimo 0,95 → Pagar.
+- **Pré-condições:** caixa aberto; venda aberta com produtos totalizando R$ 3,50.
+- **Passos:** modal → desconto 1,00 e acréscimo 0,95 → Pagar → abrir o caixa e conferir o lançamento da venda.
 - **Dados:** produtos 3,50; desconto 1,00; acréscimo 0,95.
-- **Resultado esperado:** valor final = (3,50 + 0,95) − 1,00 = **R$ 3,45**.
-- **Resultado obtido:** o sistema exibe "Venda finalizada com sucesso", mas o valor final gravado permanece **R$ 3,50** (venda FECHADA com R$ 3,50).
+- **Resultado esperado:** valor recebido = (3,50 + 0,95) − 1,00 = **R$ 3,45**.
+- **Resultado obtido:** o sistema exibe "Venda finalizada com sucesso" e o pedido passa a FECHADA, com "R$ 3,50" na tela. Esse valor é o total dos produtos (`valor_produtos`), que não muda com desconto nem acréscimo. O valor errado está no **lançamento do caixa: R$ 3,55** (= (3,50 + 1,00) − 0,95).
 - **Status:** Falhou → **DEF-VENDA-003** (desconto/acréscimo trocados nos métodos auxiliares).
 - **Evidências:**
   - ![Desconto 1,00 e acréscimo 0,95 - venda finalizada](../evidencias/venda/Evidencia%20desc-acresc%201.png)
-  - ![Pedido FECHADA com valor 3,50](../evidencias/venda/Evidencia%20desc-acresc%202.png)
+  - ![Pedido FECHADA com total dos produtos 3,50](../evidencias/venda/Evidencia%20desc-acresc%202.png)
+  - ![Tela do caixa com o lançamento de R$ 3,55](../evidencias/venda/selenium-desc-acresc-caixa.png) (captura feita pelo navegador do teste de sistema)
+- **Observação (23/11/2026):** nesta execução manual a conferência parou no pedido, e os dois prints acima não mostram o valor errado (o "R$ 3,50" é o total dos produtos). O valor de R$ 3,55 foi confirmado depois pelo teste de sistema (`VendaSeleniumIT`, cenário 8, [relatório](testes-sistema-selenium.md)) e no banco (`caixa_lancamento.valor = 3.55`; `venda.valor_total` e `receber.valor_total` ficaram certos, 3,45). Para completar a evidência manual, falta um print da tela do caixa com a linha "Recebimento de venda á vista".
 
 ### CT-VENDA-07 — À vista em dinheiro com caixa fechado
 
