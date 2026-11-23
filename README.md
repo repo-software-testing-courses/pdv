@@ -110,4 +110,6 @@ as fichas documentam a análise e as evidências.
 | DEF-VENDA-003 | Venda | Desconto e acréscimo aplicados trocados (o lançamento no caixa sai com valor errado) | [ficha](docs/defeitos/DEF-VENDA-003-desconto-acrescimo-trocados.md) | [#13](https://github.com/elojas2/trabalho-pdv-2026.1/issues/13) |
 | DEF-VENDA-004 | Venda | Venda a prazo não fecha (`insert` da parcela sem `data_alteracao`) | [ficha](docs/defeitos/DEF-VENDA-004-venda-a-prazo-nao-fecha.md) | a abrir |
 | DEF-CAIXA-001 | Caixa | Fechar caixa já fechado exibe alerta vazio | [ficha](docs/defeitos/DEF-CAIXA-001-fechamento-duplicado-mensagem-vazia.md) | [#15](https://github.com/elojas2/trabalho-pdv-2026.1/issues/15) |
-|
+| DEF-ESTOQUE-001 | Estoque / Ajuste | Entrada de estoque não aumenta o saldo (trigger só subtrai) | [ficha](docs/defeitos/DEF-ESTOQUE-001-entrada-nao-aumenta-saldo.md) | [#14](https://github.com/elojas2/trabalho-pdv-2026.1/issues/14) |
+| DEF-AJUSTE-001 | Estoque / Ajuste | Ajuste de saída aumenta o saldo do produto | [ficha](docs/defeitos/DEF-AJUSTE-001-saida-aumenta-saldo.md) | [#27](https://github.com/elojas2/trabalho-pdv-2026.1/issues/27) |
+| DEF-AJUSTE-002 | Ajuste | Processar ajuste inexistente lança "No value present" sem mensagem tratada | [ficha](docs/defeitos/DEF-AJUSTE-002-ajuste-inexistente-sem-mensagem.md) | [#28](https://github.com/elojas2/trabalho-pdv-2026.1/issues/28) |
