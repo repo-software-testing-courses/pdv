@@ -47,27 +47,44 @@ Relatório da classe em
 | Métrica | Resultado |
 | --- | --- |
 | **Todas-arestas (branch)** | **89,5%** (34 de 38 arestas) |
-| Instruções | 90,1% (526/584) |
+| Instruções | 89,1% (516/579) |
 | Linhas | 84,9% (107/126) |
-| Métodos | 100% (11/11) |
-| Complexidade coberta | 26/30 |
+| Métodos | 100% (13/13) |
+| Complexidade coberta | 28/32 |
 
 Evidências (relatório HTML do JaCoCo exportado em PDF):
 
 - Resumo da classe: [`jacoco-vendaservice-resumo.pdf`](jacoco-vendaservice-resumo.pdf)
 - Código linha a linha (verde: coberto; amarelo: arestas parciais; vermelho: não coberto): [`jacoco-vendaservice-detalhe.pdf`](jacoco-vendaservice-detalhe.pdf)
 
-### Sobre as 4 arestas não cobertas
+Medição feita só com `VendaServiceTest` (43 casos, 2 deles `@Tag("defeito")`
+falhando de propósito; o JaCoCo conta a cobertura mesmo assim).
 
-As 4 arestas descobertas correspondem aos ramos de **tratamento de exceção**
-(`catch`) de `abreVenda` e `addProduto` — os mesmos pontos onde o código engole
-a exceção (defeitos DEF-VENDA-001/relacionados). Exercitá-las exigiria forçar
-exceção nos colaboradores; isso é feito pelos testes `@Tag("defeito")`, que
-entram nessas arestas mas **falham de propósito** (asserem o comportamento
-correto, que o código não cumpre). Como o JaCoCo contabiliza a aresta mesmo com
-o teste falhando, parte dessas arestas aparece coberta; as remanescentes são os
-ramos de exceção não acionados. A meta de 80% todas-arestas é atingida com folga
-(89,5%). **Nenhum defeito foi corrigido.**
+### As 4 arestas não cobertas
+
+São validações cujo ramo de erro nenhum teste aciona (números de linha da
+versão atual, depois da refatoração do Sonar):
+
+| Linha | Método | Condição | Ramo não exercitado |
+| --- | --- | --- | --- |
+| 254 | `lancaAVista` | `sigla == CARTDEB \|\| sigla == CARTCRED` | título à vista de tipo diferente de dinheiro e cartão |
+| 268 | `aprazo` | `vlParcela.isEmpty()` | parcela a prazo sem valor ("valor de recebimento invalido") |
+| 294 | `avistaDinheiro` | `vlParcelas[i].isEmpty()` | parcela à vista sem valor ("Parcela sem valor, verifique") |
+| 303 | `avistaDinheiro` | `!totalParcelas.equals(vlprodutos)` | soma das parcelas diferente do total ("Valor das parcelas diferente...") |
+
+A meta de 80% todas-arestas é atingida com folga (89,5%). Os quatro ramos
+poderiam ser cobertos com casos de teste curtos; não foram incluídos porque a
+meta já estava cumprida.
+
+### Evolução
+
+| Momento | Arestas cobertas | Métodos | Casos de teste |
+| --- | --- | --- | --- |
+| Entrega 2, antes do Sonar | 34/38 (89,5%) | 11/11 | 43 |
+| Entrega 2, depois do Sonar | 34/38 (89,5%) | 13/13 | 43 |
+
+As arestas não mudaram com a refatoração. Os métodos passaram de 11 para 13
+pela extração de `lancaAVista` e pelo inicializador estático do logger.
 
 ### Como reproduzir
 

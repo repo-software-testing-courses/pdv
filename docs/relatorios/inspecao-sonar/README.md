@@ -117,3 +117,110 @@ adotada em `CaixaService`.
 - **Defeito não corrigido:** `processar` com código de ajuste inexistente
   continua lançando `NoSuchElementException`. Não foi apontado pelo Sonar e está
   registrado em issue, documentado pelo teste `@Tag("defeito")`.
+## VendaService — Alexandre Porto
+
+| | Antes | Depois |
+| --- | --- | --- |
+| Problemas no arquivo | **26** (1 alto, 19 médios, 5 baixos, 1 informativo) | **3** (2 médios, 1 informativo) |
+
+Ferramenta: **SonarQube Community Build 26.11** em contêiner Docker, com o perfil
+`Sonar way comprehensive` (608 regras) e análise pelo `sonar-scanner-cli`. É uma
+ferramenta diferente do plugin de IDE usado nas outras classes, então a contagem
+não é comparável número a número com a delas. O mesmo arquivo foi analisado antes
+e depois, com a mesma ferramenta e o mesmo perfil.
+
+### Antes
+
+![SonarQube antes das correções em VendaService](vendaservice-antes1.png)
+
+![Legenda das colunas do painel do SonarQube](vendaservice-antes2.png)
+
+Leitura da linha, na ordem das colunas da legenda: 225 linhas de código, 0
+problemas de segurança, 1 de confiabilidade, **26 de manutenibilidade**, 0
+*security hotspots*, 86,0% de cobertura e 0,0% de duplicação.
+
+### Depois
+
+![SonarQube depois das correções em VendaService](vendaservice-depois.png)
+
+![Legenda das colunas do painel do SonarQube](vendaservice-antes2.png)
+
+Mesma legenda do antes: 227 linhas de código, 0 de segurança, **0 de
+confiabilidade**, **3 de manutenibilidade**, 0 *security hotspots*, 86,0% de
+cobertura e 0,0% de duplicação.
+
+### Problemas corrigidos
+
+| Regra apontada pelo Sonar | Qtd | Correção |
+| --- | --- | --- |
+| Exceção genérica (`RuntimeException`) — java:S112 | 11 | nova `VendaException` (subclasse de `RuntimeException`), com as mesmas mensagens |
+| Uso de `System.out` — java:S106 | 3 | substituído por logger (`LOG.error`), registrando a venda e a exceção |
+| Nome de variável fora do padrão — java:S117 | 3 | `vl_parcela` → `vlParcela`; `valor_parcela` → `valorParcela` (2 ocorrências) |
+| Complexidade cognitiva 22 > 15 em `fechaVenda` — java:S3776 | 1 | ramo à vista (dinheiro e cartão) extraído para `lancaAVista`; a regra deixou de ser apontada |
+| Parâmetros não usados — java:S1172 | 2 | removidos `vlprodutos` e `qtdVezes` de `aprazo` e `formaPagar` de `avistaDinheiro` |
+| Método com 10 parâmetros — java:S107 | 1 | `aprazo` passou a receber só a parcela e o prazo da posição atual (`vlParcela`, `prazo`), em vez dos arrays e do índice: 7 parâmetros |
+| `Boolean` em vez de `boolean` — java:S5411 | 1 | `vendaIsAberta` devolve `boolean` |
+| Campo que nunca é reatribuído — java:S9438 | 1 | `dataHoraAtual` passou a `final` |
+
+A variável `qtdVezes` era código morto: `avistaDinheiro` a decrementava e a
+devolvia, mas nenhum trecho lia o resultado. Ela saiu junto com o parâmetro que o
+Sonar apontou, e `avistaDinheiro` passou a ser `void`.
+
+### Problemas mantidos (justificados)
+
+**"Parameters to `aprazo` / `avistaDinheiro` have the same names but not the same
+order as the method arguments" — java:S2234 (2 ocorrências).** O Sonar encontrou,
+sozinho, o defeito **DEF-VENDA-003**
+([ficha](../../defeitos/DEF-VENDA-003-desconto-acrescimo-trocados.md),
+[issue #13](https://github.com/elojas2/trabalho-pdv-2026.1/issues/13)):
+`fechaVenda` passa `desc, acre` a métodos que declaram `acre, desc`, e por isso
+desconto e acréscimo são aplicados trocados. O alerta só some corrigindo o
+defeito. Como o objetivo do trabalho é que os testes apontem os defeitos, a troca
+foi preservada de propósito.
+
+**"Use the java.time API for date and time" — java:S2143 (informativo).** A
+entidade `Venda` exige `java.sql.Timestamp` em `setData_cadastro` e
+`setData_finalizado`. Zerar o item exigiria alterar a entidade, o mapeamento JPA e
+as consultas do repositório, mesma justificativa adotada em `CaixaService` e
+`AjusteService`.
+
+### Efeitos das correções
+
+- **Comportamento preservado:** `VendaException` é subclasse de `RuntimeException`
+  e as mensagens são as mesmas, então o contrato com o controller e o rollback da
+  transação não mudaram.
+- **Testes:** `VendaServiceTest` foi executado antes e depois com o mesmo
+  resultado (43 casos, 2 falhas intencionais, dos testes `@Tag("defeito")`), e
+  `VendaServiceIT` seguiu com 4 de 4 verdes.
+- **Cobertura todas-arestas (JaCoCo):** mantida em 89,5% (34/38)
+  ([relatório](../cobertura-jacoco/)). A coluna *Coverage* do painel (86,0%)
+  coincide com (107 linhas + 34 arestas) / (126 + 38) do JaCoCo, nos dois prints.
+- **Escore de mutação (PIT):** 91% (60/66) → 98% (62/63). Nenhum teste foi
+  alterado: o logger e a remoção de `qtdVezes` retiraram 5 mutantes da conta
+  ([relatório](../mutacao-pit/)).
+- **Defeitos não corrigidos:** além da troca de desconto e acréscimo (S2234),
+  seguem como estavam os `catch` que engolem exceção em `abreVenda` e `addProduto`
+  (issues [#7](https://github.com/elojas2/trabalho-pdv-2026.1/issues/7) e
+  [#8](https://github.com/elojas2/trabalho-pdv-2026.1/issues/8)), o retorno
+  `"ok"` de `removeProduto` em venda fechada
+  ([#9](https://github.com/elojas2/trabalho-pdv-2026.1/issues/9)), o fechamento da
+  venda dentro do laço de pagamento
+  ([#10](https://github.com/elojas2/trabalho-pdv-2026.1/issues/10)) e a soma das
+  parcelas à vista com o índice errado. O Sonar não aponta estes cinco.
+
+### Como reproduzir
+
+```sh
+docker run -d --name sonarqube-local -p 9000:9000 sonarqube:community
+docker compose exec pdv-app mvn -DskipTests compile
+docker run --rm --network host -v "$PWD":/usr/src:ro \
+  -e SONAR_HOST_URL=http://localhost:9000 -e SONAR_TOKEN=<token> \
+  sonarsource/sonar-scanner-cli \
+  -Dsonar.projectKey=pdv -Dsonar.sources=src/main/java \
+  -Dsonar.java.binaries=target/classes -Dsonar.java.source=8 \
+  -Dsonar.working.directory=/tmp/scannerwork -Dsonar.scm.disabled=true
+```
+
+Antes de analisar, associar ao projeto o perfil `Sonar way comprehensive`
+(*Quality Profiles*). O perfil padrão do servidor, `Sonar way core`, tem só 263
+regras e não aponta nenhum problema nesta classe.
