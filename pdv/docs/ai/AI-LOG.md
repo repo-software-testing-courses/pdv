@@ -91,6 +91,21 @@ Este arquivo registra o uso de ferramentas de inteligência artificial no trabal
 - **Decisão da equipe:** Executar Maven com `clean` antes do teste e manter somente `src/test/java/net/originmobi/pdv/service/RecebimentoServiceTest.java`.
 - **Validação:** O arquivo correto foi integrado pelo PR `#7`. Também foi orientado colocar o parâmetro `-Dtest` entre aspas no PowerShell quando houver uma lista separada por vírgulas.
 
+## Interação 009 — Teste de mutação de `NotaFiscalItemService`
+
+- **Data:** 22/11/2026
+- **Responsável:** João Paulo Alves da Silveira
+- **Ferramenta:** Claude Code
+- **Atividade:** Execução do PIT sobre `NotaFiscalItemService` e análise dos mutantes sobreviventes da suíte `NotaFiscalItemServiceTest`.
+- **Prompt resumido:** Analisar o arquivo de teste de `NotaFiscalItemService`, identificar os mutantes sobreviventes e eliminá-los.
+- **Resultado obtido:** A execução inicial gerou 37 mutantes, dos quais 33 foram mortos (89% de força de teste), com 100% de cobertura de linhas. Sobreviveram quatro:
+  - linhas 110 e 128 (`VoidMethodCallMutator`): remoção de `System.out.println(e)` nos blocos `catch` de `insere` e `remove`. Os testes de falha verificavam apenas a mensagem da `RuntimeException` lançada, sem conferir o registro da exceção original;
+  - linhas 160 e 169 (`MathMutator`): substituição de `aux = aux + 1` por `aux = aux - 1` em `verificaRegraDeTributacao`.
+- **Alterações nos testes:** Os testes `informaFalhaAoSalvarItem` e `informaFalhaAoRemoverItem` passaram a capturar a saída padrão por meio do método auxiliar `capturaSaida` e a verificar que a mensagem da exceção original (`"falha ao salvar"` e `"falha ao remover"`) é registrada. A quantidade de métodos de teste permaneceu em 17.
+- **Mutantes equivalentes:** Os mutantes das linhas 160 e 169 foram classificados como equivalentes. A variável `aux` é usada apenas na condição `aux == 0`; com a soma ela assume valores positivos e com a subtração, negativos, sendo zero somente quando não existe regra do tipo da nota nos dois casos. Não há entrada capaz de distinguir o mutante do código original.
+- **Decisão da equipe:** Matar os mutantes dos `println` por meio de ajustes nos testes e registrar os dois mutantes de `aux` como equivalentes, sem alterar o código de produção apenas para aumentar a métrica. Uma eventual refatoração (substituir o contador por um `boolean` ou por `anyMatch`) eliminaria esses mutantes, mas ficou a critério do grupo.
+- **Validação:** O PIT (`pitest-maven` 1.15.0, já configurado no `pom.xml`) foi executado novamente, restrito a `NotaFiscalItemService` e `NotaFiscalItemServiceTest`: 35 de 37 mutantes mortos (95% de força de teste), com os dois sobreviventes restantes sendo os equivalentes. Como o `mvnw` do módulo `pdv` não possui a pasta `.mvn`, a execução foi feita com uma instalação local do Maven 3.5.2. Comando utilizado: `mvn test-compile org.pitest:pitest-maven:mutationCoverage -DtargetClasses=net.originmobi.pdv.service.notafiscal.NotaFiscalItemService -DtargetTests=net.originmobi.pdv.service.notafiscal.NotaFiscalItemServiceTest`. O relatório é gerado em `pdv/target/pit-reports/`.
+
 ## Limites e responsabilidade da equipe
 
 - A IA auxiliou na análise, geração inicial, revisão e diagnóstico, mas não substituiu a conferência do código-fonte nem a execução dos testes.

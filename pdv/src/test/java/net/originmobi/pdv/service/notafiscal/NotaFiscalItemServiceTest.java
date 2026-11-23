@@ -2,6 +2,7 @@ package net.originmobi.pdv.service.notafiscal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -9,6 +10,8 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -232,10 +235,13 @@ public class NotaFiscalItemServiceTest {
         NotaFiscal nota = nota(NotaFiscalTipo.SAIDA, "SP");
         preparar(produto, nota);
         when(impostos.calcula(null, 10.0, regra, '0', 3)).thenReturn(new NotaFiscalItemImposto());
-        doThrow(new RuntimeException("falha")).when(itemServer).save(any(NotaFiscalItem.class));
+        doThrow(new RuntimeException("falha ao salvar")).when(itemServer).save(any(NotaFiscalItem.class));
 
-        expect("Erro ao salvar item na nota, chame o suporte",
-                () -> service.insere(1L, 1L, 1, NotaFiscalTipo.SAIDA));
+        String saida = capturaSaida(() -> expect("Erro ao salvar item na nota, chame o suporte",
+                () -> service.insere(1L, 1L, 1, NotaFiscalTipo.SAIDA)));
+
+        // a excecao original deve ser registrada no console
+        assertTrue(saida.contains("falha ao salvar"));
     }
 
     @Test
@@ -251,10 +257,13 @@ public class NotaFiscalItemServiceTest {
 
     @Test
     public void informaFalhaAoRemoverItem() {
-        doThrow(new RuntimeException("falha")).when(itemServer).deleteById(2L);
+        doThrow(new RuntimeException("falha ao remover")).when(itemServer).deleteById(2L);
 
-        expect("Erro ao tentar remover o item da nota, chame o suporte",
-                () -> service.remove(2L, 1L));
+        String saida = capturaSaida(() -> expect("Erro ao tentar remover o item da nota, chame o suporte",
+                () -> service.remove(2L, 1L)));
+
+        // a excecao original deve ser registrada no console
+        assertTrue(saida.contains("falha ao remover"));
     }
 
     @Test
@@ -328,6 +337,18 @@ public class NotaFiscalItemServiceTest {
         } catch (RuntimeException e) {
             assertEquals(mensagem, e.getMessage());
         }
+    }
+
+    private String capturaSaida(ThrowingRunnable acao) {
+        PrintStream original = System.out;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(buffer));
+        try {
+            acao.run();
+        } finally {
+            System.setOut(original);
+        }
+        return buffer.toString();
     }
 
     private interface ThrowingRunnable {
