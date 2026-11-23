@@ -1,0 +1,747 @@
+{
+	"info": {
+		"name": "PDV – Ajuste de Estoque",
+		"description": "Testes de sistema do AjusteService pela camada HTTP.\n\nNão funcionais: segurança (acesso sem login às telas e operações de ajuste, senha errada) e desempenho (toda requisição abaixo de 2000 ms).\n\nPré-requisito: sistema no ar (docker compose up -d) e produto de código {{codProduto}} (Picolé, controla estoque) cadastrado. Diferente do teste de integração, não há rollback: cada execução cria dois ajustes novos — um é processado e o outro é cancelado na pasta 4.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"event": [
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"[desempenho] responde em menos de 2000 ms\", () => pm.expect(pm.response.responseTime).to.be.below(2000));"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "usuario",
+			"value": "gerente"
+		},
+		{
+			"key": "senha",
+			"value": "123"
+		},
+		{
+			"key": "codProduto",
+			"value": "1"
+		},
+		{
+			"key": "ajusteId",
+			"value": ""
+		},
+		{
+			"key": "ajustePendenteId",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "1. Segurança (sem login)",
+			"item": [
+				{
+					"name": "Logout (estado inicial)",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"sessão encerrada (302)\", () => pm.response.to.have.status(302));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					}
+				},
+				{
+					"name": "Listagem de ajustes sem login redireciona para o login",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes"
+							]
+						}
+					}
+				},
+				{
+					"name": "Criar ajuste sem login não é executado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes"
+							]
+						}
+					}
+				},
+				{
+					"name": "Processar ajuste sem login não é executado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/processar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"processar"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codajuste",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "obs",
+									"value": "tentativa sem login",
+									"type": "text"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancelar ajuste sem login não é executado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"vai para /login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/cancelar/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"cancelar",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login com senha errada é recusado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"vai para /login?error\", () => pm.expect(pm.response.headers.get(\"Location\")).to.include(\"/login?error\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "senha-errada",
+									"type": "text"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Login",
+			"item": [
+				{
+					"name": "Login do gerente",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"redireciona (302)\", () => pm.response.to.have.status(302));",
+									"pm.test(\"não volta para o login\", () => pm.expect(pm.response.headers.get(\"Location\")).to.not.include(\"/login\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{usuario}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{senha}}",
+									"type": "text"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Listagem de ajustes abre logado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"pm.test(\"devolve a página HTML\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Processamento",
+			"item": [
+				{
+					"name": "Criar novo ajuste",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"const m = pm.response.text().match(/(\\d+)\\s*$/);",
+									"pm.test(\"devolve o código do novo ajuste\", () => pm.expect(m, \"código no fim da resposta\").to.not.be.null);",
+									"if (m) pm.collectionVariables.set(\"ajusteId\", m[1]);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes"
+							]
+						}
+					}
+				},
+				{
+					"name": "Abrir o ajuste criado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"pm.test(\"devolve a página HTML\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/{{ajusteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"{{ajusteId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Adicionar produto ao ajuste (+5)",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/addproduto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"addproduto"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codajuste",
+									"value": "{{ajusteId}}",
+									"type": "text"
+								},
+								{
+									"key": "codprod",
+									"value": "{{codProduto}}",
+									"type": "text"
+								},
+								{
+									"key": "qtd_alterar",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Processar o ajuste",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"pm.test(\"mensagem: Ajuste realizado com sucesso\", () => pm.expect(pm.response.text()).to.eql(\"Ajuste realizado com sucesso\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/processar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"processar"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codajuste",
+									"value": "{{ajusteId}}",
+									"type": "text"
+								},
+								{
+									"key": "obs",
+									"value": "Teste Postman",
+									"type": "text"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Processar o mesmo ajuste de novo é recusado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"operação recusada (status 500)\", () => pm.response.to.have.status(500));",
+									"pm.test(\"mensagem: Ajuste já processado\", () => pm.expect(pm.response.text()).to.include(\"Ajuste já processado\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/processar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"processar"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codajuste",
+									"value": "{{ajusteId}}",
+									"type": "text"
+								},
+								{
+									"key": "obs",
+									"value": "segunda vez",
+									"type": "text"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancelar ajuste já processado é recusado",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"operação recusada (status 500)\", () => pm.response.to.have.status(500));",
+									"pm.test(\"mensagem: O ajuste já esta processado\", () => pm.expect(pm.response.text()).to.include(\"O ajuste já esta processado\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/cancelar/{{ajusteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"cancelar",
+								"{{ajusteId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "[defeito #28] Processar ajuste inexistente deveria dar mensagem tratada",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"mensagem tratada para o usuário (não \\\"No value present\\\")\", () => pm.expect(pm.response.text()).to.not.include(\"No value present\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/processar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"processar"
+							]
+						},
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codajuste",
+									"value": "999999",
+									"type": "text"
+								},
+								{
+									"key": "obs",
+									"value": "ajuste inexistente",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Falha de propósito: AjusteService.processar usa Optional.get() sem verificar se o ajuste existe e devolve a mensagem técnica \"No value present\" (NoSuchElementException) em vez de uma mensagem tratada (issue #28)."
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Cancelamento",
+			"item": [
+				{
+					"name": "Criar ajuste pendente",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"const m = pm.response.text().match(/(\\d+)\\s*$/);",
+									"pm.test(\"devolve o código do novo ajuste\", () => pm.expect(m, \"código no fim da resposta\").to.not.be.null);",
+									"if (m) pm.collectionVariables.set(\"ajustePendenteId\", m[1]);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes"
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancelar ajuste pendente",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+									"pm.test(\"devolve o endereço da lista de ajustes\", () => pm.expect(pm.response.text()).to.include(\"/ajustes\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ajustes/cancelar/{{ajustePendenteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ajustes",
+								"cancelar",
+								"{{ajustePendenteId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"sessão encerrada (302)\", () => pm.response.to.have.status(302));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}
